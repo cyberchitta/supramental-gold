@@ -1,0 +1,33 @@
+<%
+function splitList(s, sep) {
+  if (typeof s !== 'string' || !s) return [];
+  return s.split(sep).map(x => x.trim()).filter(Boolean);
+}
+const _authors = splitList(typeof authors !== 'undefined' ? authors : '', ',');
+const _models  = splitList(typeof models  !== 'undefined' ? models  : '', ',');
+const _venue   = (typeof venue !== 'undefined' && venue) ? venue : null;
+const _date    = (typeof date  !== 'undefined' && date ) ? date  : null;
+const _extras  = splitList(typeof extras  !== 'undefined' ? extras  : '', ';');
+
+let authorDisplay = null;
+if (_authors.length) {
+  authorDisplay = _authors.length <= 3
+    ? _authors.join(', ')
+    : _authors.slice(0, 3).join(', ') + ', et al.';
+}
+
+const parts = [];
+if (authorDisplay) parts.push({ kind: 'authors', text: authorDisplay });
+if (_venue)        parts.push({ kind: 'meta',    text: _venue });
+if (_models.length) parts.push({ kind: 'meta',   text: 'tested on ' + _models.join(', ') });
+if (_date)         parts.push({ kind: 'meta',    text: _date });
+for (const e of _extras) parts.push({ kind: 'meta', text: e });
+-%>
+<% if (parts.length) { -%>
+<div class="provenance">
+<% parts.forEach((p, i) => { -%>
+<% if (i > 0) { -%><span class="provenance-sep">·</span><% } -%>
+<span class="<%= p.kind === 'authors' ? 'provenance-authors' : 'provenance-meta' %>"><%= p.text %></span>
+<% }) -%>
+</div>
+<% } -%>

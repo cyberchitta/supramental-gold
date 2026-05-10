@@ -1,0 +1,43 @@
+{
+  "name": "@cyberchitta/supramental-gold",
+  "version": "0.1.0",
+  "description": "CyberChitta design system — tokens, primitives, and Eleventy plugin shared across cyberchitta.cc and its sub-sites.",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": "./eleventy/index.js",
+    "./package.json": "./package.json",
+    "./eleventy": "./eleventy/index.js",
+    "./eleventy/renderer": "./eleventy/custom-element-renderer.js",
+    "./eleventy/helpers": "./eleventy/helpers.js",
+    "./tokens.css": "./colors-and-type.css",
+    "./ui-kit.css": "./ui-kit.css",
+    "./tailwind.css": "./tailwind.css",
+    "./dist/styles.css": "./dist/styles.css",
+    "./assets/*": "./assets/*",
+    "./primitives/*": "./eleventy/primitives/*"
+  },
+  "files": [
+    "eleventy",
+    "assets",
+    "colors-and-type.css",
+    "ui-kit.css",
+    "tailwind.css",
+    "dist",
+    "NOTES.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build:css": "bun x @tailwindcss/cli -i tailwind.css -o dist/styles.css --minify",
+    "watch:css": "bun x @tailwindcss/cli -i tailwind.css -o dist/styles.css --watch"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "daisyui": "^5.5.19",
+    "tailwindcss": "^4.2.2"
+  }
+}

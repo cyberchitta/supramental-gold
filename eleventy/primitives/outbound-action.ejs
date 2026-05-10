@@ -1,0 +1,7 @@
+<%
+const _label = (typeof label !== 'undefined' && label) || 'Read source';
+%>
+<a class="outbound-action" href="<%= href %>" target="_blank" rel="noopener">
+  <span><%= _label %></span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>

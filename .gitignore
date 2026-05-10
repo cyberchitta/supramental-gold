@@ -2,9 +2,13 @@
 node_modules/
 
 # Build output
-dist/
+# Note: dist/styles.css is intentionally tracked — it's the compiled
+# bundle consumers fetch via jsDelivr / passthrough copy.
 _site/
 .eleventy-cache/
+
+# Local commit-message drafts
+.commit-msg
 
 # Editor / OS
 .DS_Store

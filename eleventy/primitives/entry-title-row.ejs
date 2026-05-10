@@ -1,0 +1,6 @@
+<div class="entry-title-row">
+  <h1 class="entry-title"><%= title %></h1>
+  <% if (typeof status !== 'undefined' && status) { -%>
+  <span class="status-badge" data-status="<%= status %>"><span class="status-label"><%= status %></span></span>
+  <% } -%>
+</div>

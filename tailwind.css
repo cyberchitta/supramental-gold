@@ -1,0 +1,49 @@
+/* supramental-gold — bundle source.
+   Compiled to dist/styles.css and consumed by every CyberChitta
+   surface (the main site and each sub-site).
+
+   The @source directives below scan SG's own templates plus every
+   known consumer's templates. Adding a new sub-site means adding a
+   line here. Sibling checkouts are required for local builds; CI
+   should clone the listed consumers to the same relative paths. */
+
+/* Web fonts — must come before any other rules per CSS spec.
+   Consumers that already <link> these in their <head> get them faster;
+   keeping the @import here ensures the bundle works standalone. */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;700&family=Fira+Code&family=Courier+Prime&display=swap");
+
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dark --prefersdark;
+}
+
+/* SG's own primitives + assets */
+@source "./eleventy/**/*.{ejs,js}";
+@source "./assets/**/*.{html,js,svg}";
+@source "./examples/**/*.{html,ejs}";
+
+/* Main site */
+@source "../www.cyberchitta.cc/src/**/*.{html,js,ejs,md}";
+
+/* Sub-site: ch-ai-tanya */
+@source "../ch-ai-tanya/_includes/**/*.{ejs}";
+@source "../ch-ai-tanya/wiki/**/*.{md,ejs}";
+@source "../ch-ai-tanya/index.ejs";
+
+/* Safelist for dynamically-constructed classes (used in JS) */
+@source inline("bg-orange-500 bg-green-500 text-orange-500 text-green-500");
+
+/* Custom fonts and breakpoints */
+@theme {
+  --breakpoint-xs: 480px;
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-mono: 'Fira Code', monospace;
+  --font-typewriter: 'Courier Prime', monospace;
+}
+
+/* Design system tokens + components */
+@import "./colors-and-type.css";
+@import "./ui-kit.css";
