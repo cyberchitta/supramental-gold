@@ -23,9 +23,10 @@
 // site's <showcase>/<showtable>). SG itself doesn't use it.
 
 import createCustomElementRenderer from './custom-element-renderer.js';
+import createSectionTitleTransform from './section-title-transform.js';
 import helpers from './helpers.js';
 
-export { createCustomElementRenderer, helpers };
+export { createCustomElementRenderer, createSectionTitleTransform, helpers };
 
 export default function supramentalGold(eleventyConfig) {
   eleventyConfig.addGlobalData('sgHelpers', helpers);

@@ -9,6 +9,7 @@
     "./package.json": "./package.json",
     "./eleventy": "./eleventy/index.js",
     "./eleventy/renderer": "./eleventy/custom-element-renderer.js",
+    "./eleventy/section-title-transform": "./eleventy/section-title-transform.js",
     "./eleventy/helpers": "./eleventy/helpers.js",
     "./tokens.css": "./colors-and-type.css",
     "./ui-kit.css": "./ui-kit.css",
@@ -33,11 +34,11 @@
     "watch:css": "bun x @tailwindcss/cli -i tailwind.css -o dist/styles.css --watch"
   },
   "dependencies": {
-    "ejs": "^3.1.10"
+    "ejs": "^5.0.2"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "^4.2.2",
+    "@tailwindcss/cli": "^4.2.4",
     "daisyui": "^5.5.19",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.4"
   }
 }
