@@ -11,6 +11,12 @@ live **www.cyberchitta.cc** site. It is intended to be consumed by:
 Your job, when invoked in the live cyberchitta.cc repo, is to **reconcile and
 adopt** this design system there, then design the multi-site sync mechanism.
 
+**Status update (2026-05-10):** the package + plugin + bundle build are
+in place. `ch-ai-tanya` consumes SG end-to-end via `bun add file:..`
+and `<%- include('primitives/<name>') %>`. The live site has not yet
+been migrated. See `NOTES.md` for what's done and `TODO.md` for what's
+pending.
+
 ---
 
 ## Source-of-truth relationship
@@ -27,29 +33,32 @@ read from the imported CSS, no local overrides).
 
 ---
 
-## What's in the bundle
+## What's in the package
 
 | Path | Status | Notes |
 |---|---|---|
+| `package.json` | ✅ canonical | `@cyberchitta/supramental-gold` v0.1.0. `exports` cover the plugin entry, primitives path, and CSS files. |
+| `tailwind.css` | ✅ canonical | Bundle build entry. Multi-source `@source` scan covers SG + every sibling consumer repo. |
+| `dist/styles.css` | ✅ canonical | Compiled bundle (~117KB minified). Tracked in git; consumers link to it. |
 | `colors-and-type.css` | ✅ canonical | Plain CSS custom properties. Light + dark. |
-| `ui-kit.css` | ✅ canonical | Component styles. Extends the token file. |
-| `assets/logo.svg` | ✅ canonical | Mythic palette baked in as hex values, NOT CSS vars on the SVG. To re-skin, edit the SVG directly (search-and-replace the hexes). |
-| `assets/hero.webp` | ⚠️ placeholder | DeepMind "Visualising AI" sample. Replace per-page with real hero imagery. |
-| `_includes/*.ejs` | ⚠️ best-effort | Mechanical conversions of React prototypes. Interactive bits need rewiring. See "Known imperfections." |
+| `ui-kit.css` | ✅ canonical | Component styles + wiki design vocabulary (status-badge, sub-site-bar, finding-list, concept-entry, backlink-list, etc.). |
+| `eleventy/index.js` | ✅ canonical | Eleventy plugin — registers `sgHelpers` global. |
+| `eleventy/helpers.js` | ✅ canonical | `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`. |
+| `eleventy/custom-element-renderer.js` | ✅ canonical | Generic factory; exported, not auto-registered. For consumers that want HTML-tag-style authoring for their own namespaces. |
+| `eleventy/primitives/*.ejs` | ✅ mostly canonical | See `NOTES.md` "Primitive ↔ live-site partial mapping" for which are canonical vs sample. |
+| `assets/cc-260508.{svg,png}` + `cc-250815-v3.svg` | ✅ canonical | CC mark assets, copied from live. PNG is LFS-tracked. |
+| `assets/manda-2504.webp`, `llm-lot-2504.webp` | 🟡 untracked | Avatars / featured-image samples copied locally; staging deferred. |
 | `examples/index.html` | ℹ️ reference | Static rendered preview. Not for production. |
 
-## What's NOT in the bundle (intentional)
+## What's NOT in the package (intentional)
 
 - The original `preview/` folder of design-system cards. If a docs page is
   wanted, build it as Eleventy pages from the real partials.
 - The original `uploads/` (live site's tailwind.css + index.html + the SVG).
   Those are the *origin*; this repo is the *system*. Pull originals from the
   live repo when reconciling.
-- The showrunner avatar (`manda-2504.webp`). Was never provided. The article
-  byline has a fallback initial 'R' chip. Replace with the real avatar in
-  the live site.
 - A React build. The kit's React prototypes were a working surface for design,
-  not a deliverable. The EJS partials are the production-shaped output.
+  not a deliverable. The EJS primitives are the production-shaped output.
 
 ---
 
@@ -72,61 +81,66 @@ read from the imported CSS, no local overrides).
 
 ---
 
-## Suggested first-PR order (in the live cyberchitta.cc repo)
+## Adoption sequence — status
 
-Do these in sequence; each unlocks the next.
+The plan is to land sub-site adoption first, then live-site adoption,
+then tag v1.0. Current state:
 
-### 1. Vendor or depend on supramental-gold
-Pick **one** of:
-- **npm package** *(recommended)*: publish `@cyberchitta/supramental-gold`,
-  `npm install` it in the live site, import CSS via the package path.
-- **git submodule**: zero publishing infra, but submodules are fiddly.
-- **git subtree**: vendored copy, easier to edit locally and push back.
+### 1. Vendor or depend on supramental-gold ✅ done (file: link)
+Consumers add `"@cyberchitta/supramental-gold": "file:../supramental-gold"`
+in `package.json`. No npm publish step yet. When we tag, the dependency
+spec becomes `"github:cyberchitta/supramental-gold#v…"` (or the
+compiled bundle gets served from jsDelivr — see `CONSUMER.md`).
 
-See `CONSUMER.md` for the tradeoffs.
+### 2. Diff and reconcile tokens ✅ done
+Token values match exactly between SG's `colors-and-type.css` and live's
+`tailwind.css`. Wiki design vocabulary added to SG's `ui-kit.css`. Each
+decision is documented in `NOTES.md`.
 
-### 2. Diff and reconcile tokens
-Run `diff` between live `tailwind.css` and this repo's `colors-and-type.css`.
-For each difference:
-- If live is intentional and newer → update this repo.
-- If repo is intentional → update live to import from this repo.
-- Document each decision in this repo's `CHANGELOG.md`.
+### 3. Replace partials — partial: ✅ ch-ai-tanya, ⏳ live site
+`ch-ai-tanya` consumes the SG primitives via
+`<%- include('primitives/<name>', { … }) %>` in its base/concept/finding
+layouts. The live site still uses its own inline header/footer; switching
+it to consume `primitives/header.ejs` and `primitives/footer.ejs` is the
+remaining migration. See `TODO.md`.
 
-### 3. Replace partials
-Swap the live site's existing layout includes for the ones in
-`_includes/`. Wire interactive bits (theme toggle, dropdowns) against the
-live site's existing JS.
+### 4. Verify visual parity ⏳ pending live-site swap
+Screenshot diff to be done after the live site links to SG's bundle.
 
-### 4. Verify visual parity
-Screenshot diff: live homepage before vs after. Should be pixel-identical
-modulo intentional changes.
+### 5. Tag v1.0 ⏳ pending
+Once the live site is fully consuming SG with no local overrides, tag
+`v1.0.0`. At that point switch consumer dependency specs from `file:` to
+git URL or jsDelivr.
 
-### 5. Tag v1.0
-Once the live site is fully consuming the repo with no local overrides,
-tag `v1.0.0` here. From this point, this repo is the source of truth.
-
-### 6. Stand up the second consumer
-Pick the first gh-pages subsite. Repeat steps 1, 3, 4. The friction here
-is the proof that the system is real.
+### 6. Stand up sub-sites ✅ ch-ai-tanya done
+`ch-ai-tanya` is the first sub-site consumer; works end-to-end. Future
+sub-sites repeat the same wiring (see `CONSUMER.md` checklist).
 
 ---
 
-## Architecture decision: multi-site sync
+## Architecture decision: multi-site sync — decided
 
-This is a real decision the showrunner needs to make. Don't pick silently.
+**Constraint:** main site + N subsites must share the same
+header/footer/type/colors and stay in sync as the main site evolves.
+Constraint added in this iteration: the *same URL* should serve the
+bundle to all consumers, so cross-site navigation hits a warm browser
+cache.
 
-**Constraint:** main site + N subsites must share the same header/footer/type/
-colors and stay in sync as the main site evolves.
+**Decision:**
+- **SG hosts the canonical bundle** (`dist/styles.css`). Compiled here,
+  scanned across every consumer's templates via Tailwind's multi-source
+  `@source`. No special role for the live site as bundler.
+- **Local dev:** `bun add file:../supramental-gold`; consumers
+  passthrough-copy `dist/styles.css` from the file: link.
+- **Production (post-tag):** jsDelivr serves the same bundle from the
+  tagged git repo. Same URL on every consumer. Brand assets (logos)
+  also addressable via jsDelivr.
+- **Eleventy plugin** (this package's main entry) provides the helpers
+  and the path to `eleventy/`, which consumers expose to EJS via
+  `views: [sgEleventy]`. Primitives are then `<%- include('primitives/<name>') %>`.
 
-| Approach | Pros | Cons |
-|---|---|---|
-| **npm package** | Versioned, semver, easy to consume, plays nicely with Tailwind v4 build. | Requires npm publish (public or scoped private). |
-| **git submodule** | Zero infra, pinned by SHA. | Submodules are notoriously fiddly. Each subsite must `git submodule update` on deploy. |
-| **git subtree** | Vendored copy you can edit locally. | Harder to push changes back upstream. |
-| **CDN `@import`** | Fastest. Works in plain HTML. | Only ships CSS; partials don't propagate. |
-
-**Recommendation:** npm package. The live site already has a build step
-(Tailwind v4); the friction is low. Publish under `@cyberchitta/` scope.
+CI for the bundle build (cloning consumer siblings, rebuilding on tag,
+pushing) is deferred — local builds suffice for now. See `TODO.md`.
 
 ---
 
@@ -142,7 +156,11 @@ colors and stay in sync as the main site evolves.
 ## Things to verify on first checkout
 
 - `colors-and-type.css` declares all expected vars (light + dark).
-- `assets/logo.svg` opens cleanly in a browser and renders the colored
-  wheel mark (not just black).
+- `assets/cc-260508.svg` opens cleanly in a browser and renders the
+  colored wheel mark.
+- `bun install && bun run build:css` produces `dist/styles.css` without
+  warnings (sibling consumer repos must exist for the multi-source
+  scan; see `tailwind.css` for the listed paths).
 - `examples/index.html` opens in a browser and looks like CyberChitta.
-- All `_includes/*.ejs` parse with a basic Eleventy build.
+- All `eleventy/primitives/*.ejs` parse with a basic Eleventy build
+  (use `ch-ai-tanya` as the working reference consumer).
