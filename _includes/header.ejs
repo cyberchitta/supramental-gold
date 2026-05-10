@@ -1,0 +1,27 @@
+<%
+// Header — wheel mark + CyberChitta wordmark.
+// Locals:
+//   siteUrl  — href for the home link (default '/')
+//   theme    — 'light' | 'dark', for the optional toggle marker
+// Theme toggle is markup-only here. Wire your site's existing
+// theme-persistence JS to the .cc-theme-toggle button.
+const _siteUrl = (typeof siteUrl !== 'undefined' && siteUrl) || '/';
+const _theme   = (typeof theme   !== 'undefined' && theme)   || null;
+%>
+<header class="cc-header">
+  <div class="cc-container">
+    <nav class="cc-nav" aria-label="Main">
+      <a href="<%= _siteUrl %>" class="cc-brand">
+        <div class="cc-brand-mark">
+          <img src="/assets/sg/logo.svg" alt="CyberChitta">
+        </div>
+        <span class="logo-text cc-brand-wordmark">CyberChitta</span>
+      </a>
+      <% if (_theme) { %>
+      <button class="cc-theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <%= _theme === 'dark' ? 'light mode' : 'dark mode' %>
+      </button>
+      <% } %>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,36 @@
+<%
+// Footer — github / twitter / rss icons + project links + bilingual tagline.
+// Locals:
+//   projects — array of { name, url } (default: llm_context, llm_chat_phx, openai_ex)
+//   ghUrl    — github org/user URL (default cyberchitta)
+//   twUrl    — twitter URL (optional)
+//   rssUrl   — RSS feed URL (optional)
+const _projects = (typeof projects !== 'undefined' && projects) || [
+  { name: 'llm_context',  url: 'https://github.com/cyberchitta/llm-context.py' },
+  { name: 'llm_chat_phx', url: 'https://github.com/cyberchitta/llm_chat_phx' },
+  { name: 'openai_ex',    url: 'https://github.com/cyberchitta/openai_ex' },
+];
+const _ghUrl  = (typeof ghUrl  !== 'undefined' && ghUrl)  || 'https://github.com/cyberchitta';
+const _twUrl  = (typeof twUrl  !== 'undefined' && twUrl)  || '#';
+const _rssUrl = (typeof rssUrl !== 'undefined' && rssUrl) || '/feed.xml';
+%>
+<footer class="cc-footer">
+  <div class="cc-container">
+    <div class="cc-footer-row">
+      <a href="<%= _ghUrl %>" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <span class="cc-footer-icon cc-footer-icon-github"></span>
+      </a>
+      <a href="<%= _twUrl %>" aria-label="Twitter">
+        <span class="cc-footer-icon cc-footer-icon-twitter"></span>
+      </a>
+      <a href="<%= _rssUrl %>" aria-label="RSS">
+        <span class="cc-footer-icon cc-footer-icon-rss"></span>
+      </a>
+      <% _projects.forEach((p, i) => { %>
+        <% if (i > 0) { %><span class="byline-sep">·</span><% } %>
+        <a href="<%= p.url %>"><%= p.name %></a>
+      <% }) %>
+    </div>
+    <p class="cc-footer-tagline">सत्यमेव जयते • vincit omnia veritas</p>
+  </div>
+</footer>

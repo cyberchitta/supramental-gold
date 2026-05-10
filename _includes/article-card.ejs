@@ -1,0 +1,37 @@
+<%
+// Article row — title, dek, byline.
+// Locals:
+//   article — { title, dek, collaborators: string[], showrunner?,
+//               date, updated?, readTime?, url }
+const a = article;
+const writers = (a.collaborators || []).map(c => '@' + String(c).replace(/^@/, ''));
+%>
+<article class="cc-article">
+  <h3 class="cc-article-title">
+    <a href="<%= a.url || '#' %>"><%= a.title %></a>
+  </h3>
+  <% if (a.dek) { %><p class="cc-article-dek"><%= a.dek %></p><% } %>
+  <div class="byline">
+    <span class="byline-writers"><%= writers.join(' · ') %></span>
+    <% if (a.showrunner) { %>
+    <details class="cc-byline-info">
+      <summary aria-label="Showrunner">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+      </summary>
+      <div class="cc-byline-info-card">
+        <div class="cc-byline-info-label">Showrunner</div>
+        <div class="cc-byline-info-row">
+          <span class="cc-showrunner-initial"><%= String(a.showrunner).charAt(0).toUpperCase() %></span>
+          <span>@<%= String(a.showrunner).replace(/^@/, '') %></span>
+        </div>
+      </div>
+    </details>
+    <% } %>
+    <span class="byline-sep"> · </span>
+    <time class="byline-meta"><%= a.date %></time>
+    <% if (a.updated) { %> <span class="byline-sep">·</span> <span class="byline-meta">Updated <%= a.updated %></span><% } %>
+    <% if (a.readTime) { %> <span class="byline-sep">·</span> <span class="byline-meta"><%= a.readTime %></span><% } %>
+  </div>
+</article>

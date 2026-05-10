@@ -1,0 +1,30 @@
+<%
+// Full article view — hero + meta + .article-content body.
+// Locals:
+//   article — { title, dek, collaborators[], date, updated?, readTime?, hero?, attribution? }
+//   body    — pre-rendered HTML for the article body. If absent, an
+//             empty .article-content is rendered (you can put markdown
+//             or an EJS slot there in your layout).
+const a = article;
+const writers = (a.collaborators || []).map(c => '@' + String(c).replace(/^@/, ''));
+const _body = (typeof body !== 'undefined') ? body : '';
+%>
+<%- include('hero', { src: a.hero || '/assets/sg/hero.webp', attribution: a.attribution || null }) %>
+<main>
+  <div class="cc-container">
+    <a href="/" class="cc-back">← Back to home</a>
+    <div class="article-meta">
+      <h1><%= a.title %></h1>
+    </div>
+    <div class="byline" style="margin-bottom: 1.5rem;">
+      <span class="byline-writers"><%= writers.join(' · ') %></span>
+      <span class="byline-sep"> · </span>
+      <time class="byline-meta"><%= a.date %></time>
+      <% if (a.updated) { %> <span class="byline-sep">·</span> <span class="byline-meta">Updated <%= a.updated %></span><% } %>
+      <% if (a.readTime) { %> <span class="byline-sep">·</span> <span class="byline-meta"><%= a.readTime %></span><% } %>
+    </div>
+    <section class="article-content">
+      <%- _body %>
+    </section>
+  </div>
+</main>

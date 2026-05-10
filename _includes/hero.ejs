@@ -1,0 +1,28 @@
+<%
+// Hero image — full-width inside the max-w-3xl container.
+// Locals:
+//   src          — image URL (required)
+//   alt          — alt text
+//   attribution  — { artist, artistHref, org, orgHref } (optional)
+const _src   = src;
+const _alt   = (typeof alt !== 'undefined' && alt) || '';
+const _attr  = (typeof attribution !== 'undefined') ? attribution : null;
+%>
+<figure class="cc-hero">
+  <div class="cc-container">
+    <div class="cc-hero-inner">
+      <div class="cc-hero-frame">
+        <img src="<%= _src %>" alt="<%= _alt %>">
+      </div>
+      <% if (_attr) { %>
+      <details class="cc-hero-attr">
+        <summary aria-label="Attribution">ⓘ</summary>
+        <div class="cc-hero-attr-card">
+          Image by <a href="<%= _attr.artistHref %>"><%= _attr.artist %></a>
+          for <a href="<%= _attr.orgHref %>"><%= _attr.org %></a>
+        </div>
+      </details>
+      <% } %>
+    </div>
+  </div>
+</figure>

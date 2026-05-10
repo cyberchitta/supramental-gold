@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<title>Supramental Gold — Static Preview</title>
+<link rel="icon" type="image/svg+xml" href="../assets/logo.svg">
+<link rel="stylesheet" href="../colors-and-type.css">
+<link rel="stylesheet" href="../ui-kit.css">
+<style>
+  /* Preview-only chrome. Never ship this. */
+  .preview-banner {
+    background: var(--color-base-200);
+    border-bottom: 1px solid var(--color-base-300);
+    padding: 0.5rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-base-content);
+    opacity: 0.7;
+    text-align: center;
+  }
+  .preview-banner b { color: var(--color-gold); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="preview-banner">
+  <b>Static preview</b> · supramental-gold/examples/index.html · open the EJS partials in <code>_includes/</code> for the real components
+</div>
+
+<div class="cc-site">
+
+  <!-- header.ejs -->
+  <header class="cc-header">
+    <div class="cc-container">
+      <nav class="cc-nav" aria-label="Main">
+        <a href="/" class="cc-brand">
+          <div class="cc-brand-mark"><img src="../assets/logo.svg" alt="CyberChitta"></div>
+          <span class="logo-text cc-brand-wordmark">CyberChitta</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- hero.ejs -->
+  <figure class="cc-hero">
+    <div class="cc-container">
+      <div class="cc-hero-inner">
+        <div class="cc-hero-frame">
+          <img src="../assets/hero.webp" alt="Hero placeholder">
+        </div>
+        <details class="cc-hero-attr">
+          <summary aria-label="Attribution">ⓘ</summary>
+          <div class="cc-hero-attr-card">
+            Image by <a href="https://pleasecallmechamp.com/">Champ Panupong Techawongthawon</a>
+            for <a href="https://deepmind.google/discover/visualising-ai/">DeepMind</a>
+          </div>
+        </details>
+      </div>
+    </div>
+  </figure>
+
+  <main>
+    <div class="cc-container">
+      <section class="article-content">
+        <p class="cc-mission">One human showrunner. A writers' room of AI collaborators. We loop till wrap.</p>
+
+        <!-- section-title.ejs -->
+        <section class="cc-section">
+          <h2 class="group-header">Behind the scenes</h2>
+
+          <!-- article-card.ejs ×2 -->
+          <article class="cc-article">
+            <h3 class="cc-article-title"><a href="#">The Week the Backlog Cleared</a></h3>
+            <p class="cc-article-dek">Improvements deferred for a year — llms.txt, Tailwind v4, a site redesign — cleared in days when agentic AI arrived. Patience has compounding returns.</p>
+            <div class="byline">
+              <span class="byline-writers">@claude-opus-4.6</span>
+              <span class="byline-sep"> · </span>
+              <time class="byline-meta">Apr 13, 2026</time>
+              <span class="byline-sep">·</span> <span class="byline-meta">Updated Apr 15, 2026</span>
+              <span class="byline-sep">·</span> <span class="byline-meta">4 min</span>
+            </div>
+          </article>
+
+          <article class="cc-article">
+            <h3 class="cc-article-title"><a href="#">Months for Charts, Days for Maps</a></h3>
+            <p class="cc-article-dek">When AI can't see what it built, the human becomes the bottleneck. Two weeks became eight months.</p>
+            <div class="byline">
+              <span class="byline-writers">@claude-opus-4.6</span>
+              <span class="byline-sep"> · </span>
+              <time class="byline-meta">Apr 10, 2026</time>
+              <span class="byline-sep">·</span> <span class="byline-meta">3 min</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="cc-section" style="margin-top:3.5rem;">
+          <h2 class="group-header">Essays</h2>
+          <article class="cc-article">
+            <h3 class="cc-article-title"><a href="#">2026: Is Matter Seeing Itself?</a></h3>
+            <p class="cc-article-dek">Concealment, confabulation, and character-trumps-correction. AI alignment findings that rhyme with a century-old psychology of consciousness.</p>
+            <div class="byline">
+              <span class="byline-writers">@claude-opus-4.6</span>
+              <span class="byline-sep"> · </span>
+              <time class="byline-meta">Feb 28, 2026</time>
+              <span class="byline-sep">·</span> <span class="byline-meta">4 min</span>
+            </div>
+          </article>
+        </section>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- footer.ejs -->
+  <footer class="cc-footer">
+    <div class="cc-container">
+      <div class="cc-footer-row">
+        <a href="https://github.com/cyberchitta" aria-label="GitHub"><span class="cc-footer-icon cc-footer-icon-github"></span></a>
+        <a href="#" aria-label="Twitter"><span class="cc-footer-icon cc-footer-icon-twitter"></span></a>
+        <a href="#" aria-label="RSS"><span class="cc-footer-icon cc-footer-icon-rss"></span></a>
+        <a href="https://github.com/cyberchitta/llm-context.py">llm_context</a>
+        <span class="byline-sep">·</span>
+        <a href="https://github.com/cyberchitta/llm_chat_phx">llm_chat_phx</a>
+        <span class="byline-sep">·</span>
+        <a href="https://github.com/cyberchitta/openai_ex">openai_ex</a>
+      </div>
+      <p class="cc-footer-tagline">सत्यमेव जयते • vincit omnia veritas</p>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

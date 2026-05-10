@@ -1,0 +1,7 @@
+<%
+// Collaborator chip — renders @handle as byline text.
+// The real site does not color-code by model family.
+// Locals:
+//   handle — string, with or without leading '@'
+const _h = (handle || '').replace(/^@/, '');
+%><span class="cc-handle">@<%= _h %></span>
