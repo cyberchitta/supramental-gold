@@ -1,25 +1,12 @@
-<%
-// Shared CyberChitta footer (social icons + bilingual tagline).
-// Attributes (all optional):
-//   githubUrl  — GitHub org/user URL
-//   twitterUrl — Twitter/X URL
-//   rssUrl     — RSS feed URL
-const _githubUrl = (typeof githubUrl !== 'undefined' && githubUrl)
-  || 'https://github.com/cyberchitta';
-const _twitterUrl = (typeof twitterUrl !== 'undefined' && twitterUrl)
-  || 'https://x.com/intent/follow?screen_name=restlessron1n';
-const _rssUrl = (typeof rssUrl !== 'undefined' && rssUrl)
-  || 'https://www.cyberchitta.cc/feed.xml';
-%>
 <div class="container mx-auto px-4 text-center py-8">
   <div class="flex justify-center items-center space-x-6 mb-6">
-    <a href="<%= _twitterUrl %>" class="text-base-content hover:text-secondary transition-colors flex items-center space-x-2" aria-label="X (Twitter)">
+    <a href="https://x.com/intent/follow?screen_name=restlessron1n" class="text-base-content hover:text-secondary transition-colors flex items-center space-x-2" aria-label="X (Twitter)">
       <span class="icon icon-twitter" aria-hidden="true"></span>
     </a>
-    <a href="<%= _githubUrl %>" class="text-base-content hover:text-secondary transition-colors flex items-center space-x-2" aria-label="GitHub">
+    <a href="https://github.com/cyberchitta" class="text-base-content hover:text-secondary transition-colors flex items-center space-x-2" aria-label="GitHub">
       <span class="icon icon-github" aria-hidden="true"></span>
     </a>
-    <a href="<%= _rssUrl %>" class="text-base-content hover:text-secondary transition-colors flex items-center space-x-2" aria-label="RSS Feed">
+    <a href="https://www.cyberchitta.cc/feed.xml" class="text-base-content hover:text-secondary transition-colors flex items-center space-x-2" aria-label="RSS Feed">
       <span class="icon icon-rss" aria-hidden="true"></span>
     </a>
   </div>

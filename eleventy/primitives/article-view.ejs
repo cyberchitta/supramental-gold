@@ -9,7 +9,7 @@ const a = article;
 const writers = (a.collaborators || []).map(c => '@' + String(c).replace(/^@/, ''));
 const _body = (typeof body !== 'undefined') ? body : '';
 %>
-<%- include('hero', { src: a.hero || '/assets/sg/hero.webp', attribution: a.attribution || null }) %>
+<%- include('hero', { src: a.hero || 'https://www.cyberchitta.cc/assets/images/shared/llm-lot-2504.webp', attribution: a.attribution || null }) %>
 <main>
   <div class="cc-container">
     <a href="/" class="cc-back">← Back to home</a>

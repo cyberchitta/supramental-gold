@@ -1,10 +1,4 @@
-<%
-const _name = (typeof name !== 'undefined' && name) || (data && data.site && data.site.title) || 'LLM Wiki';
-const _tagline = (typeof tagline !== 'undefined' && tagline)
-  || (data && data.site && data.site.tagline)
-  || '';
-%>
 <div class="sub-site-bar">
-  <span class="sub-site-name"><%= _name %></span>
-  <% if (_tagline) { %><span class="sub-site-tagline"><%= _tagline %></span><% } %>
+  <span class="sub-site-name"><%= site.title %></span>
+  <% if (site.tagline) { %><span class="sub-site-tagline"><%= site.tagline %></span><% } %>
 </div>
