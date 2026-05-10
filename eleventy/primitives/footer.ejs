@@ -1,3 +1,4 @@
+<% const _origin = (typeof mainSiteUrl !== 'undefined' && mainSiteUrl) ? mainSiteUrl : ''; -%>
 <div class="container mx-auto px-4 text-center py-8">
   <div class="flex justify-center items-center space-x-6 mb-6">
     <a href="https://x.com/intent/follow?screen_name=restlessron1n" class="text-base-content hover:text-secondary transition-colors flex items-center space-x-2" aria-label="X (Twitter)">
@@ -6,7 +7,7 @@
     <a href="https://github.com/cyberchitta" class="text-base-content hover:text-secondary transition-colors flex items-center space-x-2" aria-label="GitHub">
       <span class="icon icon-github" aria-hidden="true"></span>
     </a>
-    <a href="https://www.cyberchitta.cc/feed.xml" class="text-base-content hover:text-secondary transition-colors flex items-center space-x-2" aria-label="RSS Feed">
+    <a href="<%= _origin %>/feed.xml" class="text-base-content hover:text-secondary transition-colors flex items-center space-x-2" aria-label="RSS Feed">
       <span class="icon icon-rss" aria-hidden="true"></span>
     </a>
   </div>
