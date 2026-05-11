@@ -11,6 +11,8 @@ Consumed in production by:
 
 A versioned, Eleventy-aware design system. It contains:
 
+- **`BRAND.md`** — designer-facing brief. Voice, tone, philosophy (*Less is More*), anti-patterns, iconography rules. Read this before designing.
+- **`SKILL.md`** — skill entry point for AI design tools. Frontmatter + read-order instructions.
 - **`tailwind.css`** — Tailwind v4 + DaisyUI build entry. Multi-source `@source` scan covers SG plus every sibling consumer repo. Compiled to:
 - **`dist/styles.css`** — the canonical CSS bundle, served via jsDelivr to every consumer.
 - **`colors-and-type.css`** + **`ui-kit.css`** — the source CSS imported by `tailwind.css`. Tokens (light + dark), semantic element styles, and the wiki design vocabulary.
@@ -222,6 +224,8 @@ Same immutability guarantee, noisier dep ref.
 ```
 supramental-gold/
 ├── README.md                ← you are here
+├── BRAND.md                 ← designer-facing brief (voice/tone/anti-patterns)
+├── SKILL.md                 ← AI-skill entry point
 ├── CLAUDE.md                ← handoff notes
 ├── NOTES.md                 ← decision rationale + reconciliation log
 ├── TODO.md                  ← forward-looking work

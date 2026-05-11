@@ -3,6 +3,14 @@
 Decision rationale and reconciliation log. For forward-looking work,
 see `TODO.md`.
 
+## Brief vs. notes vs. handoff
+
+The design *brief* — voice, tone, philosophy, anti-patterns, iconography rules —
+lives in `BRAND.md`, not here. This file is for decision *rationale* (why a
+choice was made, what alternatives were considered, where the bodies are
+buried). When a `BRAND.md` rule has a non-obvious "why," document it here and
+cross-link.
+
 ## Brand assets canonical at SG/jsDelivr
 
 OG/Twitter scrapers accept absolute URLs from any host; there's no
