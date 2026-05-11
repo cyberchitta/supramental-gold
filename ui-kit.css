@@ -229,6 +229,11 @@
   font-size: 1rem; font-weight: 600;
   color: var(--color-gold);
   letter-spacing: 0.01em; white-space: nowrap;
+  text-decoration: none;
+}
+a.sub-site-name:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
 }
 .sub-site-tagline {
   font-family: var(--font-sans);

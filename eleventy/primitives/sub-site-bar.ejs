@@ -1,4 +1,5 @@
+<% const _home = (typeof homeUrl !== 'undefined' && homeUrl) ? homeUrl : '/'; -%>
 <div class="sub-site-bar">
-  <span class="sub-site-name"><%= site.title %></span>
+  <a href="<%= _home %>" class="sub-site-name"><%= site.title %></a>
   <% if (site.tagline) { %><span class="sub-site-tagline"><%= site.tagline %></span><% } %>
 </div>
