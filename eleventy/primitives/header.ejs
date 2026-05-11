@@ -1,8 +1,9 @@
 <% const _origin = (typeof mainSiteUrl !== 'undefined' && mainSiteUrl) ? mainSiteUrl : ''; -%>
+<% const _logo = (typeof brandLogoUrl !== 'undefined' && brandLogoUrl) ? brandLogoUrl : `${_origin}/assets/images/shared/cc-260508.svg`; -%>
 <nav class="flex items-center justify-between py-4" aria-label="Main Navigation">
   <a href="<%= _origin %>/" class="flex items-center">
     <div class="w-12 h-12 overflow-hidden rounded-full mr-3">
-      <img src="<%= _origin %>/assets/images/shared/cc-260508.svg" alt="CyberChitta Logo" class="w-full h-full object-cover" decoding="async" width="48" height="48">
+      <img src="<%= _logo %>" alt="CyberChitta Logo" class="w-full h-full object-cover" decoding="async" width="48" height="48">
     </div>
     <span class="logo-text text-3xl font-typewriter flex items-center">CyberChitta</span>
   </a>
