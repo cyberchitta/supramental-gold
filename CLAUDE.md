@@ -1,166 +1,134 @@
 # Claude Code — Handoff Notes
 
-This repo (`supramental-gold`) contains a design system extracted from the
-live **www.cyberchitta.cc** site. It is intended to be consumed by:
+This repo (`supramental-gold`) is the design system for **CyberChitta**.
+It is the source of truth for tokens, primitives, the compiled CSS
+bundle, and brand assets.
 
-1. The main cyberchitta.cc site (Eleventy + Tailwind v4 + DaisyUI).
-2. One or more **subsites deployed to GitHub Pages**, which must share the
-   same header, footer, type, and colors and stay in lockstep with the main
-   site as it evolves.
+Consumers depend on SG via a `github:cyberchitta/supramental-gold#<tag>`
+dep pin in their `package.json`. A small `_data/sg.js` on each consumer
+derives jsDelivr URLs from that pin — see `README.md`.
 
-Your job, when invoked in the live cyberchitta.cc repo, is to **reconcile and
-adopt** this design system there, then design the multi-site sync mechanism.
+## Deployments
 
-**Status update (2026-05-10):** the package + plugin + bundle build are
-in place. `ch-ai-tanya` consumes SG end-to-end via `bun add file:..`
-and `<%- include('primitives/<name>') %>`. The live site has not yet
-been migrated. See `NOTES.md` for what's done and `TODO.md` for what's
-pending.
+| Site | URL | Where it builds |
+|---|---|---|
+| Main site | https://www.cyberchitta.cc | Netlify, from `main` |
+| ch-ai-tanya | https://ch-ai-tanya.cyberchitta.cc | GitHub Pages, from `main` |
 
----
-
-## Source-of-truth relationship
-
-- The CSS in this repo was **lifted from the live site's tailwind.css** as of
-  the export date. So at handoff time the two are nearly-identical.
-- **Until v1.0:** if the live site disagrees with this repo, the live site
-  wins. Update this repo to match.
-- **After v1.0:** this repo wins. The live site's CSS becomes a thin import.
-
-The flip from "live wins" to "repo wins" happens when the live site is
-successfully consuming this repo end-to-end (all partials in use, all tokens
-read from the imported CSS, no local overrides).
+(A staging context for the main site exists on Netlify; its URL is
+deliberately not listed here because this file is checked into a
+public repo.)
 
 ---
 
 ## What's in the package
 
-| Path | Status | Notes |
-|---|---|---|
-| `package.json` | ✅ canonical | `@cyberchitta/supramental-gold` v0.1.0. `exports` cover the plugin entry, primitives path, and CSS files. |
-| `tailwind.css` | ✅ canonical | Bundle build entry. Multi-source `@source` scan covers SG + every sibling consumer repo. |
-| `dist/styles.css` | ✅ canonical | Compiled bundle (~117KB minified). Tracked in git; consumers link to it. |
-| `colors-and-type.css` | ✅ canonical | Plain CSS custom properties. Light + dark. |
-| `ui-kit.css` | ✅ canonical | Component styles + wiki design vocabulary (status-badge, sub-site-bar, finding-list, concept-entry, backlink-list, etc.). |
-| `eleventy/index.js` | ✅ canonical | Eleventy plugin — registers `sgHelpers` global. |
-| `eleventy/helpers.js` | ✅ canonical | `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`. |
-| `eleventy/custom-element-renderer.js` | ✅ canonical | Generic factory; exported, not auto-registered. For consumers that want HTML-tag-style authoring for their own namespaces. |
-| `eleventy/primitives/*.ejs` | ✅ mostly canonical | See `NOTES.md` "Primitive ↔ live-site partial mapping" for which are canonical vs sample. |
-| `assets/cc-260508.{svg,png}` + `cc-250815-v3.svg` | ✅ canonical | CC mark assets, copied from live. PNG is LFS-tracked. |
-| `assets/manda-2504.webp`, `llm-lot-2504.webp` | 🟡 untracked | Avatars / featured-image samples copied locally; staging deferred. |
-| `examples/index.html` | ℹ️ reference | Static rendered preview. Not for production. |
-
-## What's NOT in the package (intentional)
-
-- The original `preview/` folder of design-system cards. If a docs page is
-  wanted, build it as Eleventy pages from the real partials.
-- The original `uploads/` (live site's tailwind.css + index.html + the SVG).
-  Those are the *origin*; this repo is the *system*. Pull originals from the
-  live repo when reconciling.
-- A React build. The kit's React prototypes were a working surface for design,
-  not a deliverable. The EJS primitives are the production-shaped output.
+| Path | Notes |
+|---|---|
+| `package.json` | `@cyberchitta/supramental-gold`. `exports` cover plugin entry, primitives, helpers, and CSS files. |
+| `tailwind.css` | Bundle build entry. Multi-source `@source` scan covers SG + every sibling consumer repo. |
+| `dist/styles.css` | Compiled bundle (~118KB minified). Tracked in git; served via jsDelivr to consumers. |
+| `colors-and-type.css` | Plain CSS custom properties. Light + dark tokens. |
+| `ui-kit.css` | Component styles + wiki design vocabulary. |
+| `eleventy/index.js` | Eleventy plugin — registers `sgHelpers` global. |
+| `eleventy/helpers.js` | `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`. |
+| `eleventy/section-title-transform.js` | Generic factory for rewriting `<h2>` titles into `.group-header` shape + classing the following `<ul>`. |
+| `eleventy/custom-element-renderer.js` | Generic factory; exported, not auto-registered. For consumers wanting HTML-tag-style authoring in their own namespaces. |
+| `eleventy/primitives/header.ejs` | Accepts `brandLogoUrl` (consumer passes the jsDelivr URL from `sg.js`). |
+| `eleventy/primitives/chrome.ejs` | Forwards `brandLogoUrl` to `header`. Hardcodes `mainSiteUrl: https://www.cyberchitta.cc` for sub-sites. |
+| `eleventy/primitives/footer.ejs` | Accepts `mainSiteUrl`. |
+| `eleventy/primitives/sub-site-bar.ejs`, `status-badge.ejs`, `entry-title-row.ejs`, `provenance.ejs`, `outbound-action.ejs`, `section-title.ejs` | Wiki design vocabulary, used by `ch-ai-tanya`. |
+| `eleventy/primitives/article-card.ejs`, `article-view.ejs`, `hero.ejs`, `collaborator-chip.ejs` | Sample — design vocabulary in `cc-*` paradigm; not wired into any production consumer. |
+| `assets/cc-260508.{svg,png}` | Canonical CC mark. Plain blobs (not LFS). Served via jsDelivr. |
+| `assets/cc-250815-v3.svg` | Source-of-mark working file; not used at runtime. |
+| `examples/index.html` | Static rendered preview, not for production. |
 
 ---
 
-## Known imperfections to reconcile
+## Brand-asset routing
 
-1. **EJS partials need their JS rewired.** The `<details>` dropdowns and the
-   `cc-nav` custom event on the brand link are static markup. Wire them to
-   whatever the live site uses.
-2. **Theme toggle** is in `header.ejs` only as a marker. The live site has
-   its own theme persistence; defer to that.
-3. **Dark mode token values** were lifted but not battle-tested across every
-   component. Verify visually after integrating.
-4. **Tailwind v4 `@theme` block.** The live site declares tokens inside
-   `@theme { … }`; this repo declares them in `:root`. Functionally the
-   same, but for tighter integration you can wrap the `:root` block in
-   `@theme inline { … }` so Tailwind picks them up natively.
-5. **Class naming convention.** Component classes use the `cc-*` prefix
-   throughout. If the live site uses a different prefix or naming, decide
-   whether to rename here or alias there.
-
----
-
-## Adoption sequence — status
-
-The plan is to land sub-site adoption first, then live-site adoption,
-then tag v1.0. Current state:
-
-### 1. Vendor or depend on supramental-gold ✅ done (file: link)
-Consumers add `"@cyberchitta/supramental-gold": "file:../supramental-gold"`
-in `package.json`. No npm publish step yet. When we tag, the dependency
-spec becomes `"github:cyberchitta/supramental-gold#v…"` (or the
-compiled bundle gets served from jsDelivr — see `CONSUMER.md`).
-
-### 2. Diff and reconcile tokens ✅ done
-Token values match exactly between SG's `colors-and-type.css` and live's
-`tailwind.css`. Wiki design vocabulary added to SG's `ui-kit.css`. Each
-decision is documented in `NOTES.md`.
-
-### 3. Replace partials — partial: ✅ ch-ai-tanya, ⏳ live site
-`ch-ai-tanya` consumes the SG primitives via
-`<%- include('primitives/<name>', { … }) %>` in its base/concept/finding
-layouts. The live site still uses its own inline header/footer; switching
-it to consume `primitives/header.ejs` and `primitives/footer.ejs` is the
-remaining migration. See `TODO.md`.
-
-### 4. Verify visual parity ⏳ pending live-site swap
-Screenshot diff to be done after the live site links to SG's bundle.
-
-### 5. Tag v1.0 ⏳ pending
-Once the live site is fully consuming SG with no local overrides, tag
-`v1.0.0`. At that point switch consumer dependency specs from `file:` to
-git URL or jsDelivr.
-
-### 6. Stand up sub-sites ✅ ch-ai-tanya done
-`ch-ai-tanya` is the first sub-site consumer; works end-to-end. Future
-sub-sites repeat the same wiring (see `CONSUMER.md` checklist).
+- **CSS bundle** + **brand mark** (`cc-260508.svg`, `cc-260508.png`)
+  served from jsDelivr at `@<tag>`. One canonical URL per asset across
+  all consumers → real cross-site cache hits.
+- **Per-article featured images** stay on each consumer's own domain
+  (they're the consumer's content, not brand).
+- Where a consumer uses the CC mark as a featured image (e.g. live's
+  `witness-ai`, `supramental-ai`), it references the jsDelivr URL in
+  the consumer's `featuredImages` entry. The consumer's `base.ejs`
+  needs an `absUrl` guard so OG/Twitter meta tags don't double-prefix
+  absolute URLs.
+- **Legacy redirects** in live's `netlify.toml` 302 the old
+  `/assets/images/shared/cc-260508.{svg,png}` paths to jsDelivr to
+  preserve pre-migration social-card OG references. Transitional;
+  not part of the live SG version-pin chain.
 
 ---
 
-## Architecture decision: multi-site sync — decided
+## Single-source SG version pin
 
-**Constraint:** main site + N subsites must share the same
-header/footer/type/colors and stay in sync as the main site evolves.
-Constraint added in this iteration: the *same URL* should serve the
-bundle to all consumers, so cross-site navigation hits a warm browser
-cache.
+Each consumer's `package.json` carries the version in one place:
 
-**Decision:**
-- **SG hosts the canonical bundle** (`dist/styles.css`). Compiled here,
-  scanned across every consumer's templates via Tailwind's multi-source
-  `@source`. No special role for the live site as bundler.
-- **Local dev:** `bun add file:../supramental-gold`; consumers
-  passthrough-copy `dist/styles.css` from the file: link.
-- **Production (post-tag):** jsDelivr serves the same bundle from the
-  tagged git repo. Same URL on every consumer. Brand assets (logos)
-  also addressable via jsDelivr.
-- **Eleventy plugin** (this package's main entry) provides the helpers
-  and the path to `eleventy/`, which consumers expose to EJS via
-  `views: [sgEleventy]`. Primitives are then `<%- include('primitives/<name>') %>`.
+```jsonc
+"@cyberchitta/supramental-gold": "github:cyberchitta/supramental-gold#<vX.Y.Z>"
+```
 
-CI for the bundle build (cloning consumer siblings, rebuilding on tag,
-pushing) is deferred — local builds suffice for now. See `TODO.md`.
+`_data/sg.js` in the consumer parses the `#tag` (via `.split('#').pop()`)
+and builds jsDelivr URLs (CSS bundle, brand SVG, brand PNG). Templates
+reference `<%= sg.cssBundleUrl %>`, `<%= sg.logoSvgUrl %>`, and pass
+`brandLogoUrl: sg.logoSvgUrl` to `header` / `chrome`.
+
+Bumping SG is a single edit to the dep ref + `bun install` + commit
+(both `package.json` and `bun.lock`). CI uses `--frozen-lockfile` so
+the two must move together.
 
 ---
 
-## Versioning policy
+## Wiring the live site (recap)
 
-- `0.x.y` while the live site has not fully adopted.
-- `1.0.0` when first consumer (live site) ships entirely on this repo.
-- Subsequent breaking changes bump major; new tokens/components bump minor;
-  fixes bump patch. Standard semver.
+Live's data layer:
+- `_data/sg.js` — derives SG URLs from `package.json` dep ref.
+- `_data/site.js` — hand-edited config (URL, title, authors,
+  featuredImages, externalImages) referencing `sg.*` for brand URLs.
+  Imports auto-generated `siteIndex.json` for `images` + `articles`.
+- `_data/siteIndex.json` — written by `build/index-site-content.js`
+  (walks `src/assets/`, gets dimensions); reading times updated by
+  `build/update-reading-times.js`.
+
+`src/_includes/layouts/base.ejs`:
+- Favicon `<link>` uses `<%= sg.logoSvgUrl %>`.
+- Stylesheet `<link>` uses `<%= sg.cssBundleUrl %>`.
+- Header include passes `brandLogoUrl: sg.logoSvgUrl`.
+- OG/Twitter meta uses `absUrl(...)` to avoid double-prefixing
+  absolute URLs.
+
+`eleventy.config.js`:
+- Registers SG plugin, exposes SG's `eleventy/` to EJS includes.
+- Passes the static `site` config explicitly into the
+  custom-element renderer's `dataContext` (the JSON-dir loader
+  can't read a `.js` data file).
+
+Live also retains a CSR footer (uses its own `build/ejs-precompiler.js`
+and `template-manager.js` for client-side hydration). SG's
+`primitives/footer.ejs` is the sub-site SSR variant of the same body;
+the two are kept in sync.
 
 ---
 
 ## Things to verify on first checkout
 
 - `colors-and-type.css` declares all expected vars (light + dark).
-- `assets/cc-260508.svg` opens cleanly in a browser and renders the
-  colored wheel mark.
-- `bun install && bun run build:css` produces `dist/styles.css` without
-  warnings (sibling consumer repos must exist for the multi-source
-  scan; see `tailwind.css` for the listed paths).
+- `bun install && bun run build:css` produces `dist/styles.css`
+  without warnings (sibling consumer repos must exist for the
+  multi-source scan — see `tailwind.css` for the listed paths).
 - `examples/index.html` opens in a browser and looks like CyberChitta.
-- All `eleventy/primitives/*.ejs` parse with a basic Eleventy build
-  (use `ch-ai-tanya` as the working reference consumer).
+- `ch-ai-tanya` builds cleanly against this checkout (use it as a
+  reference consumer).
+
+---
+
+## Pointers
+
+- `README.md` — consumer integration guide, release workflow,
+  dev-testing options.
+- `NOTES.md` — decision log.
+- `TODO.md` — forward-looking work.
