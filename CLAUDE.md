@@ -8,9 +8,9 @@ Consumers depend on SG via a `github:cyberchitta/supramental-gold#<tag>`
 dep pin in their `package.json`. A small `_data/sg.js` on each consumer
 derives jsDelivr URLs from that pin — see `README.md`.
 
-For the *design brief* — voice, tone, philosophy, anti-patterns, iconography
-rules — see `BRAND.md`. This file (CLAUDE.md) is for production-wiring handoff
-only; design decisions live in `BRAND.md` and decision rationale lives in
+For the *craft brief* — voice, tone, philosophy, anti-patterns, iconography
+rules — see `CRAFT.md`. This file (CLAUDE.md) is for production-wiring handoff
+only; design decisions live in `CRAFT.md` and decision rationale lives in
 `NOTES.md`.
 
 ## Deployments
@@ -133,7 +133,7 @@ the two are kept in sync.
 
 ## Pointers
 
-- `BRAND.md` — designer-facing brief (voice, tone, philosophy, anti-patterns,
+- `CRAFT.md` — craft brief (voice, tone, philosophy, anti-patterns,
   iconography). Read before designing.
 - `SKILL.md` — AI-skill entry point.
 - `README.md` — consumer integration guide, release workflow,

@@ -1,23 +1,25 @@
-# CyberChitta — Brand & Design Brief
+# CyberChitta — Craft Brief
 
 > **"One human showrunner. A writers' room of AI collaborators. We loop till wrap."**
 >
 > *सत्यमेव जयते • vincit omnia veritas*
 
-This file is the **designer-facing brief** for the CyberChitta brand. It is intentionally separate from `README.md` (integration / release runbook), `CLAUDE.md` (handoff notes), and `NOTES.md` (decision log).
+This is CyberChitta's **craft brief** — the foundational document for how the room works: voice, look, provenance, and the moves already ruled out. Companion files: `README.md` (integration / release runbook), `CLAUDE.md` (handoff notes), `NOTES.md` (decision log).
 
-Read this when you are about to *design something* — a new surface, a new primitive, a new page, an article hero treatment, a one-off mock or deck. Tokens and CSS will keep you on-key visually; this file keeps you on-key in voice, tone, philosophy, and the anti-patterns that have been deliberately ruled out.
+Read it before making anything new — a new article angle, a new surface, a new primitive, a new page, a hero treatment, a one-off mock or deck. Tokens and CSS keep you on-key visually; this file keeps you on-key everywhere else.
 
 ---
 
 ## Naming
 
-The system is **Supramental Gold**. The brand it dresses is **CyberChitta**:
+The system is **Supramental Gold**. The work it dresses is **CyberChitta**:
 
 - *Supramental Gold* names the design system / repo / npm package.
-- *CyberChitta* is the wordmark rendered on every surface that uses the system.
+- *CyberChitta* names the work itself — the publication, its surfaces, and the wordmark rendered on each one.
 
 Don't conflate the two. Internal references say "SG"; user-facing surfaces say "CyberChitta."
+
+The same register applies to *meta-vocabulary* — file names, section headings, internal categories. We're a writers' room: a showrunner, a rotating cast of named AI co-authors, articles that *loop till wrap*. The room calls its work *craft*, so this file is `CRAFT.md`. Sibling files keep the same plain register — `NOTES.md`, `TODO.md`, `SKILL.md`. Names a contributor would actually say in the room.
 
 ---
 

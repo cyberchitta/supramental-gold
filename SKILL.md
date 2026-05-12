@@ -1,6 +1,6 @@
 ---
 name: supramental-gold
-description: Use this skill to generate well-branded interfaces, articles, sub-site surfaces, and assets for CyberChitta — the personal publication of @restlessronin and its wiki sub-sites. Contains tokens, type, primitives, icons, a compiled CSS bundle, and the design-brief (voice, tone, philosophy, anti-patterns).
+description: Use this skill to generate well-crafted interfaces, articles, sub-site surfaces, and assets for CyberChitta — the personal publication of @restlessronin and its wiki sub-sites. Contains tokens, type, primitives, icons, a compiled CSS bundle, and the craft brief (voice, tone, philosophy, anti-patterns).
 user-invocable: true
 ---
 
@@ -8,7 +8,7 @@ Supramental Gold is the design system that dresses **CyberChitta** (`www.cyberch
 
 ## Read these first, in order
 
-1. **`BRAND.md`** — the designer-facing brief. Voice, tone, casing, philosophy (*Less is More*), what to avoid, iconography rules. **Read this before designing anything** — tokens alone will not keep you on-key.
+1. **`CRAFT.md`** — the craft brief. Voice, tone, casing, philosophy (*Less is More*), what to avoid, iconography rules. **Read this before designing anything** — tokens alone will not keep you on-key.
 2. **`README.md`** — what's in the package, how consumers wire it in (jsDelivr CSS bundle + Eleventy plugin + version-pinned dep ref), the release workflow.
 3. **`NOTES.md`** — decision rationale and reconciliation log. Useful when you need to know *why* something is the way it is.
 4. **`CLAUDE.md`** — handoff notes for the live deployments. Read when wiring or debugging a consumer.
@@ -32,14 +32,14 @@ Supramental Gold is the design system that dresses **CyberChitta** (`www.cyberch
 - Pull tokens via the compiled bundle URL: `https://cdn.jsdelivr.net/gh/cyberchitta/supramental-gold@<tag>/dist/styles.css`. Pin a real tag.
 - Pull the brand mark from the same `@<tag>` base: `assets/cc-260508.svg`.
 - Add a `<link>` for Fraunces, Inter, Fira Code, and Courier Prime in `<head>` (the bundle relies on these being loaded; in production they're loaded via Tailwind/DaisyUI).
-- Follow **`BRAND.md`** for voice, tone, layout, anti-patterns. Tokens alone are not enough.
+- Follow **`CRAFT.md`** for voice, tone, layout, anti-patterns. Tokens alone are not enough.
 
 **Working on the live site or a sub-site** (production code):
 
 - Don't copy assets — version-pin against the canonical jsDelivr URL via `_data/sg.js`.
 - Use the Eleventy plugin: `<%- include('primitives/chrome', { brandLogoUrl: sg.logoSvgUrl }) %>`, `<%- include('primitives/footer', { mainSiteUrl: 'https://www.cyberchitta.cc' }) %>`, etc.
 - Read `README.md § How consumers wire it in` and `CLAUDE.md` for the wiring details.
-- Read `BRAND.md` before adding anything new to the visual language.
+- Read `CRAFT.md` before adding anything new to the visual language.
 
 ## Flagged approximations
 
@@ -58,7 +58,7 @@ Ask the user:
 3. Any specific surface or component? Or starting from scratch?
 4. Light, dark, or both?
 
-Then act as an expert designer who outputs HTML / EJS / JSX as appropriate — never inventing new tokens, never breaking the anti-patterns in `BRAND.md § What to avoid`.
+Then act as an expert designer who outputs HTML / EJS / JSX as appropriate — never inventing new tokens, never breaking the anti-patterns in `CRAFT.md § What to avoid`.
 
 ---
 
