@@ -11,7 +11,8 @@ Consumed in production by:
 
 A versioned, Eleventy-aware design system. It contains:
 
-- **`CRAFT.md`** — craft brief. Voice, tone, philosophy (*Less is More*), anti-patterns, iconography rules. Read this before designing.
+- **`voice.md`** — house voice, attribution, surface registers, editorial discipline. Read this before drafting or copyediting.
+- **`visual.md`** — visual brief. Look, layout, motion, philosophy (*Less is More*), anti-patterns, iconography rules. Read this before designing.
 - **`SKILL.md`** — skill entry point for AI design tools. Frontmatter + read-order instructions.
 - **`tailwind.css`** — Tailwind v4 + DaisyUI build entry. Multi-source `@source` scan covers SG plus every sibling consumer repo. Compiled to:
 - **`dist/styles.css`** — the canonical CSS bundle, served via jsDelivr to every consumer.
@@ -224,7 +225,8 @@ Same immutability guarantee, noisier dep ref.
 ```
 supramental-gold/
 ├── README.md                ← you are here
-├── CRAFT.md                 ← craft brief (voice/tone/anti-patterns)
+├── voice.md                 ← house voice + editorial discipline
+├── visual.md                ← visual brief (look/layout/anti-patterns)
 ├── SKILL.md                 ← AI-skill entry point
 ├── CLAUDE.md                ← handoff notes
 ├── NOTES.md                 ← decision rationale + reconciliation log

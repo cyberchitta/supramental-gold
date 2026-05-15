@@ -5,11 +5,11 @@ see `TODO.md`.
 
 ## Brief vs. notes vs. handoff
 
-The craft *brief* — voice, tone, philosophy, anti-patterns, iconography rules —
-lives in `CRAFT.md`, not here. This file is for decision *rationale* (why a
-choice was made, what alternatives were considered, where the bodies are
-buried). When a `CRAFT.md` rule has a non-obvious "why," document it here and
-cross-link.
+The craft *briefs* — voice/attribution/registers in `voice.md`, and look/
+layout/anti-patterns/iconography in `visual.md` — are not here. This file
+is for decision *rationale* (why a choice was made, what alternatives were
+considered, where the bodies are buried). When a `voice.md` or `visual.md`
+rule has a non-obvious "why," document it here and cross-link.
 
 ## Brand assets canonical at SG/jsDelivr
 

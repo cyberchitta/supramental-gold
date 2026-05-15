@@ -1,6 +1,6 @@
 ---
 name: supramental-gold
-description: Use this skill to generate well-crafted interfaces, articles, sub-site surfaces, and assets for CyberChitta — the personal publication of @restlessronin and its wiki sub-sites. Contains tokens, type, primitives, icons, a compiled CSS bundle, and the craft brief (voice, tone, philosophy, anti-patterns).
+description: Use this skill to generate well-crafted interfaces, articles, sub-site surfaces, and assets for CyberChitta — the writers' room of @restlessronin (Showrunner) and named AI collaborators — whose publication runs at cyberchitta.cc (main site and wiki sub-sites). Contains tokens, type, primitives, icons, a compiled CSS bundle, and the craft briefs (voice.md for editorial; visual.md for design).
 user-invocable: true
 ---
 
@@ -8,10 +8,11 @@ Supramental Gold is the design system that dresses **CyberChitta** (`www.cyberch
 
 ## Read these first, in order
 
-1. **`CRAFT.md`** — the craft brief. Voice, tone, casing, philosophy (*Less is More*), what to avoid, iconography rules. **Read this before designing anything** — tokens alone will not keep you on-key.
-2. **`README.md`** — what's in the package, how consumers wire it in (jsDelivr CSS bundle + Eleventy plugin + version-pinned dep ref), the release workflow.
-3. **`NOTES.md`** — decision rationale and reconciliation log. Useful when you need to know *why* something is the way it is.
-4. **`CLAUDE.md`** — handoff notes for the live deployments. Read when wiring or debugging a consumer.
+1. **`visual.md`** — the visual brief. Look, layout, motion, philosophy (*Less is More*), what to avoid, iconography rules. **Read before designing anything** — tokens alone will not keep you on-key.
+2. **`voice.md`** — the editorial brief. House voice, attribution, the four surface registers (essay / bts / tools / research), cut patterns, frontmatter conventions. **Read before drafting or copyediting.**
+3. **`README.md`** — what's in the package, how consumers wire it in (jsDelivr CSS bundle + Eleventy plugin + version-pinned dep ref), the release workflow.
+4. **`NOTES.md`** — decision rationale and reconciliation log. Useful when you need to know *why* something is the way it is.
+5. **`CLAUDE.md`** — handoff notes for the live deployments. Read when wiring or debugging a consumer.
 
 ## Then explore
 
@@ -32,14 +33,14 @@ Supramental Gold is the design system that dresses **CyberChitta** (`www.cyberch
 - Pull tokens via the compiled bundle URL: `https://cdn.jsdelivr.net/gh/cyberchitta/supramental-gold@<tag>/dist/styles.css`. Pin a real tag.
 - Pull the brand mark from the same `@<tag>` base: `assets/cc-260508.svg`.
 - Add a `<link>` for Fraunces, Inter, Fira Code, and Courier Prime in `<head>` (the bundle relies on these being loaded; in production they're loaded via Tailwind/DaisyUI).
-- Follow **`CRAFT.md`** for voice, tone, layout, anti-patterns. Tokens alone are not enough.
+- Follow **`visual.md`** for layout, motion, anti-patterns, and **`voice.md`** for any copy the mock includes. Tokens alone are not enough.
 
 **Working on the live site or a sub-site** (production code):
 
 - Don't copy assets — version-pin against the canonical jsDelivr URL via `_data/sg.js`.
 - Use the Eleventy plugin: `<%- include('primitives/chrome', { brandLogoUrl: sg.logoSvgUrl }) %>`, `<%- include('primitives/footer', { mainSiteUrl: 'https://www.cyberchitta.cc' }) %>`, etc.
 - Read `README.md § How consumers wire it in` and `CLAUDE.md` for the wiring details.
-- Read `CRAFT.md` before adding anything new to the visual language.
+- Read `visual.md` before adding anything new to the visual language. Read `voice.md` before drafting or copyediting article copy.
 
 ## Flagged approximations
 
@@ -58,7 +59,7 @@ Ask the user:
 3. Any specific surface or component? Or starting from scratch?
 4. Light, dark, or both?
 
-Then act as an expert designer who outputs HTML / EJS / JSX as appropriate — never inventing new tokens, never breaking the anti-patterns in `CRAFT.md § What to avoid`.
+Then act as an expert designer who outputs HTML / EJS / JSX as appropriate — never inventing new tokens, never breaking the anti-patterns in `visual.md § What to avoid`.
 
 ---
 

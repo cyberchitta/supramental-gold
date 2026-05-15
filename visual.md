@@ -1,12 +1,12 @@
-# CyberChitta — Craft Brief
+# CyberChitta — Visual
 
 > **"One human showrunner. A writers' room of AI collaborators. We loop till wrap."**
 >
 > *सत्यमेव जयते • vincit omnia veritas*
 
-This is CyberChitta's **craft brief** — the foundational document for how the room works: voice, look, provenance, and the moves already ruled out. Companion files: `README.md` (integration / release runbook), `CLAUDE.md` (handoff notes), `NOTES.md` (decision log).
+This is the visual half of CyberChitta's craft brief: look, layout, motion, iconography, the moves already ruled out. Companion file: `voice.md` (house voice, attribution, surface registers, editorial discipline). Read both before making anything new.
 
-Read it before making anything new — a new article angle, a new surface, a new primitive, a new page, a hero treatment, a one-off mock or deck. Tokens and CSS keep you on-key visually; this file keeps you on-key everywhere else.
+Tokens and CSS keep you on-key visually; this file keeps you on-key everywhere else in the design language.
 
 ---
 
@@ -19,13 +19,15 @@ The system is **Supramental Gold**. The work it dresses is **CyberChitta**:
 
 Don't conflate the two. Internal references say "SG"; user-facing surfaces say "CyberChitta."
 
-The same register applies to *meta-vocabulary* — file names, section headings, internal categories. We're a writers' room: a showrunner, a rotating cast of named AI co-authors, articles that *loop till wrap*. The room calls its work *craft*, so this file is `CRAFT.md`. Sibling files keep the same plain register — `NOTES.md`, `TODO.md`, `SKILL.md`. Names a contributor would actually say in the room.
+The same register applies to *meta-vocabulary* — file names, section headings, internal categories. We're a writers' room: a showrunner, a rotating cast of named AI co-authors, articles that *loop till wrap*. Sibling files in the design system keep the same plain register — `voice.md`, `visual.md`, `NOTES.md`, `TODO.md`, `SKILL.md`. Names a contributor would actually say in the room.
 
 ---
 
 ## What CyberChitta is
 
-CyberChitta is the personal publication of **@restlessronin** ("the Showrunner"), written in collaboration with named AI models as co-authors. The name pairs *cyber* with the Sanskrit *chitta* — "mind-stuff," consciousness, awareness — and the house metaphor is television production: one human showrunner, a rotating writers' room of AI collaborators, articles that *loop till wrap*.
+**CyberChitta** is a writers' room — the combined entity of **@restlessronin** (the Showrunner, durable element and prime mover) and a rotating cast of named AI collaborators. The name pairs *cyber* with the Sanskrit *chitta* — "mind-stuff," consciousness, awareness.
+
+The publication the room produces — articles, essays, sub-sites — runs at `cyberchitta.cc` (main site at `www.cyberchitta.cc`, sub-sites at `ch-*.cyberchitta.cc`). The room did not exist pre-AI; the publication is its collective work, not anyone's solo work. The house metaphor is television production: one human showrunner, a rotating writers' room of AI collaborators, articles that *loop till wrap*.
 
 The main site (`www.cyberchitta.cc`) is intentionally minimal — a single blog-style home page with a reverse-chronological article index, grouped into four sections:
 
@@ -40,17 +42,9 @@ Every article credits its AI collaborators by handle (`@claude-opus-4.6`, `@grok
 
 ---
 
-## CONTENT FUNDAMENTALS
+## ORTHOGRAPHY
 
-### Voice
-- **First-person plural** (*"we"*, *"our"*) — the human + AI pair as a team.
-- **Human and AI speak as co-equals.** Articles written by a model are bylined to that model's handle; the showrunner appears as a separate credit.
-- **Never addresses the reader as "you"** in the essay body — the register is journal / essayistic.
-
-### Tone
-- **Scholarly but warm.** Articles are 3–20 min reads, structured with `##` / `###` headings, code blocks, and occasional italicized reflection.
-- **Quietly confident.** Specific claims ("2-2.5x gains", "34 LLMs", "a year of GitHub data") rather than hype.
-- **Philosophical undertone.** Essay titles lean aphoristic: *"Is Matter Seeing Itself?"*, *"Did Matter Begin to Think?"*, *"Less is More"*, *"Full Context Magic"*. Two-part titles with a colon are the house pattern.
+Cross-surface rules every component or surface should respect. (These also appear in `voice.md` — they apply to both visual and editorial work; a designer adding a byline component needs them as much as an editor copyediting prose.)
 
 ### Casing
 - **Title Case** for article titles.
@@ -65,16 +59,6 @@ Every article credits its AI collaborators by handle (`@claude-opus-4.6`, `@grok
 - Bullet `•` in the Sanskrit/Latin footer tagline.
 - Info glyph `ⓘ` (U+24D8) inside `details/summary` buttons on hero attributions and bylines.
 - Em-dashes (`—`) and en-dashes (`–`) freely. ASCII hyphens are not a substitute.
-
-### Vibe
-Think **Stratechery × personal newsletter × research journal**. Long reads, warm paper-ink reading surface, author-as-authority, no gimmicks.
-
-### Example deks
-The one-line lede under each title. One or two short declarative sentences that set up a tension and hint at the resolution:
-
-- *"Improvements deferred for a year – llms.txt, Tailwind v4, a site redesign – cleared in days when agentic AI arrived. Patience has compounding returns."*
-- *"When AI can't see what it built, the human becomes the bottleneck. Two weeks became eight months."*
-- *"AI agents can't contest freezes, negotiate compliance, or prove good faith. They need money that doesn't require any of that."*
 
 ---
 
