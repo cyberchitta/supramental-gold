@@ -1,65 +1,48 @@
 ---
 name: supramental-gold
-description: Use this skill to generate well-crafted interfaces, articles, sub-site surfaces, and assets for CyberChitta — the writers' room of @restlessronin (Showrunner) and named AI collaborators — whose publication runs at cyberchitta.cc (main site and wiki sub-sites). Contains tokens, type, primitives, icons, a compiled CSS bundle, and the craft briefs (voice.md for editorial; visual.md for design).
+description: Router for the CyberChitta design system — the writers' room of @restlessronin (Showrunner) and named AI collaborators, whose publication runs at cyberchitta.cc. Three task-specific child skills (design-throwaway, design-surface, wire-consumer) and two craft briefs (voice.md, visual.md). Use this skill if you're not sure which child fits.
 user-invocable: true
 ---
 
-Supramental Gold is the design system that dresses **CyberChitta** (`www.cyberchitta.cc`) and its sub-sites (`ch-ai-tanya.cyberchitta.cc`, etc.).
+Supramental Gold is the design system that dresses the **CyberChitta** publication at `www.cyberchitta.cc` and its sub-sites (`ch-ai-tanya.cyberchitta.cc`, etc.).
 
-## Read these first, in order
+This file is a **router**. For any actual work, invoke one of the child skills below.
 
-1. **`visual.md`** — the visual brief. Look, layout, motion, philosophy (*Less is More*), what to avoid, iconography rules. **Read before designing anything** — tokens alone will not keep you on-key.
-2. **`voice.md`** — the editorial brief. House voice, attribution, the four surface registers (essay / bts / tools / research), cut patterns, frontmatter conventions. **Read before drafting or copyediting.**
-3. **`README.md`** — what's in the package, how consumers wire it in (jsDelivr CSS bundle + Eleventy plugin + version-pinned dep ref), the release workflow.
-4. **`NOTES.md`** — decision rationale and reconciliation log. Useful when you need to know *why* something is the way it is.
-5. **`CLAUDE.md`** — handoff notes for the live deployments. Read when wiring or debugging a consumer.
+## Pick a child skill
 
-## Then explore
+| Skill | Use when |
+|---|---|
+| **`design-throwaway`** | Producing a one-off artifact (slide, mock, prototype, deck, OG card, single-page demo). Pulls SG via the public CDN, doesn't need the Eleventy plugin. |
+| **`design-surface`** | Production design work on a consumer site that already wires SG (`www.cyberchitta.cc`, `ch-ai-tanya`, etc.). Adding or modifying components, primitives, surfaces. |
+| **`wire-consumer`** | First-time wiring of a new consumer site — npm dep-pin, `_data/sg.js`, Eleventy plugin registration. One-shot setup; afterwards switch to `design-surface`. |
 
-- **`colors-and-type.css`** — light + dark tokens, base type, semantic element classes (`.link`, `.logo-text`, `.group-header`, `.byline*`, `.article-content`, `.credits-section`), full-width utilities, the four `.icon-*` mask classes.
-- **`ui-kit.css`** — component styles in two layers:
-  - **`cc-*`** classes — blog surface vocabulary (header, hero, article row, byline-info, footer, article view).
-  - **Wiki / sub-site primitives** — `sub-site-bar`, `status-badge`, `provenance`, `outbound-action`, `entry-title-row`, `finding-list`, `concept-entry`, `backlink-list`, `crumb-nav`, density toggles. Used by wiki sub-sites.
-- **`assets/`** — `cc-260508.svg` + `.png` (canonical mark, served via jsDelivr), `cc-250815-v3.svg` (source-of-mark working file).
-- **`eleventy/primitives/*.ejs`** — design primitives. `header`, `chrome`, `footer`, `sub-site-bar`, `status-badge`, `entry-title-row`, `provenance`, `outbound-action`, `section-title` are canonical. `article-card`, `article-view`, `hero`, `collaborator-chip` ship as samples.
-- **`eleventy/{index,helpers,section-title-transform,custom-element-renderer}.js`** — Eleventy plugin + helpers.
-- **`examples/index.html`** — static rendered preview, for visual reference.
-- **`dist/styles.css`** — the compiled bundle (~118 KB). Served via jsDelivr; consumers don't import it from source.
+## The craft briefs
 
-## Working modes
+Both child design skills reference these:
 
-**Designing a throwaway artifact** (slide, mock, prototype, deck):
+- **`voice.md`** — house voice, attribution conventions, surface registers (essay / bts / tools / research), cut patterns, frontmatter conventions. Read before drafting or copyediting.
+- **`visual.md`** — visual brief. Look, layout, motion, philosophy (*Less is More*), anti-patterns, iconography rules. Read before designing.
 
-- Pull tokens via the compiled bundle URL: `https://cdn.jsdelivr.net/gh/cyberchitta/supramental-gold@<tag>/dist/styles.css`. Pin a real tag.
-- Pull the brand mark from the same `@<tag>` base: `assets/cc-260508.svg`.
-- Add a `<link>` for Fraunces, Inter, Fira Code, and Courier Prime in `<head>` (the bundle relies on these being loaded; in production they're loaded via Tailwind/DaisyUI).
-- Follow **`visual.md`** for layout, motion, anti-patterns, and **`voice.md`** for any copy the mock includes. Tokens alone are not enough.
+These are foundational and stable; child skills load them on demand.
 
-**Working on the live site or a sub-site** (production code):
+## Other supporting files (loaded by child skills as needed)
 
-- Don't copy assets — version-pin against the canonical jsDelivr URL via `_data/sg.js`.
-- Use the Eleventy plugin: `<%- include('primitives/chrome', { brandLogoUrl: sg.logoSvgUrl }) %>`, `<%- include('primitives/footer', { mainSiteUrl: 'https://www.cyberchitta.cc' }) %>`, etc.
-- Read `README.md § How consumers wire it in` and `CLAUDE.md` for the wiring details.
-- Read `visual.md` before adding anything new to the visual language. Read `voice.md` before drafting or copyediting article copy.
-
-## Flagged approximations
-
-Surface these to the user when starting work where pixel fidelity matters:
-
-- **Fonts** are Google Fonts. Licensed/optical-size builds may differ subtly.
-- **`cc-250815-v3.svg`** is the source-of-mark working file, not what ships — use `cc-260508.svg` / `.png` for the canonical render.
-- **Showrunner avatar** (`manda-2504.webp`) is not in the package — bylines fall back to initials.
+- **`README.md`** — package contents, consumer wiring runbook, release workflow.
+- **`NOTES.md`** — decision rationale and reconciliation log.
+- **`CLAUDE.md`** — handoff notes for live deployments.
+- **`colors-and-type.css`** + **`ui-kit.css`** — source CSS (tokens + components).
+- **`eleventy/primitives/*.ejs`** — design primitives.
+- **`eleventy/{index,helpers,...}.js`** — Eleventy plugin entry + helpers.
+- **`assets/`** — brand mark (canonical `cc-260508.svg` / `.png`).
+- **`dist/styles.css`** — compiled bundle served via jsDelivr.
 
 ## If invoked without guidance
 
-Ask the user:
+Ask the user one question:
 
-1. Are we designing a one-off artifact (slide, mock, prototype) or working on production code (`www.cyberchitta.cc` or a sub-site)?
-2. Main site (blog surface) or sub-site (wiki / research-vault surface)?
-3. Any specific surface or component? Or starting from scratch?
-4. Light, dark, or both?
+> "Are you (a) producing a one-off artifact, (b) doing production design on an existing CyberChitta site, or (c) setting up a new consumer site?"
 
-Then act as an expert designer who outputs HTML / EJS / JSX as appropriate — never inventing new tokens, never breaking the anti-patterns in `visual.md § What to avoid`.
+Then hand off to `design-throwaway`, `design-surface`, or `wire-consumer` respectively.
 
 ---
 
