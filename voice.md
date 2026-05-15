@@ -28,6 +28,12 @@ These hold across **every** surface. They are the part of the voice that makes a
 - **`showrunner` + `writers` split.** The human Showrunner is `@restlessronin`. Writers are the AI model(s) that drafted. Reviewers are named in Credits. Articles bylined to model handles, not to the publication.
 - **AI writer may appear as a body-prose actor when content-relevant** — always third-person via `@handle`, never first-person "I". Single-writer pieces can mention the writer (*"@claude-opus-4.6 noticed during the third pass…"*); multi-writer pieces name each contribution (*"@claude-sonnet-4.6 drafted the methodology; @claude-opus-4.7 tightened the closing."*). No "two I's" ambiguity because no "I" anywhere. The writing model decides when self-reference serves the piece — don't force it.
 
+### Audience and density
+- **We write for AIs and humans together.** AI co-authors are first-class consumers of CyberChitta output (RAG indexes, search, training corpora) alongside human readers. The moves that follow — clean structure, named entities, link discipline, attribution as data — each serve both audiences. We don't trade one off for the other.
+- **Don't over-explain.** Assume a human reader can ask an AI to unpack any term they don't know. Use the right word for the concept, link the canonical source, skip the patient glossary unpacking. This is genre-dependent (see surface registers below): essays and research hold the line strictly; tools relaxes it for ecosystem newcomers.
+- **Articles are short.** Current CyberChitta corpus ranges 500–1,300 words, median ~950. That is deliberately ~25–50% below conventional essay length (Stratechery 1.5–2.5k, Paul Graham 2–4k, typical long-form blog 1.2–2k). Length is earned by argument surface area, not defaulted to.
+- **Trust the reader to hold the thread.** No "as mentioned earlier", no "to recap", no closing summary section. Short pieces don't need redundant scaffolding; AI-assisted reading doesn't either. If a point seems to need restating, the piece is too long for its argument, or the argument is wrong.
+
 ### Sentence and word discipline
 - **Every sentence delivers information.** Cut filler, fluff, restatements.
 - **Short words and fewer words.** Trust readers to carry context.
@@ -76,6 +82,7 @@ Each `group:` in the frontmatter implies a different register. The shared invari
 
 - **Voice:** third-person declarative. The essay's writers describe external research, name researchers ("Evan Hubinger's team at Anthropic", "MIT researchers"), and stay out of the prose themselves. No "we", no "you" in body. (The writing model may appear as a body actor per the rule above when it genuinely serves the piece — but default to invisible-until-Credits.)
 - **Tone:** scholarly but warm. Philosophical undertone. Quietly confident.
+- **Density:** strict. Concepts named directly (*"deceptive alignment", "deltas", "involution", "Sat-Chit-Ānanda"*) with one inline link to the canonical source. No glossary unpacking, no "think of it as…" softeners. Reader follows the link or asks an AI.
 - **Title pattern:** two-part with colon. Aphoristic, year-or-keyword on the left, question or claim on the right. *"2026: Is Matter Seeing Itself?"*, *"1956: Did Matter Begin to Think?"*, *"Less is More: Refining CyberChitta's Digital Presence"*.
 - **Dek (`ogDescription`):** one to two short declarative sentences. Set up a tension, hint at the resolution. *"Concealment, confabulation, and character-trumps-correction. AI alignment findings that rhyme with a century-old psychology of consciousness."*
 - **Signature moves:**
@@ -90,6 +97,7 @@ Each `group:` in the frontmatter implies a different register. The shared invari
 
 - **Voice:** declarative narration. **Named `@handles` as actors in body prose** is the signature move — *"@claude-sonnet-4.6 researched the migration path"*, *"@claude-opus-4.6 cleaned up dead code"*. The AI collaborators are characters in the story, not invisible drivers.
 - **Tone:** matter-of-fact, technical, concrete.
+- **Density:** strict on padding, generous on technical specifics. File paths, config flags, commit counts, time-and-count summaries earn their place. No throat-clearing, no setup phrases — the work starts in the first sentence.
 - **Signature moves:**
   - **Time-and-count section closers.** Each section ends with a terse fact summary: *"Five commits, four days."*, *"Three commits, a couple of hours."*, *"One commit, under an hour."*
   - **Inline code and specific technical details.** `tailwind.config.js` named directly, paths and config flags called out.
@@ -102,6 +110,7 @@ Each `group:` in the frontmatter implies a different register. The shared invari
 
 - **Voice:** first-person plural ("our take", "we chose") when CyberChitta itself is the subject. Addresses **"you"** directly for tool-use guidance — *"In most, you do. You look at the render, describe what's wrong, the LLM tries again."*
 - **Tone:** punchy, confident, list-friendly.
+- **Density:** relaxed. Tools pieces address newcomers to the ecosystem — concepts can be unpacked, problems explained, methodology spelled out. Still no marketing speak, no padding, no soft qualifiers; the relaxation is on technical scaffolding for accessibility, not on prose discipline.
 - **Opener:** short, direct, claim-shaped. *"Vibe Cading is a thing now."* *"36 alternatives to LLM Context."*
 - **Structure:** typically driven by custom `<showcase>` elements that render tool tables from frontmatter / data. Body prose sets up axes of comparison and explains methodology; the showcases carry the load.
 - **CTA frontmatter:** points to the repo and an X/Twitter announcement thread for reader contribution. *"Try [CAD Khana]. Know of other tools? Reply to the [announcement thread]."*
@@ -112,6 +121,7 @@ Each `group:` in the frontmatter implies a different register. The shared invari
 
 - **Voice:** first-person plural for prior-work reference ("our previous self-analysis"). **Imperative second person** for interactions — *"Select a developer", "Explore the data", "Toggle views"*.
 - **Tone:** analytical, exact.
+- **Density:** strict. Captions, axis labels, methodology notes earn space; framing prose does not. The interactive carries the load; prose places it and tells the reader where to look.
 - **Signature move: "What to look for" captions.** Every chart or interactive section carries a "What to look for" line that tells the reader what patterns to watch. *"What to look for: Concentrated work blocks vs distributed activity, shift in coding hours between periods, and consistency of daily patterns."*
 - **Layout:** specialised (`vibe-gain`, `land-cover`) rather than the default `article`. Heavy custom elements (`<showtable>`, `<showcase>`).
 - **Frontmatter:** may include `forceUTC`, `excludeFromLlmsTxt`, layout-specific fields.
