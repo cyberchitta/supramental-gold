@@ -1,6 +1,6 @@
 ---
 name: supramental-gold
-description: Router for the CyberChitta design system and house craft — the writers' room of @restlessronin (Showrunner) and named AI collaborators, whose publication runs at cyberchitta.cc. Five task-specific child skills (design-throwaway, design-surface, wire-consumer, draft-article, copyedit) and two craft briefs (voice.md, visual.md). Use this skill if you're not sure which child fits.
+description: Router for the CyberChitta design system and house craft — the studio of @restlessronin (Showrunner) and named AI collaborators, whose publication runs at cyberchitta.cc. Five task-specific child skills (design-throwaway, design-surface, wire-consumer, draft-article, copyedit) and two craft briefs (voice.md, visual.md). Use this skill if you're not sure which child fits.
 user-invocable: true
 ---
 

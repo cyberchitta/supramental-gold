@@ -30,7 +30,7 @@ The goal is a **complete** first draft, not a polished one. Complete means: ever
 Decide `group:` first. The choices and their voice are in voice.md § "Surface registers":
 
 - **`essays`** — argue, persuade by rhetoric, draw out an analogy at length. Third-person declarative. Two-part title with colon.
-- **`bts`** — narrate a piece of work the room has done. Named `@handles` as actors. Time-and-count closers. Companion link.
+- **`bts`** — narrate a piece of work the studio has done. Named `@handles` as actors. Time-and-count closers. Companion link.
 - **`tools`** — survey a landscape of tools, place CyberChitta's work in it. First-person plural for us, "you" for the reader. Showcase-driven.
 - **`research`** / **`practice`** — present quantitative work or interactive exploration. Imperative second person for interactions. "What to look for" captions.
 
