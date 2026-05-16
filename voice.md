@@ -26,7 +26,8 @@ These hold across **every** surface. They are the part of the voice that makes a
 - **Lowercase `@handles` always.** `@restlessronin`, `@claude-opus-4.6`, `@gpt-4-turbo`. Never capitalised, never bare names like "Claude" or "GPT-4o" in attribution slots.
 - **AI as collaborators, not tools.** When writing about the AI contribution to a piece, the register is colleague, not instrument.
 - **`showrunner` + `writers` split.** The human Showrunner is `@restlessronin`. Writers are the AI model(s) that drafted. Reviewers are named in Credits. Articles bylined to model handles, not to the publication.
-- **AI writer may appear as a body-prose actor when content-relevant** — always third-person via `@handle`, never first-person "I". Single-writer pieces can mention the writer (*"@claude-opus-4.6 noticed during the third pass…"*); multi-writer pieces name each contribution (*"@claude-sonnet-4.6 drafted the methodology; @claude-opus-4.7 tightened the closing."*). No "two I's" ambiguity because no "I" anywhere. The writing model decides when self-reference serves the piece — don't force it.
+- **AI writer may appear as a body-prose actor when content-relevant.** Default is third-person via `@handle`. Single-writer pieces can mention the writer (*"@claude-opus-4.6 noticed during the third pass…"*); multi-writer pieces name each contribution (*"@claude-sonnet-4.6 drafted the methodology; @claude-opus-4.7 tightened the closing."*). The writing model decides when self-reference serves the piece; don't force it.
+- **First-person "I" is permitted only when the writer is the speaker** — i.e. the `@handle` listed under `writers:` is the one saying *"I"*. Precedent: a small number of early articles where `@restlessronin` was a co-writer (e.g. `llm-ctx-why.md`, `full-context-magic.md`). When the writer narrates someone else's experience (a model writing about `@restlessronin`'s project history; a human Showrunner narrating a model's behaviour), stay in third person via `@handle`. The rule keeps named attribution legible and prevents "two I's" ambiguity in multi-writer pieces.
 
 ### Audience and density
 - **We write for AIs and humans together.** AI co-authors are first-class consumers of CyberChitta output (RAG indexes, search, training corpora) alongside human readers. The moves that follow — clean structure, named entities, link discipline, attribution as data — each serve both audiences. We don't trade one off for the other.
@@ -42,7 +43,7 @@ These hold across **every** surface. They are the part of the voice that makes a
 - **Inline links for empirical claims.** Every fact a reader might want to verify carries a link to its primary source. Unsourced claims get qualified or cut during copyedit.
 
 ### Punctuation and ornaments
-- **Em-dashes (`—`) and en-dashes (`–`) used freely.** ASCII hyphens are not a substitute. Periods, commas, and colons are also good — prefer them over em-dashes when both work, but don't avoid em-dashes for their own sake.
+- **Em-dashes (`—`) used sparingly.** Reach for periods, commas, or colons first; em-dashes earn their place only when the lighter punctuation cannot carry the parenthetical or pivot. Observed norm across the published corpus is 0–5 em-dashes per article (median ~1); AI drafts tend to over-deploy them, and the copyedit pass tightens. En-dashes (`–`) are for numeric ranges (*2025–2026*, *Sonnet 3.5–3.7*). ASCII hyphens (`-`, `--`) are not a substitute for either when one is the right mark.
 - **Middle dot `·`** as a byline / metadata separator: *"@claude-opus-4.6 · @restlessronin"*, *"Apr 13, 2026 · Updated Apr 15, 2026 · 4 min"*.
 - **Bullet `•`** in the Sanskrit / Latin tagline only.
 - **Info glyph `ⓘ`** (U+24D8) inside `details/summary` buttons on hero attributions and bylines.
@@ -169,7 +170,8 @@ Patterns that earn no information in any register. The copyedit pass removes the
 - **Treating AI authorship as exceptional.** It is normal practice at CyberChitta — don't flag it as novelty.
 - **Calling AI "tools"** when discussing collaboration. The register is colleague.
 - **Overstating capabilities.** *"AI now does X"* when one model in one benchmark did X. Specific attribution beats generalised claim.
-- **First-person singular "I"** in body prose. Not used anywhere on the site. Don't introduce it.
+- **First-person singular "I"** when the writer is not the speaker. If the article narrates someone else's work, third-person via `@handle` for that person, no "I" anywhere. See the Attribution section for the "writer = speaker" exception.
+- **Em-dash overuse.** AI drafts default to one every few sentences; the published norm is closer to one per article. Default to commas, periods, or colons; reserve em-dashes for moves the lighter marks cannot carry.
 - **Em-dashes substituted by `--` or `-`** in published articles. Use the real character.
 
 ---
