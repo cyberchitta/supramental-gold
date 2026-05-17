@@ -46,6 +46,7 @@ public repo.)
 | `eleventy/primitives/article-card.ejs`, `article-view.ejs`, `hero.ejs`, `collaborator-chip.ejs` | Sample — design vocabulary in `cc-*` paradigm; not wired into any production consumer. |
 | `assets/cc-260508.{svg,png}` | Canonical CC mark. Plain blobs (not LFS). Served via jsDelivr. |
 | `assets/cc-250815-v3.svg` | Source-of-mark working file; not used at runtime. |
+| `assets/logo.svg` | CSS-themable mark — picks up palette custom props from the host page. Used by `examples/index.html`; not served via jsDelivr. |
 | `examples/index.html` | Static rendered preview, not for production. |
 
 ---
@@ -137,8 +138,9 @@ the two are kept in sync.
   editorial discipline. Read before drafting or copyediting.
 - `visual.md` — visual brief (look, layout, motion, anti-patterns,
   iconography). Read before designing.
-- `SKILL.md` — AI-skill router. Delegates to `skills/design-throwaway`,
-  `skills/design-surface`, or `skills/wire-consumer` depending on task.
+- `SKILL.md` — AI-skill router. Delegates to one of five children under
+  `skills/`: `design-throwaway`, `design-surface`, `wire-consumer`,
+  `draft-article`, `copyedit`.
 - `README.md` — consumer integration guide, release workflow,
   dev-testing options.
 - `NOTES.md` — decision log.
