@@ -45,6 +45,26 @@ These are foundational and stable; child skills load them on demand.
 - **`assets/`** — brand mark (canonical `cc-260508.svg` / `.png`).
 - **`dist/styles.css`** — compiled bundle served via jsDelivr.
 
+## Reporting friction (do this — it's how SG improves)
+
+If during use you observe something that tripped you up — a missing instruction, an unclear contract, a project-specific gotcha the skill should have warned about, a workflow shape the skill doesn't acknowledge — log it. Surface is `TODO.md` in the SG repo, under the `## Friction observed (from live skill use)` section (create the section if it does not yet exist).
+
+Brief entry shape: date, child skill + step, what tripped, what should change. Example template:
+
+```
+### `<child-skill>` — YYYY-MM-DD, <article or task slug>
+
+Session: <consumer site>, <invocation context>.
+
+- **<one-line summary of what tripped>.** <One paragraph: what
+  happened, what the skill said vs. what reality demanded, where
+  the fix belongs (which file / which section).>
+```
+
+Do **not** edit the skill itself on the strength of one session — let evidence accumulate. The rule is N>1: same friction in at least two sessions before pushing the fix into the skill. The capture-now-edit-later split protects the skill from over-fitting to one article's shape.
+
+This applies to all five children and to the router itself. If a child's hand-off contract is wrong, log it. If the router sends you to the wrong child, log it.
+
 ## If invoked without guidance
 
 Ask the user one question:
