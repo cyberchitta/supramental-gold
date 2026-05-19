@@ -35,10 +35,16 @@ These hold across **every** surface. They are the part of the voice that makes a
 - **Articles are short.** Current CyberChitta corpus ranges 500–1,300 words, median ~950. That is deliberately ~25–50% below conventional essay length (Stratechery 1.5–2.5k, Paul Graham 2–4k, typical long-form blog 1.2–2k). Length is earned by argument surface area, not defaulted to.
 - **Trust the reader to hold the thread.** No "as mentioned earlier", no "to recap", no closing summary section. Short pieces don't need redundant scaffolding; AI-assisted reading doesn't either. If a point seems to need restating, the piece is too long for its argument, or the argument is wrong.
 
+### Argument and evidence
+- **Show, don't tell.** Real examples from actual work over abstract claims. The catalog beats the thesis; the commit beats the methodology; the artifact beats the description of the artifact. Generalisations earn their place by emerging from the cases, not by leading them.
+- **Name the counterweight.** Successes and challenges both get airtime. Honest-counterweight beats — *"vibe-gain ran long"*, *"the homogenisation account also holds"*, *"the staffable pick might have been better"* — earn their place because the piece survives them. Drafts that omit the obvious objection get qualified or rewritten at copyedit.
+
 ### Sentence and word discipline
 - **Every sentence delivers information.** Cut filler, fluff, restatements.
 - **Short words and fewer words.** Trust readers to carry context.
 - **State points directly.** Remove qualifying phrases that add no information.
+- **Combine related ideas into single statements.** A sentence that picks up the next sentence's clause usually wins. Resist the AI default of one-claim-per-sentence; resist also the opposite extreme of stacked subordinate clauses.
+- **Questions stay genuinely neutral.** Direct questions to the reader (research/tools second-person; *"What to look for"* captions) avoid leading shape — name what to look at, not what to conclude. Rhetorical-question section-enders in essays are a different move (see Essay register signature); those frame, they don't poll.
 - **Specific numbers wherever possible.** *"12–24% to 78%"*, *"61 open source tools"*, *"2–2.5x gains"*, *"five commits, four days"*. Avoid "many", "often", "most" when a real number is available.
 - **Inline links for empirical claims.** Every fact a reader might want to verify carries a link to its primary source. Unsourced claims get qualified or cut during copyedit.
 
