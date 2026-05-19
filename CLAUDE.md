@@ -36,7 +36,7 @@ public repo.)
 | `colors-and-type.css` | Plain CSS custom properties. Light + dark tokens. |
 | `ui-kit.css` | Component styles + wiki design vocabulary. |
 | `eleventy/index.js` | Eleventy plugin — registers `sgHelpers` global. |
-| `eleventy/helpers.js` | `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`. |
+| `eleventy/helpers.js` | `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`, `removeFirstHeading`, `getLatestUpdateDate`, `stripPTags`. |
 | `eleventy/section-title-transform.js` | Generic factory for rewriting `<h2>` titles into `.group-header` shape + classing the following `<ul>`. |
 | `eleventy/custom-element-renderer.js` | Generic factory; exported, not auto-registered. For consumers wanting HTML-tag-style authoring in their own namespaces. |
 | `eleventy/primitives/header.ejs` | Accepts `brandLogoUrl` (consumer passes the jsDelivr URL from `sg.js`). |
@@ -45,6 +45,7 @@ public repo.)
 | `eleventy/primitives/sub-site-bar.ejs`, `status-badge.ejs`, `entry-title-row.ejs`, `provenance.ejs`, `outbound-action.ejs`, `section-title.ejs` | Wiki design vocabulary, used by `ch-ai-tanya`. |
 | `eleventy/primitives/article-card.ejs`, `article-view.ejs`, `hero.ejs`, `collaborator-chip.ejs` | Sample — design vocabulary in `cc-*` paradigm; not wired into any production consumer. |
 | `eleventy/layouts/base-chrome.ejs` | Shared article-fidelity head/body chrome. Consumer's `_includes/layouts/base.ejs` is a thin shim: sets `permalink` frontmatter, then `<%- include('layouts/base-chrome') %>`. Used by the main site; intended for `sorted-studs`. |
+| `eleventy/layouts/article-body.ejs` | Shared article shell — `<article>` with byline header, content section, and footer (update history, X conversation link, CTA). Consumer's `_includes/layouts/article.ejs` is a thin shim: sets `layout: layouts/base` + `ogType: article`, then `<%- include('layouts/article-body') %>`. Byline and footer blocks gate on optional locals so sub-sites can opt out. |
 | `eleventy/partials/site-meta.ejs`, `site-fonts.ejs`, `theme-init.ejs`, `featured-image-figure.ejs` | Lifted from the main site's `base.ejs` decomposition. Consumed by `layouts/base-chrome`. Override by placing the same path in the consumer's `_includes/`. |
 | `eleventy/partials/site-analytics.ejs`, `site-scripts.ejs` | Empty defaults. Slots shadowed by the consumer; main site uses them for GA and the CSR template-manager wiring. |
 | `assets/cc-260508.{svg,png}` | Canonical CC mark. Plain blobs (not LFS). Served via jsDelivr. |
@@ -134,6 +135,23 @@ Consumers using the shared chrome must provide:
 - `helpers.stripHtml(html)` — only invoked when a `featuredImage` has a `credit`
 - `env.eleventyEnv` — read by `partials/site-analytics` (production-gates the GA snippet)
 - Page-level locals: `title`, `description`, `ogDescription`, `ogType`, `publishedAt`, `updatedAt`
+
+### Data contract for `layouts/article-body`
+
+Inherits the base-chrome contract (the article shim sets `layout: layouts/base`). The article shell additionally reads:
+
+- Page-level locals — all optional, each block gates on its own:
+  - `title` — required (renders the `<h1>`).
+  - `writers`, `showrunner` — byline block. Absent → no byline.
+  - `publishedAt` — date line in the byline. `updates` (array of `{date, note?}`) drives the "Updated <date>" appendix and the Update History footer section.
+  - `cta` — markdown string; rendered into the bordered footer block.
+  - `xConversationId` — adds the "Tell us on X" footer line.
+- Optional consumer-provided helpers (only invoked when their gate fires):
+  - `helpers.getAuthorImage(tag)` — used by the showrunner avatar chip.
+  - `helpers.renderMarkdown(md)` — used to render update notes and the CTA body.
+- Reading time pulled from `site.articles.find((a) => a.url === page.url).readingTime` when `site.articles` is provided; absent → no reading-time appendix.
+
+A sub-site that ships pages with just `title` and `content` (no byline, no dates, no CTA, no updates) renders cleanly — only the `<h1>` and the article body appear.
 
 Live also retains a CSR footer (uses its own `build/ejs-precompiler.js`
 and `template-manager.js` for client-side hydration). SG's

@@ -1,0 +1,96 @@
+<%# Shared article body shell. Included by a consumer's
+    _includes/layouts/article.ejs (a thin shim that sets `layout: layouts/base`
+    + `ogType: article`, then includes this file). Data contract documented in
+    SG CLAUDE.md.
+
+    Optional locals (gated):
+      writers, showrunner   → byline block
+      publishedAt           → date line + Updated/reading-time appendices
+      updates               → update-history footer section (and Updated date)
+      xConversationId       → X-conversation footer line
+      cta                   → CTA footer block (rendered via helpers.renderMarkdown)
+
+    Required consumer helpers when those gates fire:
+      helpers.getAuthorImage(tag)    — showrunner avatar (byline)
+      helpers.renderMarkdown(md)     — update notes + CTA bodies
+%>
+<%
+  const articleWriters = typeof writers !== 'undefined' ? (writers || []) : [];
+  const articleShowrunner = typeof showrunner !== 'undefined' ? showrunner : null;
+  const articlePublishedAt = typeof publishedAt !== 'undefined' ? publishedAt : null;
+  const articleUpdates = typeof updates !== 'undefined' ? updates : null;
+  const articleCta = typeof cta !== 'undefined' ? cta : null;
+  const articleXConversation = typeof xConversationId !== 'undefined' ? xConversationId : null;
+  const hasByline = articleWriters.length > 0 || articleShowrunner;
+  const hasUpdateNotes = articleUpdates && articleUpdates.some((u) => u.note);
+  const latestUpdateDate = sgHelpers.getLatestUpdateDate(articleUpdates);
+  let readingTime = null;
+  if (site.articles && Array.isArray(site.articles)) {
+    const current = site.articles.find((a) => a.url === page.url);
+    readingTime = current ? current.readingTime : null;
+  }
+%>
+<article class="mx-auto">
+  <header class="article-meta mb-6">
+    <h1><%= title %></h1>
+    <% if (hasByline || articlePublishedAt) { %>
+    <div class="byline mt-3">
+      <% if (hasByline) { %>
+        <span class="byline-writers"><%= articleWriters.join(' · ') %></span>
+        <% if (articleShowrunner) { %>
+        <details class="byline-info dropdown dropdown-top dropdown-end">
+          <summary class="btn btn-ghost btn-circle btn-xs list-none text-[var(--color-link)] hover:text-[var(--color-link-hover)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </summary>
+          <div class="dropdown-content w-36 px-3 py-2 shadow rounded-box bg-base-200 text-base-content">
+            <div class="whitespace-nowrap">
+              <div class="text-xs text-base-content/70 mb-1">Showrunner</div>
+              <div class="flex items-center gap-2">
+                <img src="<%= helpers.getAuthorImage(articleShowrunner) %>" alt="Showrunner" class="w-6 h-6 rounded-full flex-shrink-0" loading="lazy" decoding="async" width="24" height="24">
+                <span class="text-xs text-[var(--color-gold)]"><%= articleShowrunner %></span>
+              </div>
+            </div>
+          </div>
+        </details>
+        <% } %>
+        <% if (articleWriters.length > 0 && articlePublishedAt) { %><br class="sm:hidden"><span class="byline-sep sm:inline hidden"> · </span><% } %>
+      <% } %>
+      <% if (articlePublishedAt) { %>
+      <time datetime="<%= articlePublishedAt %>" class="byline-meta"><%= sgHelpers.formatDate(articlePublishedAt) %></time>
+      <% if (latestUpdateDate) { %> <span class="byline-sep">·</span> <span class="byline-meta">Updated <%= sgHelpers.formatDate(latestUpdateDate) %></span><% } %>
+      <% if (readingTime) { %> <span class="byline-sep">·</span> <span class="byline-meta"><%= readingTime %> min</span><% } %>
+      <% } %>
+    </div>
+    <% } %>
+  </header>
+  <section class="article-content">
+    <%- sgHelpers.removeFirstHeading(content) %>
+  </section>
+  <footer class="mt-8">
+    <% if (hasUpdateNotes) { %>
+    <div class="article-meta-section mt-6">
+      <h2>Update History</h2>
+      <ul class="space-y-3 list-none p-0">
+        <% articleUpdates.filter((u) => u.note).reverse().forEach((u) => { %>
+        <li class="p-0">
+          <span>
+            <time datetime="<%= u.date %>"><%= sgHelpers.formatDate(u.date) %></time>
+            — <%- sgHelpers.stripPTags(helpers.renderMarkdown(u.note)) %>
+          </span>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+    <% } %>
+    <% if (articleXConversation) { %>
+    <div class="article-meta-section mt-6">
+      <p>What did you think? <a href="https://x.com/restlessron1n/status/<%= articleXConversation %>" class="link" target="_blank" rel="noopener noreferrer">Tell us on X</a></p>
+    </div>
+    <% } %>
+    <% if (articleCta) { %>
+    <div class="mt-12 pt-6 border-t border-base-300 article-content"><%- helpers.renderMarkdown(articleCta) %></div>
+    <% } %>
+  </footer>
+</article>
