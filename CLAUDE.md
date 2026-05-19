@@ -44,6 +44,9 @@ public repo.)
 | `eleventy/primitives/footer.ejs` | Accepts `mainSiteUrl`. |
 | `eleventy/primitives/sub-site-bar.ejs`, `status-badge.ejs`, `entry-title-row.ejs`, `provenance.ejs`, `outbound-action.ejs`, `section-title.ejs` | Wiki design vocabulary, used by `ch-ai-tanya`. |
 | `eleventy/primitives/article-card.ejs`, `article-view.ejs`, `hero.ejs`, `collaborator-chip.ejs` | Sample — design vocabulary in `cc-*` paradigm; not wired into any production consumer. |
+| `eleventy/layouts/base-chrome.ejs` | Shared article-fidelity head/body chrome. Consumer's `_includes/layouts/base.ejs` is a thin shim: sets `permalink` frontmatter, then `<%- include('layouts/base-chrome') %>`. Used by the main site; intended for `sorted-studs`. |
+| `eleventy/partials/site-meta.ejs`, `site-fonts.ejs`, `theme-init.ejs`, `featured-image-figure.ejs` | Lifted from the main site's `base.ejs` decomposition. Consumed by `layouts/base-chrome`. Override by placing the same path in the consumer's `_includes/`. |
+| `eleventy/partials/site-analytics.ejs`, `site-scripts.ejs` | Empty defaults. Slots shadowed by the consumer; main site uses them for GA and the CSR template-manager wiring. |
 | `assets/cc-260508.{svg,png}` | Canonical CC mark. Plain blobs (not LFS). Served via jsDelivr. |
 | `assets/cc-250815-v3.svg` | Source-of-mark working file; not used at runtime. |
 | `assets/logo.svg` | CSS-themable mark — picks up palette custom props from the host page. Used by `examples/index.html`; not served via jsDelivr. |
@@ -100,18 +103,36 @@ Live's data layer:
   (walks `src/assets/`, gets dimensions); reading times updated by
   `build/update-reading-times.js`.
 
-`src/_includes/layouts/base.ejs`:
-- Favicon `<link>` uses `<%= sg.logoSvgUrl %>`.
-- Stylesheet `<link>` uses `<%= sg.cssBundleUrl %>`.
-- Header include passes `brandLogoUrl: sg.logoSvgUrl`.
-- OG/Twitter meta uses `absUrl(...)` to avoid double-prefixing
-  absolute URLs.
+`src/_includes/layouts/base.ejs`: thin shim — sets `permalink`
+frontmatter and delegates to `layouts/base-chrome` (resolved from SG
+via EJS views). Brand URLs, OG/Twitter meta, fonts, theme-init,
+featured image, JSON-LD all live in SG now. Consumer retains
+`partials/site-analytics.ejs` (GA) and `partials/site-scripts.ejs`
+(CSR template-manager) — shadow-by-filename overrides of SG's empty
+defaults.
 
 `eleventy.config.js`:
-- Registers SG plugin, exposes SG's `eleventy/` to EJS includes.
+- Registers SG plugin.
+- Adds **both** `src/_includes` and SG's `eleventy/` to EJS `views`
+  (in that priority order). The consumer path comes first so
+  consumer files shadow SG defaults; this is what makes
+  `partials/site-analytics.ejs` and `partials/site-scripts.ejs`
+  overrides actually resolve.
 - Passes the static `site` config explicitly into the
   custom-element renderer's `dataContext` (the JSON-dir loader
   can't read a `.js` data file).
+
+### Data contract for `layouts/base-chrome`
+
+Consumers using the shared chrome must provide:
+
+- `site.title`, `site.url`, `site.description`
+- `site.featuredImages[page.url] = { url, caption, credit, ogFormat? }` (per-article hero metadata)
+- `site.images = [{ url, width, height }, ...]` (for figure intrinsic-size attributes)
+- `sg.cssBundleUrl`, `sg.logoSvgUrl` (from the per-consumer `_data/sg.js`)
+- `helpers.stripHtml(html)` — only invoked when a `featuredImage` has a `credit`
+- `env.eleventyEnv` — read by `partials/site-analytics` (production-gates the GA snippet)
+- Page-level locals: `title`, `description`, `ogDescription`, `ogType`, `publishedAt`, `updatedAt`
 
 Live also retains a CSR footer (uses its own `build/ejs-precompiler.js`
 and `template-manager.js` for client-side hydration). SG's

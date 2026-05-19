@@ -1,0 +1,72 @@
+<%# Shared article-fidelity base chrome. Included by a consumer's
+    _includes/layouts/base.ejs (a thin shim that sets permalink frontmatter
+    and includes this file). Data contract documented in SG README. %>
+<!doctype html>
+<html lang="en" class="bg-base-100">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%
+  const ogDesc = typeof ogDescription !== 'undefined' ? ogDescription : null;
+  const desc = typeof description !== 'undefined' ? description : null;
+  const pageDescription = ogDesc || desc || site.description;
+  const ogT = typeof ogType !== 'undefined' ? ogType : null;
+  const featuredImage = site.featuredImages && site.featuredImages[page.url] ? site.featuredImages[page.url].url : null;
+  const imageCaption = site.featuredImages && site.featuredImages[page.url] ? site.featuredImages[page.url].caption : null;
+  const imageCredit = site.featuredImages && site.featuredImages[page.url] ? site.featuredImages[page.url].credit : null;
+  const ogFormat = site.featuredImages && site.featuredImages[page.url] && site.featuredImages[page.url].ogFormat ? site.featuredImages[page.url].ogFormat : 'jpg';
+  const ogImage = featuredImage ? featuredImage.replace(/\.(webp|svg|jpg|jpeg|png)$/i, '.' + ogFormat) : null;
+  const twitterImage = featuredImage && /\.svg$/i.test(featuredImage) ? ogImage : featuredImage;
+  const absUrl = (u) => /^https?:\/\//.test(u) ? u : site.url + u;
+  let markdownPath = null;
+  if (page.url === '/') {
+    markdownPath = '/llms/index.md';
+  } else if (page.url.startsWith('/articles/')) {
+    const filename = page.url.replace('/articles/', '').replace('.html', '.md');
+    markdownPath = `/llms/articles/${filename}`;
+  }
+  %>
+  <%- include('partials/site-meta', {
+    title: typeof title !== 'undefined' ? title : null,
+    pageDescription,
+    ogT,
+    ogImage,
+    twitterImage,
+    featuredImage,
+    markdownPath,
+    publishedAt: typeof publishedAt !== 'undefined' ? publishedAt : null,
+    updatedAt: typeof updatedAt !== 'undefined' ? updatedAt : null,
+    absUrl
+  }) %>
+  <%- include('partials/site-fonts') %>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <%- include('partials/theme-init') %>
+  <link rel="stylesheet" href="<%= sg.cssBundleUrl %>" />
+  <script>
+    window.ejsTemplates = window.ejsTemplates || {};
+  </script>
+  <%- include('partials/site-analytics') %>
+</head>
+<% ssRender=(typeof prerender !=='undefined' && prerender) %>
+
+<body class="font-sans bg-base-100 text-base-content">
+  <header class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <%- include('primitives/header', { brandLogoUrl: sg.logoSvgUrl }) %>
+  </header>
+  <%- include('partials/featured-image-figure', {
+    featuredImage,
+    imageCaption,
+    imageCredit,
+    title: typeof title !== 'undefined' ? title : ''
+  }) %>
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <%- content %>
+  </main>
+  <footer class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm text-base-content/70">
+    <div id="footer-container"></div>
+  </footer>
+  <%- include('partials/site-scripts') %>
+</body>
+
+</html>

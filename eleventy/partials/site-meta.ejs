@@ -1,0 +1,54 @@
+<title><%= title ? `${title} - ` : '' %><%= site.title %></title>
+<meta name="author" content="CyberChitta">
+<% if (pageDescription) { %>
+<meta name="description" content="<%= pageDescription %>">
+<% } %>
+<% if (markdownPath) { %>
+<link rel="alternate" type="text/markdown" href="<%= markdownPath %>">
+<% } %>
+<link rel="alternate" type="application/rss+xml" title="<%= site.title %> RSS Feed" href="<%= site.url %>/feed.xml">
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="<%= ogT || 'website' %>">
+<meta property="og:url" content="<%= site.url + page.url %>">
+<meta property="og:title" content="<%= title %>">
+<% if (pageDescription) { %>
+<meta property="og:description" content="<%= pageDescription %>">
+<% } %>
+<% if (featuredImage) { %>
+<meta property="og:image" content="<%= absUrl(ogImage) %>">
+<% } %>
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="<%= site.url + page.url %>">
+<meta property="twitter:title" content="<%= title %>">
+<% if (pageDescription) { %>
+<meta property="twitter:description" content="<%= pageDescription %>">
+<% } %>
+<% if (featuredImage) { %>
+<meta property="twitter:image" content="<%= absUrl(twitterImage) %>">
+<% } %>
+<link rel="icon" type="image/svg+xml" href="<%= sg.logoSvgUrl %>" sizes="any">
+<% if (featuredImage) { %>
+<link rel="preload" as="image" href="<%= featuredImage %>">
+<% } %>
+<!-- Structured Data -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "<%= ogT === 'article' ? 'Article' : 'WebPage' %>",
+    "headline": "<%= title %>",
+    "description": "<%= pageDescription %>",
+    "url": "<%= site.url + page.url %>"
+    <% if (publishedAt) { %>,
+    "datePublished": "<%= publishedAt %>"
+    <% } %>
+    <% if (updatedAt) { %>,
+    "dateModified": "<%= updatedAt %>"
+    <% } %>,
+    "author": [{
+      "@type": "Organization",
+      "name": "CyberChitta",
+      "url": "<%= site.url %>"
+    }]
+  }
+</script>

@@ -1,0 +1,26 @@
+<% if (featuredImage) {
+const imageMetadata = site.images.find(img => img.url === featuredImage);
+%>
+<figure class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+  <div class="relative">
+    <div class="aspect-square md:aspect-video overflow-hidden">
+      <img src="<%= featuredImage %>" alt="<%= imageCredit ? helpers.stripHtml(imageCredit) : 'Featured image for ' + title %>" class="w-full h-full object-cover" width="<%= imageMetadata.width %>" height="<%= imageMetadata.height %>" fetchpriority="high" decoding="async">
+    </div>
+    <% if (imageCredit) { %>
+    <details class="dropdown dropdown-top dropdown-end absolute bottom-2 right-2">
+      <summary class="btn btn-circle btn-xs bg-base-300 list-none text-[var(--color-link)] hover:text-[var(--color-link-hover)]">ⓘ</summary>
+      <div class="dropdown-content card card-compact w-64 p-2 shadow bg-base-200 text-base-content">
+        <div class="card-body">
+          <p class="text-xs"><%- imageCredit %></p>
+        </div>
+      </div>
+    </details>
+    <% } %>
+  </div>
+  <% if (imageCaption) { %>
+  <figcaption class="mt-2 text-sm text-base-content/70 italic">
+    <%= imageCaption %>
+  </figcaption>
+  <% } %>
+</figure>
+<% } %>

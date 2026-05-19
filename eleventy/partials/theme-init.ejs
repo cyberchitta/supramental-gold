@@ -1,0 +1,12 @@
+<script>
+  (function () {
+    function setTheme(isDark) {
+      var root = document.documentElement;
+      root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      root.classList.toggle('dark', isDark);
+    }
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    setTheme(mq.matches);
+    mq.addEventListener('change', function (e) { setTheme(e.matches); });
+  })();
+</script>
