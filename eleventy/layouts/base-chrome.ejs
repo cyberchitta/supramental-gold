@@ -52,7 +52,7 @@
 
 <body class="font-sans bg-base-100 text-base-content">
   <header class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-    <%- include('primitives/header', { brandLogoUrl: sg.logoSvgUrl }) %>
+    <%- include('primitives/header', { brandLogoUrl: sg.logoSvgUrl, mainSiteUrl: site.mainSiteUrl }) %>
   </header>
   <%- include('partials/featured-image-figure', {
     featuredImage,
@@ -64,7 +64,7 @@
     <%- content %>
   </main>
   <footer class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm text-base-content/70">
-    <div id="footer-container"></div>
+    <%- include('partials/footer-content') %>
   </footer>
   <%- include('partials/site-scripts') %>
 </body>

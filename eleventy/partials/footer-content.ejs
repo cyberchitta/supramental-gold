@@ -1,0 +1,5 @@
+<%# Default footer body — renders the SSR primitive with the sub-site's
+    main-site link target. Consumers can shadow this file (place a
+    `partials/footer-content.ejs` in their own `_includes/`) to swap
+    in a different pattern, e.g. the main site's CSR placeholder. %>
+<%- include('primitives/footer', { mainSiteUrl: site.mainSiteUrl }) %>

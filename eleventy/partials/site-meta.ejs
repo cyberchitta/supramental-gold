@@ -1,4 +1,5 @@
-<title><%= title ? `${title} - ` : '' %><%= site.title %></title>
+<% const _resolvedTitle = title || site.title; %>
+<title><%= title && title !== site.title ? `${title} - ${site.title}` : site.title %></title>
 <meta name="author" content="CyberChitta">
 <% if (pageDescription) { %>
 <meta name="description" content="<%= pageDescription %>">
@@ -10,7 +11,7 @@
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="<%= ogT || 'website' %>">
 <meta property="og:url" content="<%= site.url + page.url %>">
-<meta property="og:title" content="<%= title %>">
+<meta property="og:title" content="<%= _resolvedTitle %>">
 <% if (pageDescription) { %>
 <meta property="og:description" content="<%= pageDescription %>">
 <% } %>
@@ -20,7 +21,7 @@
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="<%= site.url + page.url %>">
-<meta property="twitter:title" content="<%= title %>">
+<meta property="twitter:title" content="<%= _resolvedTitle %>">
 <% if (pageDescription) { %>
 <meta property="twitter:description" content="<%= pageDescription %>">
 <% } %>
@@ -36,7 +37,7 @@
   {
     "@context": "https://schema.org",
     "@type": "<%= ogT === 'article' ? 'Article' : 'WebPage' %>",
-    "headline": "<%= title %>",
+    "headline": "<%= _resolvedTitle %>",
     "description": "<%= pageDescription %>",
     "url": "<%= site.url + page.url %>"
     <% if (publishedAt) { %>,

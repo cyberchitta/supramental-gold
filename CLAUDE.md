@@ -127,6 +127,7 @@ defaults.
 Consumers using the shared chrome must provide:
 
 - `site.title`, `site.url`, `site.description`
+- `site.mainSiteUrl` *(sub-sites only)* — absolute URL of the main CyberChitta site (`https://www.cyberchitta.cc`). Sets the brand-logo link target. Omit for the main site itself (logo falls back to `/`).
 - `site.featuredImages[page.url] = { url, caption, credit, ogFormat? }` (per-article hero metadata)
 - `site.images = [{ url, width, height }, ...]` (for figure intrinsic-size attributes)
 - `sg.cssBundleUrl`, `sg.logoSvgUrl` (from the per-consumer `_data/sg.js`)
