@@ -21,13 +21,29 @@
 // `createCustomElementRenderer` is exported for consumers that want
 // HTML-tag-style authoring for their own primitives (e.g. the live
 // site's <showcase>/<showtable>). SG itself doesn't use it.
+//
+// The plugin also registers a `wrapCredits` HTML transform so the
+// canonical `## Credits` section gets its `.credits-section` wrapper
+// (which SG's CSS targets) without each consumer wiring it up.
 
 import createCustomElementRenderer from './custom-element-renderer.js';
 import createSectionTitleTransform from './section-title-transform.js';
+import wrapCredits from './wrap-credits.js';
 import helpers from './helpers.js';
 
-export { createCustomElementRenderer, createSectionTitleTransform, helpers };
+export {
+  createCustomElementRenderer,
+  createSectionTitleTransform,
+  wrapCredits,
+  helpers,
+};
 
 export default function supramentalGold(eleventyConfig) {
   eleventyConfig.addGlobalData('sgHelpers', helpers);
+  eleventyConfig.addTransform('sgWrapCredits', function (content, outputPath) {
+    if (outputPath && outputPath.endsWith('.html')) {
+      return wrapCredits(content);
+    }
+    return content;
+  });
 }
