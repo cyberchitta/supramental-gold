@@ -1,6 +1,6 @@
 ---
 name: supramental-gold
-description: Router for the CyberChitta design system and house craft — the studio of @restlessronin (Showrunner) and named AI collaborators, whose publication runs at cyberchitta.cc. Five task-specific child skills (design-throwaway, design-surface, wire-consumer, draft-article, copyedit) and two craft briefs (voice.md, visual.md). Use this skill if you're not sure which child fits.
+description: Router for the CyberChitta design system and house craft — the studio of @restlessronin (Showrunner) and named AI collaborators, whose publication runs at cyberchitta.cc. Six task-specific child skills (design-throwaway, design-surface, wire-consumer, wire-deploy, draft-article, copyedit) and two craft briefs (voice.md, visual.md). Use this skill if you're not sure which child fits.
 user-invocable: true
 ---
 
@@ -17,6 +17,7 @@ This file is a **router**. For any actual work, invoke one of the child skills b
 | **`design-throwaway`** | Producing a one-off artifact (slide, mock, prototype, deck, OG card, single-page demo). Pulls SG via the public CDN, doesn't need the Eleventy plugin. |
 | **`design-surface`** | Production design work on a consumer site that already wires SG (`www.cyberchitta.cc`, `ch-ai-tanya`, etc.). Adding or modifying components, primitives, surfaces. |
 | **`wire-consumer`** | First-time wiring of a new consumer site — npm dep-pin, `_data/sg.js`, Eleventy plugin registration. One-shot setup; afterwards switch to `design-surface`. |
+| **`wire-deploy`** | First-time **Netlify** deploy setup — git LFS for binary assets, immutable cache headers, production-context `cp` step, date-suffix filename convention. Complements `wire-consumer`. Skip for GitHub Pages or non-Netlify targets. |
 
 ### Editorial
 
@@ -63,7 +64,7 @@ Session: <consumer site>, <invocation context>.
 
 Do **not** edit the skill itself on the strength of one session — let evidence accumulate. The rule is N>1: same friction in at least two sessions before pushing the fix into the skill. The capture-now-edit-later split protects the skill from over-fitting to one article's shape.
 
-This applies to all five children and to the router itself. If a child's hand-off contract is wrong, log it. If the router sends you to the wrong child, log it.
+This applies to all six children and to the router itself. If a child's hand-off contract is wrong, log it. If the router sends you to the wrong child, log it.
 
 ## If invoked without guidance
 

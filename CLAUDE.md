@@ -178,9 +178,9 @@ the two are kept in sync.
   editorial discipline. Read before drafting or copyediting.
 - `visual.md` — visual brief (look, layout, motion, anti-patterns,
   iconography). Read before designing.
-- `SKILL.md` — AI-skill router. Delegates to one of five children under
+- `SKILL.md` — AI-skill router. Delegates to one of six children under
   `skills/`: `design-throwaway`, `design-surface`, `wire-consumer`,
-  `draft-article`, `copyedit`.
+  `wire-deploy`, `draft-article`, `copyedit`.
 - `README.md` — consumer integration guide, release workflow,
   dev-testing options.
 - `NOTES.md` — decision log.

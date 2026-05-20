@@ -13,7 +13,7 @@ A versioned, Eleventy-aware design system. It contains:
 
 - **`voice.md`** — house voice, attribution, surface registers, editorial discipline. Read this before drafting or copyediting.
 - **`visual.md`** — visual brief. Look, layout, motion, philosophy (*Less is More*), anti-patterns, iconography rules. Read this before designing.
-- **`SKILL.md`** — router entry for AI tools. Delegates to one of five child skills under `skills/`: `design-throwaway` (mocks / decks / demos), `design-surface` (production site work), `wire-consumer` (first-time consumer wiring), `draft-article` (cold-start a new article), `copyedit` (edit an existing draft).
+- **`SKILL.md`** — router entry for AI tools. Delegates to one of six child skills under `skills/`: `design-throwaway` (mocks / decks / demos), `design-surface` (production site work), `wire-consumer` (first-time consumer wiring), `wire-deploy` (first-time Netlify deploy setup), `draft-article` (cold-start a new article), `copyedit` (edit an existing draft).
 - **`tailwind.css`** — Tailwind v4 + DaisyUI build entry. Multi-source `@source` scan covers SG plus every sibling consumer repo. Compiled to:
 - **`dist/styles.css`** — the canonical CSS bundle, served via jsDelivr to every consumer.
 - **`colors-and-type.css`** + **`ui-kit.css`** — the source CSS imported by `tailwind.css`. Tokens (light + dark), semantic element styles, and the wiki design vocabulary.

@@ -96,7 +96,7 @@ When a child SKILL.md says `../../voice.md`, treat it as `../../../../supramenta
 
 **Frontmatter drift surface.** Only the `description` field is duplicated; everything else is loaded from canonical. If the SG root SKILL.md's description changes meaningfully (rare), sweep `grep -r "description: Router for the CyberChitta" $HOME/GitHub/*/. claude/skills/supramental-gold/` to find pointers needing an update.
 
-**Invocation.** After install, the user can invoke `supramental-gold` directly; the canonical router lists the five children (design-throwaway, design-surface, wire-consumer, draft-article, copyedit) and Claude reads whichever child the task matches. No per-child pointer needed — lazy loading through the router is sufficient.
+**Invocation.** After install, the user can invoke `supramental-gold` directly; the canonical router lists the six children (design-throwaway, design-surface, wire-consumer, wire-deploy, draft-article, copyedit) and Claude reads whichever child the task matches. No per-child pointer needed — lazy loading through the router is sufficient.
 
 ## Brand assets — never copy
 
