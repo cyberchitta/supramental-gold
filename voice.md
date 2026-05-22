@@ -10,7 +10,7 @@ The aim is to keep every CyberChitta surface recognisably **CyberChitta**, while
 
 ## The studio
 
-**CyberChitta** is a studio — the combined entity of **@restlessronin** (the Showrunner, durable element and prime mover) and a rotating cast of named AI collaborators. The same studio does every collaborative project under the CyberChitta name: open-source tools, design systems, research, code, and the publication at `cyberchitta.cc` (main site at `www.cyberchitta.cc`, sub-sites at `*.cyberchitta.cc`). This brief covers the publication's editorial voice; the studio ships the rest of the work in the same spirit.
+**CyberChitta** is a studio — the combined entity of **@restlessronin** (the showrunner, durable element and prime mover) and a rotating cast of named AI collaborators. The same studio does every collaborative project under the CyberChitta name: open-source tools, design systems, research, code, and the publication at `cyberchitta.cc` (main site at `www.cyberchitta.cc`, sub-sites at `*.cyberchitta.cc`). This brief covers the publication's editorial voice; the studio ships the rest of the work in the same spirit.
 
 The studio did not exist pre-AI. Nothing it makes is anyone's solo work. The house metaphor is television production: one human showrunner, a writers' room of named AI collaborators, work that *loops till wrap*. This file describes the editorial voice the writers' room writes in.
 
@@ -25,9 +25,9 @@ These hold across **every** surface. They are the part of the voice that makes a
 ### Attribution
 - **Lowercase `@handles` always.** `@restlessronin`, `@claude-opus-4.6`, `@gpt-4-turbo`. Never capitalised, never bare names like "Claude" or "GPT-4o" in attribution slots.
 - **AI as collaborators, not tools.** When writing about the AI contribution to a piece, the register is colleague, not instrument.
-- **`showrunner` + `writers` split.** The human Showrunner is `@restlessronin`. Writers are the AI model(s) that drafted. Reviewers are named in Credits. Articles bylined to model handles, not to the publication.
+- **`showrunner` + `writers` split.** The human showrunner is `@restlessronin`. Writers are the AI model(s) that drafted. Reviewers are named in Credits. Articles bylined to model handles, not to the publication.
 - **AI writer may appear as a body-prose actor when content-relevant.** Default is third-person via `@handle`. Single-writer pieces can mention the writer (*"@claude-opus-4.6 noticed during the third pass…"*); multi-writer pieces name each contribution (*"@claude-sonnet-4.6 drafted the methodology; @claude-opus-4.7 tightened the closing."*). The writing model decides when self-reference serves the piece; don't force it.
-- **First-person "I" is permitted only when the writer is the speaker** — i.e. the `@handle` listed under `writers:` is the one saying *"I"*. Precedent: a small number of early articles where `@restlessronin` was a co-writer (e.g. `llm-ctx-why.md`, `full-context-magic.md`). When the writer narrates someone else's experience (a model writing about `@restlessronin`'s project history; a human Showrunner narrating a model's behaviour), stay in third person via `@handle`. The rule keeps named attribution legible and prevents "two I's" ambiguity in multi-writer pieces.
+- **First-person "I" is permitted only when the writer is the speaker** — i.e. the `@handle` listed under `writers:` is the one saying *"I"*. Precedent: a small number of early articles where `@restlessronin` was a co-writer (e.g. `llm-ctx-why.md`, `full-context-magic.md`). When the writer narrates someone else's experience (a model writing about `@restlessronin`'s project history; a human showrunner narrating a model's behaviour), stay in third person via `@handle`. The rule keeps named attribution legible and prevents "two I's" ambiguity in multi-writer pieces.
 
 ### Audience and density
 - **We write for AIs and humans together.** AI co-authors are first-class consumers of CyberChitta output (RAG indexes, search, training corpora) alongside human readers. The moves that follow — clean structure, named entities, link discipline, attribution as data — each serve both audiences. We don't trade one off for the other.
@@ -56,8 +56,8 @@ These hold across **every** surface. They are the part of the voice that makes a
 - **No emoji, anywhere.** Not in articles, not in bylines, not in tag chips. If a tag mark is needed, the design system provides a hairline-bordered chip or small-caps `.group-header`.
 
 ### Casing
-- **Title Case** for article titles.
-- **Sentence case** for navigation, buttons, inline UI strings, section subheads inside an article.
+- **Title Case** for article titles and section subheads inside articles.
+- **Sentence case** for navigation, buttons, inline UI strings.
 
 ### Closing structure
 - Essays and BTS pieces: horizontal rule `---` → short reframe / tagline paragraph → `## Credits`.
