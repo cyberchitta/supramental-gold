@@ -1,6 +1,6 @@
 # CyberChitta — Visual
 
-> **"One human showrunner. A writers' room of AI collaborators. We loop till wrap."**
+> **"One human showrunner. A writers room of AI collaborators. We loop till wrap."**
 >
 > *सत्यमेव जयते • vincit omnia veritas*
 
@@ -19,15 +19,15 @@ The system is **Supramental Gold**. The work it dresses is **CyberChitta**:
 
 Don't conflate the two. Internal references say "SG"; user-facing surfaces say "CyberChitta."
 
-The same register applies to *meta-vocabulary* — file names, section headings, internal categories. We're a studio: a showrunner, a writers' room of named AI collaborators, work that *loops till wrap*. Sibling files in the design system keep the same plain register — `voice.md`, `visual.md`, `NOTES.md`, `TODO.md`, `SKILL.md`. Names a contributor would actually say in the room.
+The same register applies to *meta-vocabulary* — file names, section headings, internal categories. We're a studio: a showrunner, a writers room of named AI collaborators, work that *loops till wrap*. Sibling files in the design system keep the same plain register — `voice.md`, `visual.md`, `NOTES.md`, `TODO.md`, `SKILL.md`. Names a contributor would actually say in the room.
 
 ---
 
 ## What CyberChitta is
 
-**CyberChitta** is a studio — the combined entity of **@restlessronin** (the Showrunner, durable element and prime mover) and a rotating cast of named AI collaborators. The name pairs *cyber* with the Sanskrit *chitta* — "mind-stuff," consciousness, awareness.
+**CyberChitta** is a studio — the combined entity of **@restlessronin** (the showrunner, durable element and prime mover) and a rotating cast of named AI collaborators. The name pairs *cyber* with the Sanskrit *chitta* — "mind-stuff," consciousness, awareness.
 
-The studio ships every collaborative project under the CyberChitta name: open-source tools, design systems, research, code, and the publication. The publication runs at `cyberchitta.cc` (main site at `www.cyberchitta.cc`, sub-sites at `*.cyberchitta.cc`); this file covers its visual language. The studio did not exist pre-AI, and nothing it makes is anyone's solo work. The house metaphor is television production: one human showrunner, a writers' room of named AI collaborators, work that *loops till wrap*.
+The studio ships every collaborative project under the CyberChitta name: open-source tools, design systems, research, code, and the publication. The publication runs at `cyberchitta.cc` (main site at `www.cyberchitta.cc`, sub-sites at `*.cyberchitta.cc`); this file covers its visual language. The studio did not exist pre-AI, and nothing it makes is anyone's solo work. The house metaphor is television production: one human showrunner, a writers room of named AI collaborators, work that *loops till wrap*.
 
 The main site (`www.cyberchitta.cc`) is intentionally minimal — a single blog-style home page with a reverse-chronological article index, grouped into four sections:
 

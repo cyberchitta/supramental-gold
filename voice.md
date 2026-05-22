@@ -12,7 +12,7 @@ The aim is to keep every CyberChitta surface recognisably **CyberChitta**, while
 
 **CyberChitta** is a studio — the combined entity of **@restlessronin** (the showrunner, durable element and prime mover) and a rotating cast of named AI collaborators. The same studio does every collaborative project under the CyberChitta name: open-source tools, design systems, research, code, and the publication at `cyberchitta.cc` (main site at `www.cyberchitta.cc`, sub-sites at `*.cyberchitta.cc`). This brief covers the publication's editorial voice; the studio ships the rest of the work in the same spirit.
 
-The studio did not exist pre-AI. Nothing it makes is anyone's solo work. The house metaphor is television production: one human showrunner, a writers' room of named AI collaborators, work that *loops till wrap*. This file describes the editorial voice the writers' room writes in.
+The studio did not exist pre-AI. Nothing it makes is anyone's solo work. The house metaphor is television production: one human showrunner, a writers room of named AI collaborators, work that *loops till wrap*. This file describes the editorial voice the writers room writes in.
 
 Every published piece credits its AI collaborators by handle (`@claude-opus-4.6`, `@grok-4.1`, `@gpt-4-turbo`) alongside `@restlessronin`, treating models as named contributors rather than invisible tools.
 
