@@ -48,9 +48,14 @@ export default function supramentalGold(eleventyConfig, options = {}) {
     }
     return content;
   });
-  // Amend eleventy's default markdown library with house plugins. Consumers
-  // that call `setLibrary('md', ...)` themselves (e.g. live site's custom
-  // wrapper) override this — they should use `createHouseMarkdownLibrary`
-  // from `./markdown-library` to get the same shape on their own instance.
-  eleventyConfig.amendLibrary('md', (md) => applyHousePlugins(md, { internalDomains }));
+  // Amend eleventy's default markdown library with house plugins. The
+  // amendLibrary callback also fires against consumer-supplied custom
+  // libraries (e.g. a `{ render: fn }` wrapper); skip those — the consumer
+  // is responsible for calling `createHouseMarkdownLibrary` on their own
+  // instance.
+  eleventyConfig.amendLibrary('md', (md) => {
+    if (typeof md.use === 'function' && md.options) {
+      applyHousePlugins(md, { internalDomains });
+    }
+  });
 }
