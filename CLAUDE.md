@@ -35,9 +35,10 @@ public repo.)
 | `dist/styles.css` | Compiled bundle (~118KB minified). Tracked in git; served via jsDelivr to consumers. |
 | `colors-and-type.css` | Plain CSS custom properties. Light + dark tokens. |
 | `ui-kit.css` | Component styles + wiki design vocabulary. |
-| `eleventy/index.js` | Eleventy plugin — registers `sgHelpers` global. |
+| `eleventy/index.js` | Eleventy plugin — registers `sgHelpers` global, adds `sgWrapCredits` HTML transform, and amends eleventy's default markdown library with house plugins. Accepts `{ internalDomains: [...] }` option, forwarded to `markdown-library`. |
 | `eleventy/helpers.js` | `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`, `removeFirstHeading`, `getLatestUpdateDate`, `stripPTags`. |
 | `eleventy/build-helpers.js` | `readingTimeForFile`, `calculateReadingTime`, `stripNonReadingSections`. Build-time only (imports `fs` + `gray-matter`); not template helpers. Encodes the house rule that Credits and Document History don't count toward reading time. |
+| `eleventy/markdown-library.js` | `createHouseMarkdownLibrary({ internalDomains })`, `applyHousePlugins(md, opts)`. House markdown shape: `html`/`breaks`/`linkify` defaults, `.link` class on `<a>`, markdown-it-anchor, markdown-it-external-links, markdown-it-footnote. SG plugin auto-amends eleventy's default md via `applyHousePlugins`; consumers with a custom `setLibrary` (e.g. live's `_data/markdown.js`) call `createHouseMarkdownLibrary` directly. |
 | `eleventy/section-title-transform.js` | Generic factory for rewriting `<h2>` titles into `.group-header` shape + classing the following `<ul>`. |
 | `eleventy/custom-element-renderer.js` | Generic factory; exported, not auto-registered. For consumers wanting HTML-tag-style authoring in their own namespaces. |
 | `eleventy/primitives/header.ejs` | Accepts `brandLogoUrl` (consumer passes the jsDelivr URL from `sg.js`). |

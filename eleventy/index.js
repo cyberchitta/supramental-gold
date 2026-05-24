@@ -30,6 +30,7 @@ import createCustomElementRenderer from './custom-element-renderer.js';
 import createSectionTitleTransform from './section-title-transform.js';
 import wrapCredits from './wrap-credits.js';
 import helpers from './helpers.js';
+import { applyHousePlugins } from './markdown-library.js';
 
 export {
   createCustomElementRenderer,
@@ -38,7 +39,8 @@ export {
   helpers,
 };
 
-export default function supramentalGold(eleventyConfig) {
+export default function supramentalGold(eleventyConfig, options = {}) {
+  const { internalDomains = [] } = options;
   eleventyConfig.addGlobalData('sgHelpers', helpers);
   eleventyConfig.addTransform('sgWrapCredits', function (content, outputPath) {
     if (outputPath && outputPath.endsWith('.html')) {
@@ -46,4 +48,9 @@ export default function supramentalGold(eleventyConfig) {
     }
     return content;
   });
+  // Amend eleventy's default markdown library with house plugins. Consumers
+  // that call `setLibrary('md', ...)` themselves (e.g. live site's custom
+  // wrapper) override this — they should use `createHouseMarkdownLibrary`
+  // from `./markdown-library` to get the same shape on their own instance.
+  eleventyConfig.amendLibrary('md', (md) => applyHousePlugins(md, { internalDomains }));
 }
