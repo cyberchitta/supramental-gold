@@ -29,6 +29,7 @@
 import createCustomElementRenderer from './custom-element-renderer.js';
 import createSectionTitleTransform from './section-title-transform.js';
 import wrapCredits from './wrap-credits.js';
+import repositionFootnotes from './reposition-footnotes.js';
 import helpers from './helpers.js';
 import { applyHousePlugins } from './markdown-library.js';
 
@@ -36,6 +37,7 @@ export {
   createCustomElementRenderer,
   createSectionTitleTransform,
   wrapCredits,
+  repositionFootnotes,
   helpers,
 };
 
@@ -45,6 +47,12 @@ export default function supramentalGold(eleventyConfig, options = {}) {
   eleventyConfig.addTransform('sgWrapCredits', function (content, outputPath) {
     if (outputPath && outputPath.endsWith('.html')) {
       return wrapCredits(content);
+    }
+    return content;
+  });
+  eleventyConfig.addTransform('sgRepositionFootnotes', function (content, outputPath) {
+    if (outputPath && outputPath.endsWith('.html')) {
+      return repositionFootnotes(content);
     }
     return content;
   });

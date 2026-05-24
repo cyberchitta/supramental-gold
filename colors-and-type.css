@@ -232,6 +232,10 @@ h1, h2, h3, h4, h5, h6 {
 .article-content th { background-color: var(--color-base-200); font-weight: 600; }
 .article-content hr { border: none; border-top: 1px solid var(--color-base-300); margin: 2rem 0; }
 .article-content p:empty { display: none; }
+/* markdown-it-footnote emits an `<hr class="footnotes-sep">` between body
+   and the footnotes section; SG's `.footnotes` border-top is the canonical
+   visual separator, so hide the plugin's hr to avoid a double rule. */
+.article-content .footnotes-sep { display: none; }
 .article-content .footnotes {
   font-size: 0.875rem;
   color: var(--color-base-content); opacity: 0.75;
