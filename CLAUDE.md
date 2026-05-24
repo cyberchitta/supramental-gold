@@ -37,6 +37,7 @@ public repo.)
 | `ui-kit.css` | Component styles + wiki design vocabulary. |
 | `eleventy/index.js` | Eleventy plugin — registers `sgHelpers` global. |
 | `eleventy/helpers.js` | `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`, `removeFirstHeading`, `getLatestUpdateDate`, `stripPTags`. |
+| `eleventy/build-helpers.js` | `readingTimeForFile`, `calculateReadingTime`, `stripNonReadingSections`. Build-time only (imports `fs` + `gray-matter`); not template helpers. Encodes the house rule that Credits and Document History don't count toward reading time. |
 | `eleventy/section-title-transform.js` | Generic factory for rewriting `<h2>` titles into `.group-header` shape + classing the following `<ul>`. |
 | `eleventy/custom-element-renderer.js` | Generic factory; exported, not auto-registered. For consumers wanting HTML-tag-style authoring in their own namespaces. |
 | `eleventy/primitives/header.ejs` | Accepts `brandLogoUrl` (consumer passes the jsDelivr URL from `sg.js`). |

@@ -1,6 +1,6 @@
 {
   "name": "@cyberchitta/supramental-gold",
-  "version": "0.2.2",
+  "version": "0.3.2",
   "description": "CyberChitta design system — tokens, primitives, and Eleventy plugin shared across cyberchitta.cc and its sub-sites.",
   "type": "module",
   "license": "MIT",
@@ -11,6 +11,7 @@
     "./eleventy/renderer": "./eleventy/custom-element-renderer.js",
     "./eleventy/section-title-transform": "./eleventy/section-title-transform.js",
     "./eleventy/helpers": "./eleventy/helpers.js",
+    "./eleventy/build-helpers": "./eleventy/build-helpers.js",
     "./tokens.css": "./colors-and-type.css",
     "./ui-kit.css": "./ui-kit.css",
     "./tailwind.css": "./tailwind.css",
@@ -34,7 +35,8 @@
     "watch:css": "bun x @tailwindcss/cli -i tailwind.css -o dist/styles.css --watch"
   },
   "dependencies": {
-    "ejs": "^5.0.2"
+    "ejs": "^5.0.2",
+    "gray-matter": "^4.0.3"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.2.4",
