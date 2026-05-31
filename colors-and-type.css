@@ -32,9 +32,14 @@
   --color-link:             #b85420;
   --color-link-hover:       #8a3c14;
 
-  /* Logo SVG CSS custom props — consumed by /assets/logo.svg
-     These map to the mythic-palette the logo expects: bronze rim,
-     gold wheel, platinum inner, pond blue, lotus rose, pad green. */
+  /* Logo SVG CSS custom props — consumed by /assets/logo.svg and the
+     canonical cc-260508.svg mark.
+     The underlying symbol was designed by the Mother for the Golden
+     Day medallion, distributed 29 February 1960. The original symbol
+     had no color; the gold + bronze + mythic palette was chosen when
+     adapting it for CyberChitta.
+     Variable names describe the drawn elements (rim, spokes, central
+     square, lotus petals, pads, waves, etc.). */
   --bronze:                 #cd5f2d;
   --gold:                   #d2aa32;
   --platinum:               #E5E7EB;

@@ -32,6 +32,9 @@
 @source "../ch-ai-tanya/wiki/**/*.{md,ejs}";
 @source "../ch-ai-tanya/index.ejs";
 
+/* Sub-site: sorted-studs */
+@source "../sorted-studs/subsite/**/*.{html,js,ejs,md}";
+
 /* Safelist for dynamically-constructed classes (used in JS) */
 @source inline("bg-orange-500 bg-green-500 text-orange-500 text-green-500");
 

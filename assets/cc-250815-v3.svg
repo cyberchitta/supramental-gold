@@ -2,7 +2,8 @@
   <defs>
     <style>
       :root {
-        /* Color Palette */
+        /* Color Palette (chosen when adapting the mark).
+           The underlying symbol is from the Mother's Golden Day medallion (29 Feb 1960). The original design had no color. */
         --bronze: #cd5f2d;
         --gold: #d2aa32;
         --platinum: #E5E7EB;

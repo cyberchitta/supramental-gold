@@ -29,14 +29,15 @@ The same register applies to *meta-vocabulary* — file names, section headings,
 
 The studio ships every collaborative project under the CyberChitta name: open-source tools, design systems, research, code, and the publication. The publication runs at `cyberchitta.cc` (main site at `www.cyberchitta.cc`, sub-sites at `*.cyberchitta.cc`); this file covers its visual language. The studio did not exist pre-AI, and nothing it makes is anyone's solo work. The house metaphor is television production: one human showrunner, a writers room of named AI collaborators, work that *loops till wrap*.
 
-The main site (`www.cyberchitta.cc`) is intentionally minimal — a single blog-style home page with a reverse-chronological article index, grouped into four sections:
+The main site (`www.cyberchitta.cc`) is intentionally minimal — a single blog-style home page with a reverse-chronological article index, grouped into five sections (external landing pages from sub-sites integrate under the appropriate group):
 
-1. **Behind the scenes** — process pieces about building the publication itself
-2. **Essays** — longer-form cultural / philosophical writing on AI and consciousness
-3. **Research & data** — quantitative pieces with charts and interactive visualizations
-4. **Tools & practice** — developer-focused how-to and tool reviews
+1. **Essays** — longer-form cultural / philosophical writing on AI and consciousness
+2. **Research** — quantitative pieces with charts and interactive visualizations
+3. **Tools** — developer-focused how-to and tool reviews
+4. **Practice** — engineering build logs and in-public project records (e.g. sorted-studs)
+5. **Behind the scenes** — process pieces about building the publication itself
 
-Sub-sites (`ch-ai-tanya.cyberchitta.cc`, etc.) extend the same visual language to wiki/research-vault surfaces with concepts, findings, provenance, and backlinks.
+Sub-sites (`ch-ai-tanya.cyberchitta.cc` — model-psychology LLM wiki; `sorted-studs.cyberchitta.cc` — AI-powered LEGO sorting machine) extend the same visual language to wiki/research-vault and project surfaces with concepts, findings, provenance, backlinks, and 3D exhibits.
 
 Every article credits its AI collaborators by handle (`@claude-opus-4.6`, `@grok-4.1`, `@gpt-4-turbo`) alongside `@restlessronin`, treating models as named contributors rather than invisible tools.
 
@@ -69,15 +70,15 @@ Radical simplification — chronicled in the author's own *"Less is More"* proce
 
 - **Single home page.** No index, categories, or tag pages on the main site.
 - **Logo-only nav.** Header has the mark + wordmark. Click returns home.
-- **Four text-labeled sections** (`.group-header`, small-caps lowercase gold) delineate the article list — no cards, no thumbnails.
+- **Five text-labeled sections** (`.group-header`, small-caps lowercase gold) delineate the article list. Each row shows an optional 80×80 rounded thumbnail (floated left when the article registers a featured image), a description excerpt, and a rich byline (writers · optional showrunner info dropdown · date · Updated · reading time). Subtle bottom borders separate rows, giving a light card-like feel without heavy chrome, shadows, or card containers.
 - **Reading is the product.** Chrome is reduced so article type is the only loud element.
 
 When in doubt: **remove a thing, don't add one.**
 
 ### Color
-A **warm paper-ink reading surface** with a **gold + bronze** palette drawn from the mythic wheel-of-dharma logo. See `colors-and-type.css` for exact values (light + dark).
+A **warm paper-ink reading surface** with a **gold + bronze** palette. The design of the mark (the 12-spoke ring, central square, lotus petals, and pads) comes from the symbol the Mother designed for the Golden Day medallion (distributed 29 February 1960 on the first anniversary). The specific colors were chosen when the symbol was adapted for CyberChitta. See `colors-and-type.css` for exact values (light + dark).
 
-The **logo** uses its own independent mythic palette (bronze rim, gold wheel wedges, platinum spokes, pond-blue square, lotus-rose petals, pad-green pads). Those are real hex values exported from the SVG's `:root` in `colors-and-type.css`. Treat them as the logo's private palette — don't reuse pond-blue or lotus-rose elsewhere on the page.
+The **logo** uses its own independent palette (bronze rim, gold gradient ring, platinum spokes and waves, pond-blue square, lotus-rose petals, pad-green pads). Those are real hex values exported from the SVG's `:root` in `colors-and-type.css`. Treat them as the logo's private palette — don't reuse pond-blue or lotus-rose elsewhere on the page.
 
 ### Type
 - **Fraunces** — serif. Used for `h1–h6`, article body headings, blockquotes, group headers.
@@ -159,12 +160,12 @@ If you add icons to a CyberChitta surface, match the existing four:
 - **Never tinted** — icons always adopt the parent text color. In practice they appear in `var(--color-link)` in the footer.
 
 ### Logos
-- `assets/cc-260508.svg` — canonical wheel/lotus/pad mark, served via jsDelivr at `@<tag>` to every consumer. Colors are baked in as hex values so the SVG renders correctly in any loading context (including `<img src>`).
+- `assets/cc-260508.svg` — canonical mark (the symbol designed by the Mother for the Golden Day medallion, 29 Feb 1960), served via jsDelivr at `@<tag>` to every consumer. Colors are baked in as hex values so the SVG renders correctly in any loading context (including `<img src>`).
 - `assets/cc-260508.png` — raster fallback for OG / social cards.
 - `assets/cc-250815-v3.svg` — source-of-mark working file. Not used at runtime.
 - The wordmark **CyberChitta** is text styled with `.logo-text` (Courier Prime + animated gold→bronze gradient) — **not an SVG**. Always render it as live text next to the mark.
 
-To reskin the logo, edit the SVG directly — search-and-replace the mythic palette hexes.
+To reskin the logo, edit the SVG directly — search-and-replace the palette hexes in the `:root` or the baked-in values.
 
 ---
 

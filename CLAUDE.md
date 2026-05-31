@@ -19,6 +19,7 @@ is for production-wiring handoff only; design and editorial decisions live in
 |---|---|---|
 | Main site | https://www.cyberchitta.cc | Netlify, from `main` |
 | ch-ai-tanya | https://ch-ai-tanya.cyberchitta.cc | GitHub Pages, from `main` |
+| sorted-studs | https://sorted-studs.cyberchitta.cc | Netlify, from `main` (repo base: `subsite/`) |
 
 (A staging context for the main site exists on Netlify; its URL is
 deliberately not listed here because this file is checked into a
@@ -44,9 +45,9 @@ public repo.)
 | `eleventy/primitives/header.ejs` | Accepts `brandLogoUrl` (consumer passes the jsDelivr URL from `sg.js`). |
 | `eleventy/primitives/chrome.ejs` | Forwards `brandLogoUrl` to `header`. Hardcodes `mainSiteUrl: https://www.cyberchitta.cc` for sub-sites. |
 | `eleventy/primitives/footer.ejs` | Accepts `mainSiteUrl`. |
-| `eleventy/primitives/sub-site-bar.ejs`, `status-badge.ejs`, `entry-title-row.ejs`, `provenance.ejs`, `outbound-action.ejs`, `section-title.ejs` | Wiki design vocabulary, used by `ch-ai-tanya`. |
+| `eleventy/primitives/sub-site-bar.ejs`, `status-badge.ejs`, `entry-title-row.ejs`, `provenance.ejs`, `outbound-action.ejs`, `section-title.ejs` | Wiki design vocabulary, used by `ch-ai-tanya` (section-title-transform also wired in sorted-studs for custom headings if needed). |
 | `eleventy/primitives/article-card.ejs`, `article-view.ejs`, `hero.ejs`, `collaborator-chip.ejs` | Sample — design vocabulary in `cc-*` paradigm; not wired into any production consumer. |
-| `eleventy/layouts/base-chrome.ejs` | Shared article-fidelity head/body chrome. Consumer's `_includes/layouts/base.ejs` is a thin shim: sets `permalink` frontmatter, then `<%- include('layouts/base-chrome') %>`. Used by the main site; intended for `sorted-studs`. |
+| `eleventy/layouts/base-chrome.ejs` | Shared article-fidelity head/body chrome. Consumer's `_includes/layouts/base.ejs` is a thin shim: sets `permalink` frontmatter, then `<%- include('layouts/base-chrome') %>`. Used by the main site and `sorted-studs/subsite/`. |
 | `eleventy/layouts/article-body.ejs` | Shared article shell — `<article>` with byline header, content section, and footer (update history, X conversation link, CTA). Consumer's `_includes/layouts/article.ejs` is a thin shim: sets `layout: layouts/base` + `ogType: article`, then `<%- include('layouts/article-body') %>`. Byline and footer blocks gate on optional locals so sub-sites can opt out. |
 | `eleventy/partials/site-meta.ejs`, `site-fonts.ejs`, `theme-init.ejs`, `featured-image-figure.ejs` | Lifted from the main site's `base.ejs` decomposition. Consumed by `layouts/base-chrome`. Override by placing the same path in the consumer's `_includes/`. |
 | `eleventy/partials/site-analytics.ejs`, `site-scripts.ejs` | Empty defaults. Slots shadowed by the consumer; main site uses them for GA and the CSR template-manager wiring. |
@@ -169,8 +170,7 @@ the two are kept in sync.
   without warnings (sibling consumer repos must exist for the
   multi-source scan — see `tailwind.css` for the listed paths).
 - `examples/index.html` opens in a browser and looks like CyberChitta.
-- `ch-ai-tanya` builds cleanly against this checkout (use it as a
-  reference consumer).
+- The sub-sites (`ch-ai-tanya/` and `sorted-studs/subsite/`) both build cleanly against this checkout; use either as a reference consumer (ch-ai-tanya for wiki transforms + section titles; sorted-studs for custom elements + 3D).
 
 ---
 

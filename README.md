@@ -5,7 +5,8 @@
 Consumed in production by:
 
 - [www.cyberchitta.cc](https://www.cyberchitta.cc) — main site
-- [ch-ai-tanya.cyberchitta.cc](https://ch-ai-tanya.cyberchitta.cc) — first sub-site
+- [ch-ai-tanya.cyberchitta.cc](https://ch-ai-tanya.cyberchitta.cc) — model-psychology LLM wiki
+- [sorted-studs.cyberchitta.cc](https://sorted-studs.cyberchitta.cc) — AI-powered LEGO sorting machine
 
 ## What this is
 
@@ -140,7 +141,7 @@ Without it, an absolute URL gets `site.url` prepended and you ship `https://your
 
 ## Sub-site checklist
 
-For each new gh-pages sub-site:
+For each new sub-site:
 
 - [ ] Add `@cyberchitta/supramental-gold` as a `github:` dep at a tagged version.
 - [ ] Create `_data/sg.js` (snippet above).
