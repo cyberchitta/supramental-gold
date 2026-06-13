@@ -11,6 +11,8 @@ For **first-time wiring** of a new consumer site (a new sub-site, a new sibling 
 1. **`../../README.md § How consumers wire it in`** — the canonical wiring runbook. Three things flow from SG to consumers: the compiled CSS bundle (via jsDelivr), the brand assets (via jsDelivr), and the Eleventy plugin (via npm).
 2. **`../../CLAUDE.md § Deployments`** — confirms what each consumer site is and where it deploys. Useful context when wiring a new one.
 3. **`../../package.json`** — for the canonical `name`, `exports`, and the dep-pin format consumers reference.
+4. **`references/eleventy-config.md`** — the universal `eleventy.config.js` wiring beyond the four basic pieces below: EJS-views shadowing, the SG plugin, the optional markdown-library override, template engines, and the SG-vs-consumer ownership split. **Read when setting up or debugging a consumer's Eleventy config.**
+5. **`references/custom-elements.md`** — the **opt-in** `createCustomElementRenderer` contract: registering your own HTML-tag namespace, the optional content parser, the `.ejs` template locals, and the authoring rules (self-closing for content-less tags, the blank-line rule, markdown-table-as-content). **Read before adding a custom element to a consumer.** Site-specific elaborations (e.g. a text-mirror/llms.txt rendering of the same elements) are documented by that consumer, not here.
 
 ## The four plumbing pieces
 

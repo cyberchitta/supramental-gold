@@ -24,7 +24,6 @@ When designing in production, the relevant files in `supramental-gold/`:
 - **`eleventy/primitives/*.ejs`** — design primitives. Canonical: `header`, `chrome`, `footer`, `sub-site-bar`, `status-badge`, `entry-title-row`, `provenance`, `outbound-action`, `section-title`. Sample (not wired into production by default): `article-card`, `article-view`, `hero`, `collaborator-chip`.
 - **`eleventy/helpers.js`** — `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`.
 - **`eleventy/section-title-transform.js`** — generic factory for rewriting `<h2>` titles into `.group-header` shape + classing the following `<ul>`.
-- **`eleventy/custom-element-renderer.js`** — exported factory; consumers register their own HTML-tag namespaces if needed.
 - **`examples/index.html`** — static rendered preview, useful for visual reference.
 - **`dist/styles.css`** — compiled bundle (~118 KB). Tracked in git, served via jsDelivr; consumers don't import it from source.
 
@@ -47,6 +46,32 @@ If a new surface or component genuinely needs vocabulary the existing ui-kit / p
 2. Propose the addition as a new entry in `ui-kit.css` (or a new primitive in `eleventy/primitives/`) rather than a one-off override on the consumer side.
 3. Document the *why* in `NOTES.md` if it's a non-obvious choice or evolution from the live site.
 4. Re-check against `visual.md § What to avoid` — purple-pink gradients, glassmorphism, sticky chrome, emoji, etc. — before shipping.
+
+## Designing with custom elements
+
+A **custom element** is a design surface in its own right: a custom HTML tag,
+authored inline in an article, that compiles to rich layout at build time while
+the article source stays clean semantic markdown. Reach for one when a piece of
+content recurs with rich or interactive layout that would be noise as raw markup
+(a media block, a comparison table, a chart, an embed) — as opposed to a
+**primitive** (site chrome: header, footer, byline) or plain **markdown** (prose).
+
+Each consumer defines its **own** tag namespace — the names and subtypes are not
+shared design vocabulary:
+
+- `www.cyberchitta.cc` — `<showcase>` (layout/media blocks) and `<showtable>`
+  (tabular / data-driven surfaces). Their subtype catalogs and when-to-use
+  semantics are documented in that site's own `site-build` skill.
+- `sorted-studs` — `<glb-pane>` (a 3D-model embed).
+
+SG does **not** ship a shared element vocabulary today; whether it should (a
+small `<exhibit>` / `<embed>` set consumers extend with their own subtypes) is an
+open question in SG's `TODO.md`. Until then, design at the level of *what surface
+this content wants*, and let each consumer name and build its own element.
+
+The **implementation** — registering a namespace, the content parser, the
+template locals, the authoring rules (self-closing, blank-line) — is
+build-side: `wire-consumer/references/custom-elements.md`.
 
 ## If invoked without guidance
 
