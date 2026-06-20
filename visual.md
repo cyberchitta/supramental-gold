@@ -125,7 +125,7 @@ A non-exhaustive list of things that have been deliberately ruled out. Treat eac
 - Glassmorphism (frosted-glass blurs)
 - Glowing buttons or neon accents
 - Emoji garnish — anywhere
-- Rainbow category colors (e.g. tinting each of the four section groups a different hue)
+- Rainbow category colors **as chrome** (e.g. tinting each of the four section groups a different hue). *Data figures are the exception*: a chart's series palette is a **semantic** multi-hue key — one stable hue per entity, tuned per theme for legibility — governed by `figures.md §3`, not this tripwire
 - Sticky floating chrome (sticky headers, fixed CTAs, scroll-progress bars)
 - Aggressive shadow stacks (more than the single hairline-card shadow used on `ⓘ` overlays)
 - Generic "vibrant" hero blocks — full-bleed solid-color slabs with white display type
