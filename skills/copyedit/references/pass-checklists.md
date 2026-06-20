@@ -88,7 +88,7 @@ The voice rules these passes enforce live in `../../voice.md`. Surface-specific 
 
 **`group: research` / `practice`**
 - [ ] First-person plural for prior-work reference; imperative second person for interactions.
-- [ ] "What to look for" caption on every chart / interactive section.
+- [ ] "What to look for" captions used only where they earn it — the same chart type repeating across many subjects (e.g. `vibe-gain-explorer`), not formulaically on every one-off chart. Drop or fold any that hand-hold a self-evident chart.
 - [ ] Frontmatter includes layout-specific fields (`forceUTC`, etc.) where the layout needs them.
 
 **Assembly-mode emphasis:** clarity passes on newly written prose. Don't over-tighten a draft that's still finding its register.
