@@ -10,6 +10,9 @@ _site/
 # Local commit-message drafts
 .commit-msg
 
+# Local-only working docs
+TODO.md
+
 # Editor / OS
 .DS_Store
 Thumbs.db
