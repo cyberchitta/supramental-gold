@@ -8,7 +8,7 @@ const imageMetadata = site.images.find(img => img.url === featuredImage);
     </div>
     <% if (imageCredit) { %>
     <details class="dropdown dropdown-top dropdown-end absolute bottom-2 right-2">
-      <summary class="btn btn-circle btn-xs bg-base-300 list-none text-[var(--color-link)] hover:text-[var(--color-link-hover)]">ⓘ</summary>
+      <summary class="btn btn-circle btn-xs bg-base-300 list-none text-[var(--color-link)] hover:text-[var(--color-link-hover)]" aria-label="Image attribution"><span class="icon icon-info" style="width:0.95rem;height:0.95rem"></span></summary>
       <div class="dropdown-content card card-compact w-64 p-2 shadow bg-base-200 text-base-content">
         <div class="card-body">
           <p class="text-xs"><%- imageCredit %></p>

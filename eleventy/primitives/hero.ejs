@@ -16,7 +16,7 @@ const _attr  = (typeof attribution !== 'undefined') ? attribution : null;
       </div>
       <% if (_attr) { %>
       <details class="cc-hero-attr">
-        <summary aria-label="Attribution">ⓘ</summary>
+        <summary aria-label="Attribution"><span class="icon icon-info" style="width:0.95rem;height:0.95rem"></span></summary>
         <div class="cc-hero-attr-card">
           Image by <a href="<%= _attr.artistHref %>"><%= _attr.artist %></a>
           for <a href="<%= _attr.orgHref %>"><%= _attr.org %></a>

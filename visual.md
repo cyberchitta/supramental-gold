@@ -58,8 +58,9 @@ Cross-surface rules every component or surface should respect. (These also appea
 ### Unicode ornaments
 - Middle dot `·` as a byline/metadata separator: `@claude-opus-4.6 · @restlessronin`, `Apr 13, 2026 · Updated Apr 15, 2026 · 4 min`.
 - Bullet `•` in the Sanskrit/Latin footer tagline.
-- Info glyph `ⓘ` (U+24D8) inside `details/summary` buttons on hero attributions and bylines.
 - Em-dashes (`—`) and en-dashes (`–`) freely. ASCII hyphens are not a substitute.
+
+(The info affordance is **not** a unicode ornament — it's the `.icon-info` mask icon. See `## ICONOGRAPHY`.)
 
 ---
 
@@ -97,7 +98,7 @@ Article body is `1rem / 1.75` line-height on desktop, bumping to `1.125rem / 1.8
 ### Borders & shadow
 - **Hairline only** — `1px solid var(--color-base-300)` between article rows, tables, pre blocks, credits-section top rule.
 - **Blockquote** has a 3px `--color-gold-decorative` left rule.
-- Site is otherwise **flat** — no drop shadows in chrome. Drop shadow is reserved for transient overlays only (the `ⓘ` dropdown cards).
+- Site is otherwise **flat** — no drop shadows in chrome. Drop shadow is reserved for transient overlays only (the info-glyph dropdown cards).
 
 ### Corner radii
 - `0.25rem` for inline `code`
@@ -115,7 +116,7 @@ That's the full motion vocabulary. **No parallax, no springs, no entrance animat
 
 ### Imagery treatment
 - **Hero** is full-width inside the `max-w-3xl` container, `aspect-square` on mobile, `aspect-video` on `md+`.
-- **Attribution** is a small circular `details/summary` dropdown pinned `bottom-2 right-2` on the hero — summary glyph `ⓘ` opens a credits card with the artist + project links.
+- **Attribution** is a small circular `details/summary` dropdown pinned `bottom-2 right-2` on the hero — the summary's `.icon-info` glyph opens a credits card with the artist + project links.
 - **Showrunner avatar** is `w-6 h-6 rounded-full`, pulled into a dropdown next to each byline via the info glyph.
 
 ### What to avoid
@@ -127,7 +128,7 @@ A non-exhaustive list of things that have been deliberately ruled out. Treat eac
 - Emoji garnish — anywhere
 - Rainbow category colors **as chrome** (e.g. tinting each of the four section groups a different hue). *Data figures are the exception*: a chart's series palette is a **semantic** multi-hue key — one stable hue per entity, tuned per theme for legibility — governed by `figures.md §3`, not this tripwire
 - Sticky floating chrome (sticky headers, fixed CTAs, scroll-progress bars)
-- Aggressive shadow stacks (more than the single hairline-card shadow used on `ⓘ` overlays)
+- Aggressive shadow stacks (more than the single hairline-card shadow used on info-glyph overlays)
 - Generic "vibrant" hero blocks — full-bleed solid-color slabs with white display type
 - Entrance animations on scroll, parallax, spring physics, marquees
 - "AI sparkle" iconography
@@ -141,23 +142,25 @@ If you find yourself reaching for any of these, you are probably solving the wro
 
 ## ICONOGRAPHY
 
-**The system uses four icons total**, all as Tailwind v4 `mask-image` utilities. See `colors-and-type.css` for the canonical definitions:
+**The system uses five icons total**, all as Tailwind v4 `mask-image` utilities. See `colors-and-type.css` for the canonical definitions:
 
 | Utility | Usage |
 |---|---|
 | `.icon-github` | Footer link to github.com/cyberchitta |
 | `.icon-twitter` | Footer link |
 | `.icon-rss` | Footer feed link |
-| `ⓘ` (U+24D8, unicode) | Inline glyph inside `details/summary` buttons on hero + bylines |
+| `.icon-info` | The info affordance — attribution dropdowns (hero/figure/byline) and chart-legend buttons |
 
 Everything else is Unicode typography — middle-dot `·`, bullet `•`, em/en dashes.
+
+**Info-affordance rule.** `.icon-info` is the *only* info glyph (it replaced the legacy unicode `ⓘ`/U+24D8, which rendered inconsistently and was illegible at small sizes). Color carries the affordance: paint it `var(--color-link)` (orange) when it **opens something on click** — an attribution dropdown or a chart-legend modal; leave it neutral (`currentColor` inheriting `base-content`) when it merely **labels informational content**, e.g. next to a chart toggle. One glyph, two colors, one meaning per color.
 
 ### Icon rules (for extensions)
 If you add icons to a CyberChitta surface, match the existing four:
 
 - **24×24 viewBox, single-color path, `currentColor` via `mask-image`.** The `.icon` utility in `colors-and-type.css` handles the rest: `{ display: inline-block; width: 1.25rem; height: 1.25rem; background-color: currentColor; mask-size: cover; }`.
-- **Weight**: solid-filled, not stroked. (This is the convention the existing three follow.)
-- **Never tinted** — icons always adopt the parent text color. In practice they appear in `var(--color-link)` in the footer.
+- **Weight**: the three social icons are solid-filled; `.icon-info` is a stroked outline (the established info look — more legible small). Match a new icon to whichever family it belongs to.
+- **Never tinted** — icons always adopt the parent text color. In practice they appear in `var(--color-link)` in the footer and on info affordances.
 
 ### Logos
 - `assets/cc-260508.svg` — canonical mark (the symbol designed by the Mother for the Golden Day medallion, 29 Feb 1960), served via jsDelivr at `@<tag>` to every consumer. Colors are baked in as hex values so the SVG renders correctly in any loading context (including `<img src>`).
