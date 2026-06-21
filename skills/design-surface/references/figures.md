@@ -15,10 +15,10 @@ first; nothing here overrides it.
 pattern; `N=1` is the current reference implementation, proposed as the standard
 and to be confirmed by the next figure.
 
-## 1. Container (N=2)
+## 1. Container (N=3)
 
-`vg-strip-plot.ejs` and `land-cover-map.ejs` share an identical wrapper. Match it
-for any framed figure:
+`vg-strip-plot.ejs`, `land-cover-map.ejs`, and `pc-chart.ejs` share an identical
+wrapper. Match it for any framed figure:
 
 ```ejs
 <div class="… bg-base-200 rounded-lg shadow-sm border border-base-300 overflow-hidden relative">
@@ -42,9 +42,10 @@ for any framed figure:
 - `<figure class="m-0 pt-5">` — the `pt-5` reserves headroom under the
   floating control cluster.
 
-> **`pc-chart` is the outlier.** It uses a bare `<figure class="pc-chart">` with
-> hand-rolled CSS and no panel/border. Bringing it onto this container is part of
-> "figures into SG styling."
+> **`pc-chart` conforms, with two deliberate deltas.** It wears the same panel,
+> but nests its floating cluster *inside* the bordered inner viewport and anchors
+> it `left-14` (to clear the y-axis) rather than `top-2 right-2`. Neither is a
+> theming divergence.
 
 ## 2. Axes & gridlines (N=1 — `pc-chart`, the reference line chart)
 
@@ -190,6 +191,14 @@ interaction; each interactive child re-enables `pointer-events-auto`.
 - **daisyUI vocabulary**, not bespoke widgets: `toggle toggle-sm toggle-primary`,
   `btn btn-outline btn-xs`, `range range-xs`, `modal` / `modal-box` /
   `modal-backdrop`.
+- **A binary view-switch lives in the cluster as a `toggle`, beside the legend** —
+  not a button row in the in-flow controls. Cumulative ⇄ flow (`pc-chart`) is the
+  pattern: one `toggle toggle-sm toggle-primary`, following the group-toggle
+  convention — it names and is **on** for the default state (e.g. "Cumulative"),
+  and **off** switches to the alternate; the caption carries the rest.
+  (`pc-chart`'s multi-state `Full history`/`Prediction window` range switch is a
+  deliberate gold-underline exception to this — not a license for new bespoke
+  switches.)
 - **The modal is a reference key, not a control.** Toggles that change *what's
   shown* live in the cluster; the modal is the color key you consult. Keep that
   separation unless a figure has a strong reason to merge them (document the why
