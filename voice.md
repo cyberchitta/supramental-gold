@@ -133,6 +133,21 @@ Each `group:` in the frontmatter implies a different register. The shared invari
 - **Layout:** specialised (`vibe-gain`, `land-cover`) rather than the default `article`. Heavy custom elements (`<showtable>`, `<showcase>`).
 - **Frontmatter:** may include `forceUTC`, `excludeFromLlmsTxt`, layout-specific fields.
 
+### Wiki (findings and concepts — `ch-ai-tanya`)
+
+**Job:** file empirical results and the abstractions they cluster under. Entries are evidence for other surfaces to argue from; they do not argue themselves.
+
+- **Voice:** flat, observational, third-person. The wiki repo's `schema.md` states the four-rule discipline this register executes: name the evidence precisely (method, conditions, control, rate); distinguish observation from disposition; weight negative results equally; don't escalate. A finding with stated limits beats one without.
+- **Tone:** exact. Hedged where the evidence hedges, and only there.
+- **Density:** strict, per the shared invariant. Name concepts directly, link the canonical source, no glossary unpacking.
+- **Length:** atomic. Target ~1,000–1,500 words for a finding; an entry running past ~2,500 is usually doing thread work in the wrong place — move the argument to a thread and leave the evidence.
+- **Signature moves:**
+  - **Positioning summaries.** A finding's Summary names its place among filed entries (which concept it instantiates, what it closes or complicates), not just the paper's abstract.
+  - **Interpretive tensions as the counterweight.** Disagreements get their own section and stay unresolved; the wiki never picks a side in a finding.
+  - **"Why it matters" carries the editorial framing** — the one section where cross-finding scaffolding lives.
+- **Register boundary:** the essay moves (rhetorical-question section-enders, punchy closers, sentence-shape oscillation) are prohibited in findings and concepts. They belong in threads, which graduate toward the essay register as they ripen toward publication.
+- **Frontmatter:** wiki entries follow the wiki repo's `schema.md`, not the article table below.
+
 ---
 
 ## Frontmatter conventions (cyberchitta articles)
