@@ -71,6 +71,33 @@ const helpers = {
     }
     return html;
   },
+  stripHtml: (html) => (html ? html.replace(/<[^>]*>/g, '') : ''),
+  // Collapse named `## ` sections into a house <details> in the rendered HTML.
+  // A section is matched by its <h2> text and runs from that <h2> to just
+  // before the next <h2> (or end of document). Used for reference apparatus
+  // that should be present but out of the primary flow (a data-sources
+  // appendix, a secondary-chart appendix). HTML path only: a consumer's text
+  // mirror (llms.txt) is generated separately from source markdown, so the
+  // section stays a normal `## Title` there. The real <h2> (with its anchor
+  // id) is kept inside the <summary> so the folded heading keeps full h2
+  // styling and stays a link target; the heading is set inline so it sits
+  // beside the disclosure marker rather than below it. Margins mirror
+  // `.article-content h2`.
+  foldSections: (html, titles) => {
+    if (typeof html !== 'string' || !titles || titles.length === 0) return html;
+    const strip = (s) => (s ? s.replace(/<[^>]*>/g, '') : '');
+    const set = new Set(titles.map((t) => t.trim()));
+    return html
+      .split(/(?=<h2\b)/i)
+      .map((part) => {
+        const m = part.match(/^(<h2\b[^>]*>)([\s\S]*?)<\/h2>/i);
+        if (!m || !set.has(strip(m[2]).trim())) return part;
+        const heading = `${m[1].replace(/^<h2\b/i, '<h2 style="display:inline"')}${m[2]}</h2>`;
+        const body = part.slice(m[0].length);
+        return `<details style="margin-top:2rem;margin-bottom:.75rem"><summary class="cursor-pointer py-2">${heading}</summary>${body}</details>`;
+      })
+      .join('');
+  },
 };
 
 export default helpers;

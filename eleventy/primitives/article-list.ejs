@@ -1,0 +1,79 @@
+<%
+// Grouped article list — the production listing surface of www.cyberchitta.cc.
+// Locals:
+//   articles       — [{ url, title, description, group, publishedAt,
+//                       updatedAt?, readingTime?, writers?, showrunner?,
+//                       external?, thread?, threadPart?, threadCount? }]
+//   featuredImages — { [articleUrl]: { url, thumbnailZoom? } } (optional)
+//   getAuthorImage — (tag) => avatar url, for the showrunner info-button
+//   groupOrder     — group keys in precedence order (optional)
+//   groupNames     — { [groupKey]: display name } (optional)
+//   threadHref     — where a thread eyebrow links (optional)
+const GROUP_ORDER = (typeof groupOrder !== 'undefined' && groupOrder) ||
+  ['essays', 'research', 'tools', 'practice', 'bts'];
+const GROUP_NAMES = (typeof groupNames !== 'undefined' && groupNames) || {
+  essays: 'Essays',
+  research: 'Research',
+  tools: 'Tools',
+  practice: 'Practice',
+  bts: 'Behind the scenes',
+};
+const THREAD_HREF = (typeof threadHref !== 'undefined' && threadHref) || '/colophon.html#the-threads';
+const featImgs = (typeof featuredImages !== 'undefined' && featuredImages) || {};
+
+// Group articles
+const grouped = {};
+GROUP_ORDER.forEach(g => { grouped[g] = []; });
+articles.forEach(article => {
+  const g = article.group || 'bts';
+  if (!grouped[g]) grouped[g] = [];
+  grouped[g].push(article);
+});
+
+// Sort articles within each group: reverse-chronological by publishedAt.
+// External entries have no publishedAt — fall back to 0 so they sort last.
+const sortKey = (a) => (a.publishedAt ? new Date(a.publishedAt).valueOf() : 0);
+GROUP_ORDER.forEach(g => {
+  grouped[g].sort((a, b) => sortKey(b) - sortKey(a));
+});
+
+// Sort groups by most recent publishedAt within each group
+const sortedGroups = GROUP_ORDER.filter(g => grouped[g].length > 0).sort((a, b) => {
+  return sortKey(grouped[b][0]) - sortKey(grouped[a][0]);
+});
+
+function formatBylineDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+%>
+<div class="article-list">
+  <% sortedGroups.forEach((groupKey, groupIdx) => { %>
+  <section class="article-group<%= groupIdx > 0 ? ' mt-14' : '' %>">
+    <h2 class="group-header"><%= GROUP_NAMES[groupKey] || groupKey %></h2>
+    <% grouped[groupKey].forEach(article => { %>
+    <% const featImg = featImgs[article.url]; %>
+    <article class="mb-4 pb-2 border-b border-base-300 last:border-b-0 last:mb-0 flow-root">
+      <% if (featImg) { %>
+      <a href="<%= article.url %>" class="float-left mr-4 mb-2 block w-20 h-20 overflow-hidden rounded" aria-hidden="true" tabindex="-1">
+        <img src="<%= featImg.url %>" alt="" class="w-full h-full object-cover"<% if (featImg.thumbnailZoom) { %> style="transform: scale(<%= featImg.thumbnailZoom %>)"<% } %> loading="lazy" decoding="async" width="80" height="80">
+      </a>
+      <% } %>
+      <% if (article.thread) { %>
+      <div class="thread-eyebrow">
+        <a href="<%= THREAD_HREF %>"><%= article.thread %> · <%= article.threadPart %> of <%= article.threadCount %></a>
+      </div>
+      <% } %>
+      <h3 class="text-xl font-bold mb-1 mt-0!">
+        <a href="<%= article.url %>" class="link"><%= article.title %></a>
+      </h3>
+      <p class="text-base-content/70 mb-2 text-sm"><%= article.description %></p>
+      <% if (!article.external || (article.writers || []).length > 0 || article.showrunner) { %>
+      <div class="byline mb-0 clear-left">
+        <span class="byline-writers"><%= (article.writers || []).join(' · ') %></span><% if (article.showrunner) { %><details class="byline-info dropdown dropdown-top dropdown-end"><summary class="btn btn-ghost btn-circle btn-xs list-none text-[var(--color-link)] hover:text-[var(--color-link-hover)]" aria-label="Showrunner"><span class="icon icon-info" style="width:1rem;height:1rem"></span></summary><div class="dropdown-content w-36 px-3 py-2 shadow rounded-box bg-base-200 text-base-content"><div class="whitespace-nowrap"><div class="text-xs text-base-content/70 mb-1">Showrunner</div><div class="flex items-center gap-2"><img src="<%= getAuthorImage(article.showrunner) %>" alt="Showrunner" class="w-6 h-6 rounded-full flex-shrink-0" loading="lazy" decoding="async" width="24" height="24"><span class="text-xs text-[var(--color-gold)]"><%= article.showrunner %></span></div></div></div></details><% } %><% if (article.publishedAt) { %><% if ((article.writers || []).length > 0) { %><br class="sm:hidden"><span class="byline-sep sm:inline hidden"> · </span><% } %><time datetime="<%= article.publishedAt %>" class="byline-meta"><%= formatBylineDate(article.publishedAt) %></time><% if (article.updatedAt && article.updatedAt !== article.publishedAt) { %> <span class="byline-sep">·</span> <span class="byline-meta">Updated <%= formatBylineDate(article.updatedAt) %></span><% } %><% if (article.readingTime) { %> <span class="byline-sep">·</span> <span class="byline-meta"><%= article.readingTime %> min</span><% } %><% } %>
+      </div>
+      <% } %>
+    </article>
+    <% }) %>
+  </section>
+  <% }) %>
+</div>

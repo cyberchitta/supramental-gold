@@ -155,3 +155,23 @@ in compression mode (the pre-publish pass) rather than assembly
 because that's the last point where the fixes are cheap and the first
 point where the draft is stable enough to cold-read; findings triage
 as gloss-or-cut, and cuts are compression's business anyway.
+
+## The main site is SG's reference consumer, not its exception
+
+Policy (showrunner, 2026-07-12): a house pattern that ships on
+www.cyberchitta.cc belongs in SG; the sub-sites are where reuse shows.
+The boundary is patterns vs content — SG owns how the house looks and
+renders (markup, classes, helpers); the main site owns what the house
+says (thread definitions, colophon copy, article apparatus, the
+llms.txt mirror files). Pattern-side consequences landed in v0.4.0:
+`.thread-eyebrow` (small-caps arc marker, `.group-header`'s voice
+minus the rule line), `foldSections` moved from main-site helpers,
+and `primitives/article-list.ejs` — the production listing surface,
+ported verbatim so the JIT scans its classes directly instead of
+relying on incidental overlap. The custom-element renderer now passes
+SG's own eleventy dir as an EJS `views` fallback, so any consumer
+element template can `include('primitives/<name>')`; the main site's
+`showcase/article-list.ejs` is the reference: a thin delegator that
+maps site data onto the primitive's locals. `article-card.ejs`
+remains the simple sample row; `article-list.ejs` is the production
+pattern.

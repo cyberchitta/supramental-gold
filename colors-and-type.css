@@ -155,6 +155,24 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: lowercase;
 }
 
+/* Thread eyebrow — small-caps arc marker above an article title.
+   Same small-caps voice as .group-header, minus the rule line. */
+.thread-eyebrow {
+  font-family: var(--font-serif);
+  font-variant: small-caps;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-gold);
+  margin-bottom: 0.25rem;
+  text-transform: lowercase;
+}
+.thread-eyebrow a,
+.article-content .thread-eyebrow a {
+  color: inherit;
+  text-decoration: none;
+}
+
 /* Byline */
 .byline          { font-size: 0.8rem; line-height: 1.6; }
 .byline-writers  { color: var(--color-gold); font-weight: 500; }

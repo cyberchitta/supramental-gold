@@ -11,6 +11,11 @@
 
 import ejs from 'ejs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// SG's own eleventy dir, exposed to templates as an EJS `views` fallback so a
+// consumer's element template can `include('primitives/<name>')` directly.
+const sgEleventyDir = path.dirname(fileURLToPath(import.meta.url));
 
 const noopParser = () => ({});
 
@@ -104,11 +109,15 @@ class CustomElementRenderer {
       const parser = this.contentParsers[tagName] || noopParser;
       const parsedBody = body ? parser(body) : {};
       const templatePath = path.join(this.includesRoot, templateName);
-      return await ejs.renderFile(templatePath, {
-        ...parsedBody,
-        ...attributes,
-        ...this.context,
-      });
+      return await ejs.renderFile(
+        templatePath,
+        {
+          ...parsedBody,
+          ...attributes,
+          ...this.context,
+        },
+        { views: [this.includesRoot, sgEleventyDir] }
+      );
     } catch (err) {
       console.error(`[sg] Error rendering <${tagName}>:`, err);
       return fullMatch;
