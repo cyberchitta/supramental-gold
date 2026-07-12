@@ -128,16 +128,19 @@ A house data figure is captioned twice, at two altitudes:
 1. **`<figcaption>` — the label.** Short, neutral, says *what this view is*
    (and updates with the active mode on interactive charts). On `pc-chart`:
    `font-size: 0.8125rem; opacity: 0.7`.
-2. **"What to look for" — the interpretation.** A **bold-lead-in prose line in
-   the article body, right after the figure**, telling the reader what the chart
-   is *for* and what reading to take from it:
+2. **"What to look for" — the interpretation (optional, gated).** A
+   **bold-lead-in prose line in the article body, right after the figure**,
+   telling the reader what the chart is *for* and what reading to take from it:
 
    > **What to look for**: the slope, not the level, and how far below the
    > transparent rails the privacy lines sit.
 
-   The figcaption labels; the prose interprets. Every `pc-chart` in
-   `private-canary.md` carries one. (This is also a `voice.md` concern — keep the
-   two consistent if that brief grows a figures section.)
+   The figcaption labels; the prose interprets. The line earns its place only
+   when **the same chart type repeats across many subjects** (the
+   `vibe-gain-explorer` case, 11×) — for one-off charts, fold the reading into
+   the body prose instead. `private-canary.md` carried one per chart and cut
+   all four in its 2026-06-20 compression; `voice.md` demoted the rule to
+   optional the same day. Keep the two briefs consistent.
 
 ## 5. Controls — floating cluster + modal legend (N=2)
 
@@ -232,3 +235,19 @@ as the second data point.
 
 The SVG carries `role="img"` and an `aria-label` set from the figcaption, so the
 figure announces its own description. Keep that when adding new chart types.
+
+## 8. Where a figure is defined (N=1 mechanism, firm rule)
+
+A figure's definition is **article content**, not script config. On `pc-chart`
+(the reference implementation): tag attributes carry the editorial surface
+(`caption`, `scale`, `unit`, `toggle` label, `groups`); the showcase body is a
+markdown table declaring the series (name, group, entity color token, line
+style, derived-data key); keys resolve against a single build module of
+plot-ready series; the client is a generic interpreter of the baked JSON
+island.
+
+**Never hardwire captions, series lists, or colors in client JS keyed by an
+opaque tag id** — that's how a figure becomes unreadable at the source and
+grows a hand-mirrored second implementation for text mirrors. See
+`wire-consumer/references/custom-elements.md` § JS-driven elements for the
+mechanism.

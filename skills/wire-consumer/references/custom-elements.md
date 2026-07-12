@@ -64,6 +64,27 @@ So a tag body authored as a **markdown pipe table** reaches the parser as an
 **HTML `<table>`** (parse `<tr>`/`<td>`), not as pipes. (The main site's
 `showtable` parser does exactly this, returning `{ headers, rows }`.)
 
+## JS-driven elements — declare in markup, interpret in the client
+
+When an element's output is drawn client-side, don't give the tag an opaque key
+that a script resolves against hardwired config. Instead:
+
+1. The tag's attributes + body carry the full declaration (the editorial
+   surface: captions, labels, series, style, data keys).
+2. The `.ejs` normalizes that declaration and bakes it into the element's
+   container as a `<script type="application/json" data-…>` island.
+3. The client script is a **generic interpreter**: read the island, resolve
+   data keys against fetched data, render.
+4. Data plumbing (joins, smoothing, derivations) lives in **one build module**
+   that produces plot-ready data for both the client and any text mirror —
+   never duplicated per render path. If you find yourself writing a
+   "mirrors X.js" comment, the declarative core wants extracting.
+
+Precedent (N=2, `www.cyberchitta.cc`): `pc-timeline` (events island read by
+both the build-time strip and the client re-render) and `pc-chart` (per-figure
+`data-pc-def` island + `build/derive-pc-series.js` feeding the client and the
+llms.txt mirror alike).
+
 ## Authoring rules
 
 These follow from markdown-it + the transform and apply to any consumer:
@@ -89,6 +110,14 @@ These follow from markdown-it + the transform and apply to any consumer:
 - **Body is authored content; rendering logic lives in the `.ejs`.** Keep
   computed or data-driven values in the template, surfaced through the element —
   not woven into source prose.
+- **The element's parameters live in the markup — never behind an opaque id.**
+  Everything that defines *what the element shows* (caption, series names,
+  labels, scale, data keys) must be readable in the source: attributes for
+  scalars, a body table for lists. A tag like `<showcase … chart="privacy-tx" />`
+  whose meaning lives in a chart definition hardwired in client JS is the
+  anti-pattern: the source can't say what the figure claims, editors can't
+  reach the captions, and any text mirror is forced into a second, hand-synced
+  implementation. For client-rendered elements, see § JS-driven elements above.
 
 ## Adding a tag — checklist
 
