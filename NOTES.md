@@ -137,3 +137,21 @@ prospectively. @restlessronin appears in the narration only for
 beyond-the-role contributions (co-writing, experiment design, a
 specific research method). Corpus swept 2026-07-12
 (www.cyberchitta.cc, 10 articles + the sg-design-org-of-one draft).
+
+## Compression opens with a cold-read gate
+
+Any session competent to run `copyedit` on a draft is disqualified
+from judging its clarity: it holds the notes pile, so prose that only
+parses with the notes in hand looks fine. The failure is structural,
+not a diligence problem — on supramental-gold (2026-07-12) four
+BLOCKING clarity failures (evidence cited by unintroduced proper
+nouns, a metaphor/literal collision on "router", a count with no
+antecedent, a notes-file phrase in body prose) survived ten
+independent drafts, a merge, a graft pass, and every saturated read.
+A cold-reader subagent — article and its own links only — found all
+four in one pass. Promoted straight past N>1 accumulation on
+Showrunner testimony of prior unarticulated recurrence. The gate sits
+in compression mode (the pre-publish pass) rather than assembly
+because that's the last point where the fixes are cheap and the first
+point where the draft is stable enough to cold-read; findings triage
+as gloss-or-cut, and cuts are compression's business anyway.

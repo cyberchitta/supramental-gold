@@ -1,6 +1,6 @@
 ---
 name: copyedit
-description: Use this skill to rewrite, tighten, clarify, or structurally refine a CyberChitta draft. Two modes — assembly (build/expand a thin draft) and compression (tighten a mature draft) — with a five-pass gated workflow (structural → epistemic → clarity → linking → micro). Surface-aware via the article's group: field.
+description: Use this skill to rewrite, tighten, clarify, or structurally refine a CyberChitta draft. Two modes — assembly (build/expand a thin draft) and compression (tighten a mature draft; opens with a cold-read clarity gate) — with a five-pass gated workflow (structural → epistemic → clarity → linking → micro). Surface-aware via the article's group: field.
 user-invocable: true
 ---
 
@@ -45,6 +45,7 @@ Detailed per-pass checklist: `references/pass-checklists.md`.
 - Save aggressive cutting for a later `compression` run.
 
 ### `compression` mode
+- **Cold-read gate first (before pass 1).** Spawn a cold-reader subagent given ONLY the draft and the links it contains — no notes pile, no sibling drafts, no briefs, no repo context. The editing session is always notes-saturated and structurally cannot see notes-dependence; a cold reader can (added 2026-07-12 after four BLOCKING clarity failures survived ten drafts and a graft pass on supramental-gold — see the cold-read entry in `TODO.md` § Friction observed). Report shape: exact quote → what the reader understood or failed to → BLOCKING / FOGGY / COSMETIC, closing with the reader's own two-sentence restatement of the thesis. Diagnosis only, no rewrites. Triage each finding with the showrunner before editing: gloss (+words) or cut (−words) — the cuts belong to this run anyway, and blockers often die by deletion.
 - Bias toward net-negative edits. Removed text should outweigh added text by the end of the run.
 - Remove redundancy, weak qualifiers, unsupported expansion.
 - Preserve the core argument while reducing reader load and claim surface area.
@@ -52,7 +53,7 @@ Detailed per-pass checklist: `references/pass-checklists.md`.
 
 ## Output contract
 
-End every run with these four sections in this order:
+End every run with these four sections in this order (compression runs open with a fifth: **Cold read** — findings and their gloss/cut dispositions):
 
 - **A. Changes by pass** — bullet list of what each of the five passes changed.
 - **B. Unsupported claims** — what was removed, qualified, or flagged for the showrunner to verify.
