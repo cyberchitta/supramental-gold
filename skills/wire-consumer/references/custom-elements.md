@@ -45,6 +45,16 @@ eleventyConfig.addTransform('renderCustomElements', async (content, outputPath) 
 **Template resolution** — a string config *is* the template; a nested object
 dispatches on attribute values (`<showcase type="hero">` → `configs.showcase.hero`).
 
+**Views fallback (v0.4.0+)** — element templates render with
+`views: [includesRoot, <SG's own eleventy dir>]`, so a consumer's `.ejs` can
+`include('primitives/<name>')` directly. That enables the **thin-delegator
+pattern**: when SG ships a production primitive (e.g.
+`primitives/article-list.ejs` — the grouped listing surface with thumbnails,
+thread eyebrow, byline dropdown), the consumer's element template shrinks to a
+mapper from site data onto the primitive's locals, and the markup (with the
+classes SG's JIT scans) lives in SG per the SG-owns-markup rule.
+`www.cyberchitta.cc`'s `showcase/article-list.ejs` is the reference delegator.
+
 **Locals each `.ejs` receives** — `{ ...parsedBody, ...attributes, ...context }`:
 
 - `parsedBody` — the tag's content parser output (or `{}` if no parser).
