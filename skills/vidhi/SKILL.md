@@ -12,7 +12,7 @@ A skill is a living procedure, not documentation — every session that uses one
 should be able to leave it better than it found it. This file codifies what our
 skills share, distilled from the live exemplars:
 
-- **supramental-gold** (this repo) — router + seven task children; friction log in `TODO.md`.
+- **supramental-gold** (this repo) — router + eight task children; friction log in `TODO.md`.
 - **cad-khana** `skills/cad-khana/` — single deep skill + `references/`; feedback → gitignored `field-notes.md`.
 - **geo-darshan** `.claude/skills/cluster-labeling{,-auroville}/` — engine + AOI pack; corrections loop per run dir.
 
