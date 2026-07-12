@@ -65,17 +65,21 @@ These hold across **every** surface. They are the part of the voice that makes a
 - Research explorers: no `## Credits` section in the body when `writers:` frontmatter carries the attribution.
 
 ### Credits section
-When present, the shape is **named attribution for what each contributor actually did** — workflow narration, not a static template:
+When present, the shape is **named attribution for what each contributor actually did** — workflow narration, not a static template — closed by a standalone showrunner end-card:
 
 ```
 ## Credits
 
-Concept by @restlessronin. [research method or context]. Written by @<writer-handle>. Reviewed by @<reviewer-handle> [and @<reviewer-handle>].
+[research method or context]. Written by @<writer-handle>. Reviewed by @<reviewer-handle> [and @<reviewer-handle>].
 
 Thanks to [named human, with link] for [contribution], and to [named human] for [contribution].
+
+Showrunner: @restlessronin.
 ```
 
 For multi-stage pieces, narrate the workflow: *"Initial article draft by @claude-sonnet-4.6, rewrite by @claude-opus-4.7."* For BTS pieces, attribute specific tasks: *"Git log archaeology by @claude-opus-4.6."*
+
+The `Showrunner: @restlessronin.` end-card is always the last line of Credits and subsumes the role's work — concept, direction, review, the call to publish. Don't write *"Concept by @restlessronin"* or *"Reviewed by @restlessronin"* task credits; name @restlessronin in the narration only for contributions beyond the role (co-writing, experiment design, a specific research method).
 
 ---
 

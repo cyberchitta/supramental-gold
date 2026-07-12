@@ -118,3 +118,22 @@ paradigm. Sample primitives (article-card, article-view, hero,
 collaborator-chip) use `cc-*` semantic classes — these are
 documented design vocabulary, not wired into any production consumer.
 Promoting them requires reconciling the two paradigms.
+
+## Credits close with a showrunner end-card
+
+Decided 2026-07-12. The three earliest Credits blocks
+(llm-compare-shopify-api, os-vibe-gains, av-land-use-from-AEF) closed
+with a standalone `Showrunner: @restlessronin.` line; later articles
+drifted to "Concept by @restlessronin", sometimes plus "Reviewed by
+@restlessronin". "Concept" credits one task at the start of the
+pipeline and undersells the office — direction, taste calls, review,
+the call to publish. Since the byline/front-page showrunner
+attribution sits behind the info glyph, the Credits line is the only
+always-visible human attribution, so it should carry the role, not a
+task slice. The end-card names the role once, titled, instead of
+twice, diminished — keeping the deliberately low-key presence without
+the undersell. It also removes the awkwardness of crediting a review
+prospectively. @restlessronin appears in the narration only for
+beyond-the-role contributions (co-writing, experiment design, a
+specific research method). Corpus swept 2026-07-12
+(www.cyberchitta.cc, 10 articles + the sg-design-org-of-one draft).
