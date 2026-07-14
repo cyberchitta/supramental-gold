@@ -14,13 +14,13 @@ A versioned, Eleventy-aware design system. It contains:
 
 - **`voice.md`** — house voice, attribution, surface registers, editorial discipline. Read this before drafting or copyediting.
 - **`visual.md`** — visual brief. Look, layout, motion, philosophy (*Less is More*), anti-patterns, iconography rules. Read this before designing.
-- **`SKILL.md`** — router entry for AI tools. Delegates to one of six child skills under `skills/`: `design-throwaway` (mocks / decks / demos), `design-surface` (production site work), `wire-consumer` (first-time consumer wiring), `wire-deploy` (first-time Netlify deploy setup), `draft-article` (cold-start a new article), `copyedit` (edit an existing draft).
+- **`SKILL.md`** — router entry for AI tools. Delegates to one of eight child skills under `skills/`: `design-throwaway` (mocks / decks / demos), `design-surface` (production site work), `wire-consumer` (first-time consumer wiring), `wire-deploy` (first-time Netlify deploy setup), `draft-article` (cold-start a new article), `copyedit` (edit an existing draft), `vibe` (house code style), `vidhi` (authoring house skills).
 - **`tailwind.css`** — Tailwind v4 + DaisyUI build entry. Multi-source `@source` scan covers SG plus every sibling consumer repo. Compiled to:
 - **`dist/styles.css`** — the canonical CSS bundle, served via jsDelivr to every consumer.
 - **`colors-and-type.css`** + **`ui-kit.css`** — the source CSS imported by `tailwind.css`. Tokens (light + dark), semantic element styles, and the wiki design vocabulary.
 - **`eleventy/index.js`** — Eleventy plugin entry. Registers `sgHelpers` as global data.
-- **`eleventy/primitives/*.ejs`** — design primitives. Header, chrome, footer, sub-site-bar, status-badge, entry-title-row, provenance, outbound-action, section-title are canonical; article-card, article-view, hero, collaborator-chip ship as samples.
-- **`eleventy/helpers.js`** — date formatters, slug lookups, inverse-collection helpers.
+- **`eleventy/primitives/*.ejs`** — design primitives. Header, chrome, footer, article-list, sub-site-bar, status-badge, entry-title-row, provenance, outbound-action, section-title are canonical; article-card, article-view, hero, collaborator-chip ship as samples.
+- **`eleventy/helpers.js`** — date formatters, slug lookups, inverse-collection helpers, section folding.
 - **`eleventy/section-title-transform.js`** — factory for rewriting wiki H2 titles into the `.group-header` shape with optional list classes.
 - **`eleventy/custom-element-renderer.js`** — exported factory for any consumer that wants to register its own HTML-tag namespace.
 - **`assets/`** — canonical CC mark assets (SVG + PNG), served via jsDelivr.
@@ -233,8 +233,11 @@ supramental-gold/
 │   ├── design-throwaway/SKILL.md   ← mocks, decks, demos via CDN
 │   ├── design-surface/SKILL.md     ← production design on a wired consumer
 │   ├── wire-consumer/SKILL.md      ← first-time consumer wiring
+│   ├── wire-deploy/SKILL.md        ← first-time Netlify deploy setup
 │   ├── draft-article/SKILL.md      ← cold-start a new article
-│   └── copyedit/SKILL.md           ← edit an existing draft
+│   ├── copyedit/SKILL.md           ← edit an existing draft
+│   ├── vibe/SKILL.md               ← house code style
+│   └── vidhi/SKILL.md              ← authoring house skills
 ├── CLAUDE.md                ← handoff notes
 ├── NOTES.md                 ← decision rationale + reconciliation log
 ├── TODO.md                  ← forward-looking work

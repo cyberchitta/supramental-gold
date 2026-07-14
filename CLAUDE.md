@@ -37,7 +37,7 @@ public repo.)
 | `colors-and-type.css` | Plain CSS custom properties. Light + dark tokens. |
 | `ui-kit.css` | Component styles + wiki design vocabulary. |
 | `eleventy/index.js` | Eleventy plugin — registers `sgHelpers` global, adds `sgWrapCredits` + `sgRepositionFootnotes` HTML transforms, and amends eleventy's default markdown library with house plugins. Accepts `{ internalDomains: [...] }` option, forwarded to `markdown-library`. |
-| `eleventy/helpers.js` | `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`, `removeFirstHeading`, `getLatestUpdateDate`, `stripPTags`. |
+| `eleventy/helpers.js` | `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`, `removeFirstHeading`, `getLatestUpdateDate`, `stripPTags`, `foldSections`. |
 | `eleventy/build-helpers.js` | `readingTimeForFile`, `calculateReadingTime`, `stripNonReadingSections`. Build-time only (imports `fs` + `gray-matter`); not template helpers. Encodes the house rule that Credits and Document History don't count toward reading time. |
 | `eleventy/markdown-library.js` | `createHouseMarkdownLibrary({ internalDomains })`, `applyHousePlugins(md, opts)`. House markdown shape: `html`/`breaks`/`linkify` defaults, `.link` class on `<a>`, markdown-it-anchor, markdown-it-external-links, markdown-it-footnote. SG plugin auto-amends eleventy's default md via `applyHousePlugins`; consumers with a custom `setLibrary` (e.g. live's `_data/markdown.js`) call `createHouseMarkdownLibrary` directly. |
 | `eleventy/section-title-transform.js` | Generic factory for rewriting `<h2>` titles into `.group-header` shape + classing the following `<ul>`. |
@@ -46,6 +46,7 @@ public repo.)
 | `eleventy/primitives/chrome.ejs` | Forwards `brandLogoUrl` to `header`. Hardcodes `mainSiteUrl: https://www.cyberchitta.cc` for sub-sites. |
 | `eleventy/primitives/footer.ejs` | Accepts `mainSiteUrl`. |
 | `eleventy/primitives/sub-site-bar.ejs`, `status-badge.ejs`, `entry-title-row.ejs`, `provenance.ejs`, `outbound-action.ejs`, `section-title.ejs` | Wiki design vocabulary, used by `ch-ai-tanya` (section-title-transform also wired in sorted-studs for custom headings if needed). |
+| `eleventy/primitives/article-list.ejs` | Grouped article-list — the production listing surface of the main site (`www.cyberchitta.cc`). Renders thread eyebrows (`.thread-eyebrow`, defined in `ui-kit.css`) and folds groups via `helpers.foldSections`. |
 | `eleventy/primitives/article-card.ejs`, `article-view.ejs`, `hero.ejs`, `collaborator-chip.ejs` | Sample — design vocabulary in `cc-*` paradigm; not wired into any production consumer. |
 | `eleventy/layouts/base-chrome.ejs` | Shared article-fidelity head/body chrome. Consumer's `_includes/layouts/base.ejs` is a thin shim: sets `permalink` frontmatter, then `<%- include('layouts/base-chrome') %>`. Used by the main site and `sorted-studs/subsite/`. |
 | `eleventy/layouts/article-body.ejs` | Shared article shell — `<article>` with byline header, content section, and footer (update history, X conversation link, CTA). Consumer's `_includes/layouts/article.ejs` is a thin shim: sets `layout: layouts/base` + `ogType: article`, then `<%- include('layouts/article-body') %>`. Byline and footer blocks gate on optional locals so sub-sites can opt out. |
@@ -180,9 +181,9 @@ the two are kept in sync.
   editorial discipline. Read before drafting or copyediting.
 - `visual.md` — visual brief (look, layout, motion, anti-patterns,
   iconography). Read before designing.
-- `SKILL.md` — AI-skill router. Delegates to one of six children under
+- `SKILL.md` — AI-skill router. Delegates to one of eight children under
   `skills/`: `design-throwaway`, `design-surface`, `wire-consumer`,
-  `wire-deploy`, `draft-article`, `copyedit`.
+  `wire-deploy`, `draft-article`, `copyedit`, `vibe`, `vidhi`.
 - `README.md` — consumer integration guide, release workflow,
   dev-testing options.
 - `NOTES.md` — decision log.
