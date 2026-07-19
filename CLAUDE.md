@@ -187,4 +187,18 @@ the two are kept in sync.
 - `README.md` — consumer integration guide, release workflow,
   dev-testing options.
 - `NOTES.md` — decision log.
-- `TODO.md` — forward-looking work.
+
+## Working notes (gitignored)
+
+Tracked separately in the private `working-notes` repo, symlinked at `_notes/`;
+not discoverable by search — `Grep`/`Glob` do not follow symlinks and skip
+gitignored paths, so these never turn up in a search. `Read` them directly by
+path when relevant:
+
+- `_notes/NEXT_STEPS.md` — forward-looking work, not commitments (was `TODO.md`)
+- `_notes/vibe-draft.md` — top-down, first-principles draft of the code
+  disposition; outline stage, not yet a brief
+- `_notes/vibe-reconciliation-handoff.md` — live brief for reconciling that
+  draft against the bottom-up `skills/vibe` rulebook
+
+Speculative unless stated otherwise. Do not implement from these without asking.

@@ -240,7 +240,6 @@ supramental-gold/
 │   └── vidhi/SKILL.md              ← authoring house skills
 ├── CLAUDE.md                ← handoff notes
 ├── NOTES.md                 ← decision rationale + reconciliation log
-├── TODO.md                  ← forward-looking work
 ├── LICENSE                  ← MIT
 ├── package.json
 ├── tailwind.css             ← bundle source

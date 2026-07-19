@@ -19,7 +19,7 @@ The system is **Supramental Gold**. The work it dresses is **CyberChitta**:
 
 Don't conflate the two. Internal references say "SG"; user-facing surfaces say "CyberChitta."
 
-The same register applies to *meta-vocabulary* — file names, section headings, internal categories. We're a shala: a showrunner, a writers room of named AI collaborators, work that *loops till wrap*. Sibling files in the design system keep the same plain register — `voice.md`, `visual.md`, `NOTES.md`, `TODO.md`, `SKILL.md`. Names a contributor would actually say in the room.
+The same register applies to *meta-vocabulary* — file names, section headings, internal categories. We're a shala: a showrunner, a writers room of named AI collaborators, work that *loops till wrap*. Sibling files in the design system keep the same plain register — `voice.md`, `visual.md`, `NOTES.md`, `SKILL.md`. Names a contributor would actually say in the room.
 
 ---
 

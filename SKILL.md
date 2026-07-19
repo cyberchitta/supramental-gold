@@ -60,7 +60,7 @@ These are foundational and stable; child skills load them on demand.
 
 ## Reporting friction (do this — it's how SG improves)
 
-If during use you observe something that tripped you up — a missing instruction, an unclear contract, a project-specific gotcha the skill should have warned about, a workflow shape the skill doesn't acknowledge — log it. Surface is `TODO.md` in the SG repo, under the `## Friction observed (from live skill use)` section (create the section if it does not yet exist).
+If during use you observe something that tripped you up — a missing instruction, an unclear contract, a project-specific gotcha the skill should have warned about, a workflow shape the skill doesn't acknowledge — log it. Surface is `_notes/NEXT_STEPS.md` in the SG repo, under the `## Friction observed (from live skill use)` section (create the section if it does not yet exist). `_notes/` is a symlink into a private notes repo and is gitignored — if it is not present on this machine, say so rather than writing the entry elsewhere.
 
 Brief entry shape: date, child skill + step, what tripped, what should change. Example template:
 

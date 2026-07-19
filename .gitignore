@@ -10,8 +10,16 @@ _site/
 # Local commit-message drafts
 .commit-msg
 
-# Local-only working docs
+# Working notes — the private working-notes repo, symlinked in.
+# No trailing slash: this is a symlink, and git treats a symlink as a file.
+_notes
+
+# Backstop for a note written at the root by reflex. This repo is public and
+# had two such strays untracked AND unignored, so the patterns earn their keep.
 TODO.md
+NEXT_STEPS.md
+*-handoff.md
+vibe-draft.md
 
 # Editor / OS
 .DS_Store

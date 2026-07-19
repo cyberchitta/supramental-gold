@@ -1,7 +1,8 @@
 # Notes
 
 Decision rationale and reconciliation log. For forward-looking work,
-see `TODO.md`.
+see `_notes/NEXT_STEPS.md` — gitignored, so it is present only on a machine
+that has the private `working-notes` repo linked in.
 
 ## Brief vs. notes vs. handoff
 

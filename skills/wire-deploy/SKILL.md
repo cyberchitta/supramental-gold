@@ -107,4 +107,4 @@ Ask the consumer once: which asset trees use immutable filenames? Default to `/a
 
 ## Reporting friction
 
-Same as the other SG skills — log gotchas in the SG repo's `TODO.md` under `## Friction observed (from live skill use)`.
+Same as the other SG skills — log gotchas in the SG repo's `_notes/NEXT_STEPS.md` under `## Friction observed (from live skill use)`.

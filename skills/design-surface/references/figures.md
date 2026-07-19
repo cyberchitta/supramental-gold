@@ -3,7 +3,7 @@
 **Status: candidate.** Not yet linked from `design-surface/SKILL.md`. Distilled
 from the live figures on `www.cyberchitta.cc` (`vg-strip-plot`, `land-cover-map`,
 `pc-chart`). Fold into the skill once a third surface confirms the line-chart
-conventions generalize. See `TODO.md`.
+conventions generalize. See `_notes/NEXT_STEPS.md`.
 
 This is the figure-level companion to `visual.md`. `visual.md` owns the page's
 look (warm paper-ink, gold + bronze, hairline boundaries, *Less is More*, the

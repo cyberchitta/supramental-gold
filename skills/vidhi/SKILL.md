@@ -12,7 +12,7 @@ A skill is a living procedure, not documentation — every session that uses one
 should be able to leave it better than it found it. This file codifies what our
 skills share, distilled from the live exemplars:
 
-- **supramental-gold** (this repo) — router + eight task children; friction log in `TODO.md`.
+- **supramental-gold** (this repo) — router + eight task children; friction log in `_notes/NEXT_STEPS.md`.
 - **cad-khana** `skills/cad-khana/` — single deep skill + `references/`; feedback → gitignored `field-notes.md`.
 - **geo-darshan** `.claude/skills/cluster-labeling{,-auroville}/` — engine + AOI pack; corrections loop per run dir.
 
@@ -56,7 +56,7 @@ Every skill ships with one. A skill without a feedback loop is frozen
 documentation and will rot. Four elements:
 
 1. **A capture surface separate from the skill file.** Somewhere cheap to
-   append without touching the skill: SG uses `TODO.md` ("Friction observed"
+   append without touching the skill: SG uses `_notes/NEXT_STEPS.md` ("Friction observed"
    section), cad-khana a gitignored `field-notes.md` (issues when installed
    from git), geo-darshan a per-run `corrections.md`. Pick the surface nearest
    to where the friction is felt.

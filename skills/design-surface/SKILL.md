@@ -66,7 +66,7 @@ shared design vocabulary:
 
 SG does **not** ship a shared element vocabulary today; whether it should (a
 small `<exhibit>` / `<embed>` set consumers extend with their own subtypes) is an
-open question in SG's `TODO.md`. Until then, design at the level of *what surface
+open question in SG's `_notes/NEXT_STEPS.md`. Until then, design at the level of *what surface
 this content wants*, and let each consumer name and build its own element.
 
 The **implementation** — registering a namespace, the content parser, the

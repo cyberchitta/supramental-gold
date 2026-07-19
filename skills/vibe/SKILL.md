@@ -83,6 +83,6 @@ Load the one matching the file you're touching:
 ## Feedback
 
 Same contract as every SG child: friction observed during use goes to
-`TODO.md` § "Friction observed (from live skill use)" — dated entry, N>1
+`_notes/NEXT_STEPS.md` § "Friction observed (from live skill use)" — dated entry, N>1
 before the fix lands here. A language whose conventions recur across
 sessions (Elixir, shell, …) earns a new reference file the same way.
