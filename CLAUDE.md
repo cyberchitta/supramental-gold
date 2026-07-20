@@ -191,9 +191,8 @@ the two are kept in sync.
 ## Working notes (gitignored)
 
 Tracked separately in the private `working-notes` repo, symlinked at `_notes/`;
-not discoverable by search — `Grep`/`Glob` do not follow symlinks and skip
-gitignored paths, so these never turn up in a search. `Read` them directly by
-path when relevant:
+invisible to the `Grep`/`Glob` tools (global `CLAUDE.md` has the `rg` forms).
+Read directly when relevant:
 
 - `_notes/NEXT_STEPS.md` — forward-looking work, not commitments (was `TODO.md`)
 - `_notes/vibe-draft.md` — top-down, first-principles draft of the code
