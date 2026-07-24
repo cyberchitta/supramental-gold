@@ -8,11 +8,12 @@ For **first-time wiring** of a new consumer site (a new sub-site, a new sibling 
 
 ## Read these first
 
-1. **`../../README.md § How consumers wire it in`** — the canonical wiring runbook. Three things flow from SG to consumers: the compiled CSS bundle (via jsDelivr), the brand assets (via jsDelivr), and the Eleventy plugin (via npm).
+1. **`../../README.md`** — what SG is and what flows to consumers: the compiled CSS bundle (via jsDelivr), the brand assets (via jsDelivr), and the Eleventy plugin (via npm). Context only — this skill is the wiring runbook.
 2. **`../../CLAUDE.md § Deployments`** — confirms what each consumer site is and where it deploys. Useful context when wiring a new one.
 3. **`../../package.json`** — for the canonical `name`, `exports`, and the dep-pin format consumers reference.
 4. **`references/eleventy-config.md`** — the universal `eleventy.config.js` wiring beyond the four basic pieces below: EJS-views shadowing, the SG plugin, the optional markdown-library override, template engines, and the SG-vs-consumer ownership split. **Read when setting up or debugging a consumer's Eleventy config.**
 5. **`references/custom-elements.md`** — the **opt-in** `createCustomElementRenderer` contract: registering your own HTML-tag namespace, the optional content parser, the `.ejs` template locals, and the authoring rules (self-closing for content-less tags, the blank-line rule, markdown-table-as-content). **Read before adding a custom element to a consumer.** Site-specific elaborations (e.g. a text-mirror/llms.txt rendering of the same elements) are documented by that consumer, not here.
+6. **`references/site-authoring.md`** — the page-level doctrine: pages are markdown, the only body markup is a custom-element tag, layouts are thin shims, extend by shadowing, data is built not computed in pages. **Read before building the first page of a new consumer, and whenever a page is about to be authored as `.ejs`.**
 
 ## The four plumbing pieces
 
@@ -47,7 +48,7 @@ export default {
 };
 ```
 
-Wire `sg.cssBundleUrl` into the consumer's `<head>` template; wire `sg.logoSvgUrl` into chrome / footer primitives.
+Wire `sg.cssBundleUrl` into the consumer's `<head>` template; wire `sg.logoSvgUrl` into chrome / footer primitives. **Don't hardcode jsDelivr URLs in templates** — that recreates the dual-pin bug where URL and dep ref can diverge on bump.
 
 ### 3. Eleventy plugin registration
 
@@ -128,3 +129,14 @@ Ask the user:
 4. Will the consumer be edited via Claude Code? (If yes, also install the skill pointer; if not, the first three pieces are enough.)
 
 Then walk the user through the plumbing pieces in order: `package.json` pin, `_data/sg.js`, plugin registration, Claude Code skill pointer (if applicable). After all are in place, switch to `design-surface` for any actual design work.
+
+
+## Sub-site checklist
+
+For each new sub-site, after the four pieces above:
+
+- [ ] Base layout is a thin shim on `layouts/base-chrome`; site chrome added by shadowing (`references/site-authoring.md`).
+- [ ] `sub-site-bar` primitive in place (via a `primitives/header` shadow); it reads `site.title` and `site.tagline` from `_data/site.json`.
+- [ ] Pages authored as markdown; page bodies carry prose and custom-element tags only (`references/site-authoring.md`).
+- [ ] An `@source` line in SG's `tailwind.css` points at the sub-site's templates so its Tailwind utility classes land in the bundle. Re-run `bun run build:css` in SG and commit the updated `dist/styles.css`.
+- [ ] Visual QA against the main site at the same breakpoints.

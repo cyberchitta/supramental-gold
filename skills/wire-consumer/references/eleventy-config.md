@@ -21,7 +21,9 @@ consumer's own and aren't covered here.
    `htmlTemplateEngine: 'ejs'`. The markdown engine being EJS means a `.md` file
    runs through **EJS first, then markdown** — relevant to anything that authors
    EJS in markdown or post-processes the rendered HTML.
-5. **Passthrough copy.** `src/assets/` and friends.
+5. **Passthrough copy.** `src/assets/` and friends. Never `dist/styles.css` —
+   the bundle is fetched from jsDelivr by the browser, not served from the
+   consumer's own origin.
 6. **Custom-element transform (optional).** Consumers that author custom
    HTML-tag elements register `createCustomElementRenderer` as a transform here —
    see `custom-elements.md`.
@@ -39,3 +41,22 @@ transforms, and the `primitives/` + `layouts/`.
 `_data/sg.js` + `_data/site.js`, any custom-element templates and their content
 parsers, and any site-specific build steps (text mirrors, precompilers, data
 fetchers, minifiers).
+
+
+## If you emit your own OG/Twitter meta
+
+`layouts/base-chrome` handles OG/Twitter emission (including this guard) for
+shim-based consumers. A consumer emitting its own meta whose data layer
+references brand assets (or anything on jsDelivr) as featured-image URLs needs
+a guard against double-prefixing:
+
+```ejs
+<%
+const absUrl = (u) => /^https?:\/\//.test(u) ? u : site.url + u;
+%>
+<meta property="og:image" content="<%= absUrl(ogImage) %>">
+<meta property="twitter:image" content="<%= absUrl(twitterImage) %>">
+```
+
+Without it, an absolute URL gets `site.url` prepended and you ship
+`https://your-domain/https://cdn.jsdelivr.net/...`.
