@@ -13,6 +13,7 @@ The voice rules these passes enforce live in `../../voice.md`. Surface-specific 
 - [ ] Every section has a single, statable job. (If you can't say it in one sentence, the section needs splitting or merging.)
 - [ ] Sections appear in the order the argument needs, not the order they were written.
 - [ ] No two sections cover overlapping ground. Merge duplicates; redirect references.
+- [ ] One idea per paragraph. Break where the subject changes; a sentence that sets up the next paragraph's example belongs to that paragraph, not the one it happens to end. Paragraphs are the unit of reading on a phone.
 - [ ] Intro sets up the claim or tension that the close resolves. If they don't match, fix one of them.
 - [ ] Section openers and closers carry the rhythm voice.md describes for the relevant surface:
   - **essay** — rhetorical-question or aphoristic short-sentence closer.
