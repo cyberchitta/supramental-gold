@@ -7,7 +7,13 @@
 <% if (markdownPath) { %>
 <link rel="alternate" type="text/markdown" href="<%= markdownPath %>">
 <% } %>
+<%# The RSS alternate points at the consumer's OWN origin, so only a
+    consumer that builds feed.xml may advertise it (site.feed); a
+    feed-less sub-site would otherwise link to a 404 on every page.
+    Same gate as site.markdownMirror above. %>
+<% if (site.feed) { %>
 <link rel="alternate" type="application/rss+xml" title="<%= site.title %> RSS Feed" href="<%= site.url %>/feed.xml">
+<% } %>
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="<%= ogT || 'website' %>">
 <meta property="og:url" content="<%= site.url + page.url %>">

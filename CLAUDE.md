@@ -134,6 +134,7 @@ Consumers using the shared chrome must provide:
 - `site.title`, `site.url`, `site.description`
 - `site.mainSiteUrl` *(sub-sites only)* — absolute URL of the main CyberChitta site (`https://www.cyberchitta.cc`). Sets the brand-logo link target. Omit for the main site itself (logo falls back to `/`).
 - `site.markdownMirror` *(optional, default off)* — set `true` only on a consumer that builds the `/llms/` markdown mirror (`/llms/index.md`, `/llms/articles/<slug>.md`). Gates the `<link rel="alternate" type="text/markdown">` tag; without it every sub-site home page advertised a mirror it does not have (found via apodictic, 2026-09-05).
+- `site.feed` *(optional, default off)* — set `true` only on a consumer that builds `feed.xml`. Gates the `<link rel="alternate" type="application/rss+xml">` tag, whose `href` is the consumer's OWN origin; without it a feed-less sub-site advertises a feed it does not have (found via apodictic, 2026-09-05). Distinct from the footer's RSS icon, which uses `mainSiteUrl` and correctly points at the main-site feed.
 - `site.featuredImages[page.url] = { url, caption, credit, ogFormat? }` (per-article hero metadata)
 - `site.images = [{ url, width, height }, ...]` (for figure intrinsic-size attributes)
 - `sg.cssBundleUrl`, `sg.logoSvgUrl` (from the per-consumer `_data/sg.js`)
