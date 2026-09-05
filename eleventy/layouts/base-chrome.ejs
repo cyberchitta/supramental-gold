@@ -19,12 +19,17 @@
   const ogImage = featuredImage ? featuredImage.replace(/\.(webp|svg|jpg|jpeg|png)$/i, '.' + ogFormat) : null;
   const twitterImage = featuredImage && /\.svg$/i.test(featuredImage) ? ogImage : featuredImage;
   const absUrl = (u) => /^https?:\/\//.test(u) ? u : site.url + u;
+  // The text/markdown alternate link is only advertised by consumers that
+  // build the /llms/ mirror (site.markdownMirror); a sub-site without one
+  // would otherwise link to a 404 on every home page.
   let markdownPath = null;
-  if (page.url === '/') {
-    markdownPath = '/llms/index.md';
-  } else if (page.url.startsWith('/articles/')) {
-    const filename = page.url.replace('/articles/', '').replace('.html', '.md');
-    markdownPath = `/llms/articles/${filename}`;
+  if (site.markdownMirror) {
+    if (page.url === '/') {
+      markdownPath = '/llms/index.md';
+    } else if (page.url.startsWith('/articles/')) {
+      const filename = page.url.replace('/articles/', '').replace('.html', '.md');
+      markdownPath = `/llms/articles/${filename}`;
+    }
   }
   %>
   <%- include('partials/site-meta', {
