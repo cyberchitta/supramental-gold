@@ -31,7 +31,7 @@ These hold across **every** surface. They are the part of the voice that makes a
 
 ### Audience and density
 - **We write for AIs and humans together.** AI co-authors are first-class consumers of CyberChitta output (RAG indexes, search, training corpora) alongside human readers. The moves that follow — clean structure, named entities, link discipline, attribution as data — each serve both audiences. We don't trade one off for the other.
-- **Don't over-explain.** Assume a human reader can ask an AI to unpack any term they don't know. Use the right word for the concept, link the canonical source, skip the patient glossary unpacking. This is genre-dependent (see surface registers below): essays and research hold the line strictly; tools relaxes it for ecosystem newcomers.
+- **Don't over-explain.** Assume a human reader can ask an AI to unpack any term they don't know. Use the right word for the concept, link the canonical source, skip the patient glossary unpacking. This is register-dependent (see Registers below): essays, prose practice and explorers hold the line strictly; tools relaxes it for ecosystem newcomers.
 - **Articles are short.** Current CyberChitta corpus ranges 500–1,300 words, median ~950. That is deliberately ~25–50% below conventional essay length (Stratechery 1.5–2.5k, Paul Graham 2–4k, typical long-form blog 1.2–2k). Length is earned by argument surface area, not defaulted to.
 - **Trust the reader to hold the thread.** No "as mentioned earlier", no "to recap", no closing summary section. Short pieces don't need redundant scaffolding; AI-assisted reading doesn't either. If a point seems to need restating, the piece is too long for its argument, or the argument is wrong.
 
@@ -44,7 +44,7 @@ These hold across **every** surface. They are the part of the voice that makes a
 - **Short words and fewer words.** Trust readers to carry context.
 - **State points directly.** Remove qualifying phrases that add no information.
 - **Combine related ideas into single statements.** A sentence that picks up the next sentence's clause usually wins. Resist the AI default of one-claim-per-sentence; resist also the opposite extreme of stacked subordinate clauses.
-- **Questions stay genuinely neutral.** Direct questions to the reader (research/tools second-person; *"What to look for"* captions) avoid leading shape — name what to look at, not what to conclude. Rhetorical-question section-enders in essays are a different move (see Essay register signature); those frame, they don't poll.
+- **Questions stay genuinely neutral.** Direct questions to the reader (explorer/tools second-person; *"What to look for"* captions) avoid leading shape — name what to look at, not what to conclude. Rhetorical-question section-enders in essays are a different move (see Essay register signature); those frame, they don't poll.
 - **Specific numbers wherever possible.** *"12–24% to 78%"*, *"61 open source tools"*, *"2–2.5x gains"*, *"five commits, four days"*. Avoid "many", "often", "most" when a real number is available.
 - **Inline links for empirical claims.** Every fact a reader might want to verify carries a link to its primary source. Unsourced claims get qualified or cut during copyedit.
 
@@ -83,11 +83,31 @@ The `Showrunner: @restlessronin.` end-card is always the last line of Credits an
 
 ---
 
-## Surface registers
+## Shelf and register
 
-Each `group:` in the frontmatter implies a different register. The shared invariants above hold; the moves below are the genre execution on top.
+Two decisions, one field each. They correlate; they are not the same decision.
 
-### Essay (`group: essays`)
+**`group:` is the shelf** — the section the piece lists under on the index page, and a promise to the reader about what they carry away. Choose it by the takeaway, not by the piece's form:
+
+| shelf | the reader leaves with | e.g. |
+|---|---|---|
+| `essays` | an argument | supramental-ai, privacy-coins-ai-money |
+| `research` | a finding — a method applied, results reported | os-vibe-gains, llm-compare-shopify-api, private-canary |
+| `tools` | a landscape | lc-alternatives, cad-llm-tools |
+| `practice` | a method in use — the doing is the payload | auro-darshan, ai-derisks-niche |
+| `bts` | the room — how the publication itself works | writers-room, supramental-gold |
+
+A finding reached by formal proof shelves as research alongside one reached by counting commits; the shelf doesn't care whether the piece is quantitative, interactive, or prose.
+
+**Register is the set of moves the piece executes**, chosen by its *form*. Each shelf has a default register (named in the headings below), and a piece deviates when its form requires it — a prose research piece takes the prose-practice register, not the explorer's imperative captions. Record a deviation and its reason in the piece's HANDOFF so copyedit doesn't revert it.
+
+**Shelves are not frozen.** Add, split, or rename one when the corpus holds two or more pieces no row describes. The `article-list` primitive takes `groupOrder` / `groupNames` overrides, so a new shelf is a data change, not a design change.
+
+## Registers
+
+The shared invariants above hold in every register; the moves below are the genre execution on top.
+
+### Essay (default for `essays`)
 
 **Job:** argue, persuade by rhetoric, draw out an analogy or correspondence at length.
 
@@ -102,7 +122,7 @@ Each `group:` in the frontmatter implies a different register. The shared invari
   - **Sentence-shape oscillation.** Long compound sentences with embedded clauses, then sudden three-word sentences. The rhythm is part of the voice.
 - **Vibe:** Stratechery × personal newsletter × research journal.
 
-### Process / behind-the-scenes (`group: bts`)
+### Process / behind-the-scenes (default for `bts`)
 
 **Job:** narrate a piece of work CyberChitta has done — what changed, who did it, how long it took.
 
@@ -115,7 +135,7 @@ Each `group:` in the frontmatter implies a different register. The shared invari
   - **Companion-piece cross-linking.** BTS pieces often pair with a partner article; link generously.
   - **Closing tagline.** Short reframe sentence that becomes the piece's takeaway. *"Patience has compounding returns."*
 
-### Tools / list (`group: tools`)
+### Tools / list (default for `tools`)
 
 **Job:** survey a landscape of tools, place CyberChitta's own work within it, point readers at what's worth using.
 
@@ -126,7 +146,20 @@ Each `group:` in the frontmatter implies a different register. The shared invari
 - **Structure:** typically driven by custom `<showcase>` elements that render tool tables from frontmatter / data. Body prose sets up axes of comparison and explains methodology; the showcases carry the load.
 - **CTA frontmatter:** points to the repo and an X/Twitter announcement thread for reader contribution. *"Try [CAD Khana]. Know of other tools? Reply to the [announcement thread]."*
 
-### Research / practice / explorer (`group: research` or `practice`)
+### Prose practice (default for `practice`; prose pieces on `research`)
+
+**Job:** show a method in use, or a finding it produced, through what was actually done — named actors, named artifacts, dated steps — with the figures carrying the evidence. Derived from the five shipped `practice` pieces (auro-darshan, geo-darshan-skill, ai-derisks-niche, wt-visualizations, av-land-use-from-AEF).
+
+- **Voice:** third-person declarative. Subjects are named actors (`@restlessronin`, `@claude-opus-4.7`, "the agents", "the readers") and named artifacts (a file, a cluster ID, a date) doing verbs — not concept-nouns arriving or sitting. The showrunner appears in body prose by handle or role, never as "I"; no "we" except for prior-work reference, no "you".
+- **Tone:** matter-of-fact, exact, with insider specificity as texture — artifacts can be named even when the reader can't fully grok them, so long as a descriptive tail lets them see the shape.
+- **Density:** strict. Structure follows the takeaways the reader carries, not the chronology of the work; detail runs to the minimum that signals research grounding.
+- **Opener:** a concrete count or contrast in the first sentence — *"Ten agents on one vision model sorted 4,900 hectares…"*, *"Two weeks, maybe three. It took months."* In a thread, the second sentence links the previous piece and moves on; it never re-tells that piece's setup.
+- **Section heads:** Title Case, sentence-shaped, the takeaway not the step — *"Silence Comes Back as a Name"*, *"When the Cost is Expertise"*.
+- **Section closers:** one short declarative reframe, not a question — *"The bottleneck was never capability. It was feedback latency."*, *"What was missing could only be said, not seen."* Shorter and flatter than the essay koan.
+- **Figures carry the evidence;** prose places them and says what they cost. `<showtable>` / `<showcase>` / images as the exhibits, captions doing real work.
+- **Title:** a concrete count from the corpus pattern — *"Nine Months, One Working App, 1,611 Holes"*, *"Months for Charts, Days for Maps"*.
+
+### Explorer (quantitative / interactive; `research` or `practice` pieces on a specialised layout)
 
 **Job:** present quantitative work or interactive exploration; let the reader inspect data themselves.
 
@@ -162,14 +195,14 @@ Each `group:` in the frontmatter implies a different register. The shared invari
 | `title` | yes | Title Case; essays use two-part with colon |
 | `ogDescription` | yes | dek; one to two declarative sentences setting tension |
 | `publishedAt` | yes | ISO date |
-| `group` | yes | `essays` \| `bts` \| `research` \| `tools` \| `practice` |
+| `group` | yes | the shelf: `essays` \| `bts` \| `research` \| `tools` \| `practice` — see § Shelf and register; it does not fix the register |
 | `showrunner` | yes | `'@restlessronin'` |
 | `writers` | yes | list of `@handles` (one or more) |
 | `tags` | yes | list of lowercase-hyphenated keywords |
 | `xConversationId` | optional | X/Twitter thread ID for the piece |
-| `cta` | optional | multi-line block; varies by surface (companion-piece links for essays / bts, repo + reply-thread for tools, companion-article for research) |
+| `cta` | optional | multi-line block; varies by shelf (companion-piece links for essays / bts, repo + reply-thread for tools, companion-article for research) |
 | `updates` | optional | list of `{date, note}` entries for dated copy-edit notes; bts and tools use this |
-| `forceUTC` | research-only | for time-sensitive visualisations |
+| `forceUTC` | explorer-only | for time-sensitive visualisations |
 | `excludeFromLlmsTxt` | optional | for interactive pieces that don't render well as text |
 
 ---

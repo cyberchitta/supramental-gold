@@ -1,14 +1,14 @@
 ---
 name: draft-article
-description: Use this skill to produce a first complete CyberChitta draft from an outline, brief, or evidence pile. Cold start to assembled first-pass draft with frontmatter, sections, and Credits scaffold. Surface-aware (essay / bts / tools / research) — branches on the article's group:. Hands off to copyedit once a complete draft exists.
+description: Use this skill to produce a first complete CyberChitta draft from an outline, brief, or evidence pile. Cold start to assembled first-pass draft with frontmatter, sections, and Credits scaffold. Shelf-aware (group:) and register-aware (essay / bts / tools / prose-practice / explorer) — the two are decided separately. Hands off to copyedit once a complete draft exists.
 user-invocable: true
 ---
 
-For **cold-start drafting** of a new CyberChitta article. Input: an outline, a brief, a pile of notes, a research summary, a draft-in-pieces. Output: one prose draft, end-to-end, in the right surface register, with frontmatter and a Credits scaffold. After that, hand off to `copyedit` for the gated tightening passes. If the draft already reads end-to-end, you're past this skill — go directly to `copyedit`.
+For **cold-start drafting** of a new CyberChitta article. Input: an outline, a brief, a pile of notes, a research summary, a draft-in-pieces. Output: one prose draft, end-to-end, on the right shelf and in the right register, with frontmatter and a Credits scaffold. After that, hand off to `copyedit` for the gated tightening passes. If the draft already reads end-to-end, you're past this skill — go directly to `copyedit`.
 
 ## Read these first
 
-1. **`../../voice.md`** — required. The surface registers (essay / bts / tools / research), shared invariants, attribution conventions, frontmatter table, and what to cut. Drafting without reading voice.md will produce text that fails copyedit pass 3.
+1. **`../../voice.md`** — required. Shelf and register (why they are separate decisions), the registers (essay / bts / tools / prose-practice / explorer), shared invariants, attribution conventions, frontmatter table, and what to cut. Drafting without reading voice.md will produce text that fails copyedit pass 3.
 2. **`../../visual.md`** — only if the draft will include visual elements (showcases, charts, primitives) where layout decisions inform prose framing. Otherwise skip.
 
 The Credits and frontmatter shapes are in voice.md. Don't reinvent them.
@@ -25,16 +25,21 @@ The goal is a **complete** first draft, not a polished one. Complete means: ever
 
 ## Workflow
 
-### Step 1 — Pin the surface
+### Step 1 — Pin the shelf, then the register
 
-Decide `group:` first. The choices and their voice are in voice.md § "Surface registers":
+Two decisions, in order. Both are in voice.md § "Shelf and register" and § "Registers".
 
-- **`essays`** — argue, persuade by rhetoric, draw out an analogy at length. Third-person declarative. Two-part title with colon.
-- **`bts`** — narrate a piece of work the shala has done. Named `@handles` as actors. Time-and-count closers. Companion link.
-- **`tools`** — survey a landscape of tools, place CyberChitta's work in it. First-person plural for us, "you" for the reader. Showcase-driven.
-- **`research`** / **`practice`** — present quantitative work or interactive exploration. Imperative second person for interactions. "What to look for" captions.
+**Shelf (`group:`)** — what the reader carries away: an argument (`essays`), a finding (`research`), a landscape (`tools`), a method in use (`practice`), the room (`bts`). Not the piece's form: a prose piece whose payload is a finding is `research`.
 
-If the input doesn't make the surface obvious, ask before drafting. Drafting in the wrong register wastes a full run.
+**Register** — the moves, chosen by the piece's form. The shelf names a default; take the default unless the form says otherwise:
+
+- **essay** — argue by rhetoric. Third-person declarative. Rhetorical-question closers. Two-part title with colon. Default for `essays`.
+- **bts** — narrate the shala's own work. Named `@handles` as actors. Time-and-count closers. Companion link. Default for `bts`.
+- **tools** — survey a landscape. First-person plural for us, "you" for the reader. Showcase-driven. Default for `tools`.
+- **prose practice** — show the method in use through named actors and artifacts; figures carry the evidence; short declarative closers. Default for `practice`, and for a prose piece on `research`.
+- **explorer** — quantitative or interactive on a specialised layout. Imperative second person for interactions; "What to look for" captions only where one chart type repeats. For `research` or `practice` pieces built around an interactive.
+
+If either decision isn't obvious from the input, ask before drafting. Drafting in the wrong register wastes a full run. When the register is not the shelf's default, say so in the HANDOFF with the reason.
 
 ### Step 2 — Scaffold frontmatter
 
@@ -42,7 +47,7 @@ Use the table in voice.md § "Frontmatter conventions". At minimum:
 
 ```yaml
 ---
-layout: article  # or vibe-gain / land-cover for research surfaces
+layout: article  # or vibe-gain / land-cover for explorer pieces
 title: ...
 ogDescription: ...
 publishedAt: <today, ISO>
@@ -73,15 +78,16 @@ For each section, note:
 
 Run section-by-section. Don't try to draft the whole article in one pass. For each section:
 
-1. Write the opener in the surface's register (punchy claim for tools, declarative setup for essays, named-actor lead for bts, etc.).
+1. Write the opener in the chosen register (punchy claim for tools, declarative setup for essays, named-actor lead for bts, a concrete count for prose practice, etc.).
 2. Body — deliver the claim, ground it in evidence with inline links.
-3. Closer in the surface's register:
+3. Closer in the chosen register:
    - **essay** — short rhetorical question, italicised or bare, that turns the section's finding into a koan.
    - **bts** — terse fact summary ("Five commits, four days.").
    - **tools** — pivot to the next axis or the showcase that carries the data.
-   - **research** — "What to look for" caption on any chart or interactive.
+   - **prose practice** — one short declarative reframe, not a question.
+   - **explorer** — "What to look for" caption only where the same chart type repeats.
 
-Pull from voice.md § "Surface registers" → the relevant subsection for the signature moves of the chosen surface.
+Pull from voice.md § "Registers" → the relevant subsection for the signature moves of the chosen register.
 
 ### Step 5 — Scaffold Credits
 
@@ -128,11 +134,11 @@ Don't run `copyedit` in the same session unless the user asks; the two skills ar
 Ask the user:
 
 1. What's the input — outline, brief, evidence pile, draft-in-pieces? Where is it?
-2. Which surface (`group:`) — essay, bts, tools, research? If unsure, describe what the piece is doing and I'll suggest.
+2. Which shelf (`group:`) — what does the reader carry away? And is the register the shelf's default, or does the form call for another? If unsure, describe what the piece is doing and I'll suggest.
 3. Who's the writer (which `@<model-handle>` carries the byline)? Single-writer or multi-writer draft?
 4. Any specific reference articles to anchor the register against? (E.g. *"essay, like supramental-ai"* or *"bts, like the witness-ai BTS piece"*.)
 
-Then walk the six steps in order. State the surface explicitly at the top of the output so the user can redirect early if you've picked wrong.
+Then walk the six steps in order. State shelf and register explicitly at the top of the output so the user can redirect early if you've picked wrong.
 
 ---
 

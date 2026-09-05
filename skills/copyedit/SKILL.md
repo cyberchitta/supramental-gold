@@ -1,6 +1,6 @@
 ---
 name: copyedit
-description: Use this skill to rewrite, tighten, clarify, or structurally refine a CyberChitta draft. Two modes — assembly (build/expand a thin draft) and compression (tighten a mature draft; opens with a cold-read clarity gate) — with a five-pass gated workflow (structural → epistemic → clarity → linking → micro). Surface-aware via the article's group: field.
+description: Use this skill to rewrite, tighten, clarify, or structurally refine a CyberChitta draft. Two modes — assembly (build/expand a thin draft) and compression (tighten a mature draft; opens with a cold-read clarity gate) — with a five-pass gated workflow (structural → epistemic → clarity → linking → micro). Register-aware: moves follow the piece's register (the shelf's default unless the HANDOFF records a deviation).
 user-invocable: true
 ---
 
@@ -8,7 +8,7 @@ For **editing an existing CyberChitta draft**: rewriting, tightening, clarifying
 
 ## Read these first
 
-1. **`../../voice.md`** — house voice, attribution, the surface registers (essay / bts / tools / research / wiki), the cut patterns, frontmatter conventions. **Required.** Every pass below tests against it.
+1. **`../../voice.md`** — house voice, attribution, shelf vs register, the registers (essay / bts / tools / prose-practice / explorer / wiki), the cut patterns, frontmatter conventions. **Required.** Every pass below tests against it.
 2. **`references/mode-selection.md`** — the assembly-vs-compression heuristic. Read at the start of a run if mode isn't obvious from the user's request.
 3. **`references/pass-checklists.md`** — concrete per-pass checklist. Load when you actually reach the passes, not at skill entry.
 
@@ -28,9 +28,9 @@ See `references/mode-selection.md` for examples and edge cases.
 
 Never skip a pass. Never run a later pass before an earlier one — a clarity rewrite over an unsupported claim is wasted work.
 
-1. **Structural** — Reorder sections for argument flow. Eliminate duplicated ideas. One job per section. Section openers and closers carry the rhythm voice.md describes for the relevant surface (rhetorical-question closers for essays, time-and-count for bts, etc.).
+1. **Structural** — Reorder sections for argument flow. Eliminate duplicated ideas. One job per section. Section openers and closers carry the rhythm voice.md describes for the piece's register (rhetorical-question closers for essays, time-and-count for bts, short declarative reframes for prose practice, etc.).
 2. **Epistemic** — Identify unsupported claims. Add citations, soften certainty, or remove. Verify quote attribution. **Flag uncertain factual claims explicitly; never silently rewrite them as facts.**
-3. **Clarity + concision** — Apply voice.md's cut list (*"It's worth noting that…"*, *"This is important because…"*, soft qualifiers, restatements). Branch on `group:` for surface-specific moves: aphoristic short closers for essays, named-actor narration for bts, punchy claim openers for tools, "What to look for" captions for research.
+3. **Clarity + concision** — Apply voice.md's cut list (*"It's worth noting that…"*, *"This is important because…"*, soft qualifiers, restatements). Branch on the register for its moves: aphoristic short closers for essays, named-actor narration for bts, punchy claim openers for tools, named actors and artifacts as subjects for prose practice, "What to look for" captions for explorers. The register is the shelf's default unless the HANDOFF records otherwise — don't revert a recorded deviation.
 4. **Linking + packaging** — Validate internal links, citations, CTAs. Tighten title / `ogDescription` / closing alignment. Check frontmatter against the table in voice.md.
 5. **Micro copyedit** — Grammar, diction, punctuation. Em-dash discipline (real `—`, not `--` or `-`). Lowercase `@handle` attribution. Title Case for titles, Sentence case for section subheads. Final terminology sweep.
 
@@ -73,7 +73,7 @@ Ask the user:
 1. Which file? (path to the draft)
 2. Mode preference, or should I infer from the draft state?
 3. Any specific concern driving the edit (overlong, weak section, factual review, pre-publish polish)?
-4. Surface — confirm `group:` in frontmatter so I pick the right clarity-pass moves.
+4. Register — the shelf's default from `group:`, unless the HANDOFF records a deviation. Confirm so I pick the right clarity-pass moves.
 
 Then run mode selection (with reasoning) and execute the five passes in order.
 

@@ -23,7 +23,7 @@ This file is a **router**. For any actual work, invoke one of the child skills b
 
 | Skill | Use when |
 |---|---|
-| **`draft-article`** | Cold-starting a new CyberChitta article from outline / brief / evidence pile. Produces a complete first draft (frontmatter, sections, Credits scaffold) in the right surface register. Hands off to `copyedit` after. |
+| **`draft-article`** | Cold-starting a new CyberChitta article from outline / brief / evidence pile. Produces a complete first draft (frontmatter, sections, Credits scaffold) on the right shelf and in the right register. Hands off to `copyedit` after. |
 | **`copyedit`** | Editing an existing draft — rewriting, tightening, clarifying, restructuring. Two modes (`assembly` / `compression`), five gated passes. Operates on a draft that already exists end-to-end. |
 
 ### Code
@@ -42,7 +42,7 @@ This file is a **router**. For any actual work, invoke one of the child skills b
 
 Both child design skills reference these:
 
-- **`voice.md`** — house voice, attribution conventions, surface registers (essay / bts / tools / research), cut patterns, frontmatter conventions. Read before drafting or copyediting.
+- **`voice.md`** — house voice, attribution conventions, shelf vs register, the registers (essay / bts / tools / prose-practice / explorer), cut patterns, frontmatter conventions. Read before drafting or copyediting.
 - **`visual.md`** — visual brief. Look, layout, motion, philosophy (*Less is More*), anti-patterns, iconography rules. Read before designing.
 
 These are foundational and stable; child skills load them on demand.
