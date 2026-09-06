@@ -1,7 +1,7 @@
 {
   "name": "@cyberchitta/supramental-gold",
   "version": "0.4.3",
-  "description": "CyberChitta design system — tokens, primitives, and Eleventy plugin shared across cyberchitta.cc and its sub-sites.",
+  "description": "CyberChitta design system \u2014 tokens, primitives, and Eleventy plugin shared across cyberchitta.cc and its sub-sites.",
   "type": "module",
   "license": "MIT",
   "exports": {
@@ -10,6 +10,7 @@
     "./eleventy": "./eleventy/index.js",
     "./eleventy/renderer": "./eleventy/custom-element-renderer.js",
     "./eleventy/section-title-transform": "./eleventy/section-title-transform.js",
+    "./eleventy/site-url": "./eleventy/site-url.js",
     "./eleventy/helpers": "./eleventy/helpers.js",
     "./eleventy/build-helpers": "./eleventy/build-helpers.js",
     "./eleventy/markdown-library": "./eleventy/markdown-library.js",
