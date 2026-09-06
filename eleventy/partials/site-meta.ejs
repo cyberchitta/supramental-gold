@@ -14,6 +14,11 @@
 <% if (site.feed) { %>
 <link rel="alternate" type="application/rss+xml" title="<%= site.title %> RSS Feed" href="<%= site.url %>/feed.xml">
 <% } %>
+<%# Self-referencing canonical. `site.url` is the consumer's own origin for
+    the current build context (see eleventy/site-url.js), so a preview
+    canonicalises to itself, not to production — pair non-production deploys
+    with X-Robots-Tag: noindex rather than a cross-host canonical. %>
+<link rel="canonical" href="<%= site.url + page.url %>">
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="<%= ogT || 'website' %>">
 <meta property="og:url" content="<%= site.url + page.url %>">
