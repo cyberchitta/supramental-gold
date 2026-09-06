@@ -19,7 +19,8 @@ is for production-wiring handoff only; design and editorial decisions live in
 |---|---|---|
 | Main site | https://www.cyberchitta.cc | Netlify, from `main` |
 | ch-ai-tanya | https://ch-ai-tanya.cyberchitta.cc | GitHub Pages, from `main` |
-| sorted-studs | https://sorted-studs.cyberchitta.cc | Netlify, from `main` (repo base: `subsite/`) |
+| sorted-studs | https://sorted-studs.cyberchitta.cc | Netlify, from the orphan `live` branch (repo base: `subsite/`) — publishing is a path-scoped checkout off `staging`, not a merge; see that repo's `_notes/decisions/subsite-deploy-branches.md` |
+| apodictic | https://apodictic.cyberchitta.cc | GitHub Pages, from `main` (repo base: `site/`). The only consumer whose prose SG does not wrap from markdown: Verso emits pre-rendered HTML fragments from Lean (`lake exe generate-doc`), `doc.md` paginates over them, and a `verso-page` custom element prints each fragment — SG supplies chrome, not rendering. |
 
 (A staging context for the main site exists on Netlify; its URL is
 deliberately not listed here because this file is checked into a
