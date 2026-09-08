@@ -44,6 +44,7 @@
   --syntax-number:          #7a3560;
   --syntax-meta:            #8a827a;
   --syntax-operator:        #96551f;
+  --syntax-params:          #4a6a7a;
   --syntax-sorry:           #a81c1c;
   --syntax-sorry-bg:        #f2d9d9;
 
@@ -117,6 +118,7 @@
   --syntax-number:          #d08ab0;
   --syntax-meta:            #a09786;
   --syntax-operator:        #e8a070;
+  --syntax-params:          #8fb3c4;
   --syntax-sorry:           #ff8080;
   --syntax-sorry-bg:        #4a1f1f;
 }
@@ -283,8 +285,9 @@ h1, h2, h3, h4, h5, h6 {
 .article-content .hljs-number { color: var(--syntax-number); }
 .article-content .hljs-meta,
 .article-content .hljs-punctuation,
-.article-content .hljs-attr,
-.article-content .hljs-variable { color: var(--syntax-meta); }
+.article-content .hljs-attr { color: var(--syntax-meta); }
+.article-content .hljs-params,
+.article-content .hljs-variable { color: var(--syntax-params); }
 .article-content .hljs-subst { color: var(--color-base-content); }
 /* `sorry`/`admit`/`#exit` — a non-standard scope emitted by highlightjs-lean4
    and styled by no stock theme. Upstream Lean marks these `invalid.illegal`:
