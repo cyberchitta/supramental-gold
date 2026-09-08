@@ -7,6 +7,8 @@
       "dependencies": {
         "ejs": "^5.0.2",
         "gray-matter": "^4.0.3",
+        "highlight.js": "^11.12.0",
+        "highlightjs-lean4": "github:cyberchitta/highlightjs-lean4#v0.2.0",
         "markdown-it": "^14.1.0",
         "markdown-it-anchor": "^9.2.0",
         "markdown-it-external-links": "^0.0.6",
@@ -117,6 +119,10 @@
     "graceful-fs": ["graceful-fs@4.2.11", "", {}, "sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ=="],
 
     "gray-matter": ["gray-matter@4.0.3", "", { "dependencies": { "js-yaml": "^3.13.1", "kind-of": "^6.0.2", "section-matter": "^1.0.0", "strip-bom-string": "^1.0.0" } }, "sha512-5v6yZd4JK3eMI3FqqCouswVqwugaA9r4dNZB1wwcmrD02QkV5H0y7XBQW8QwQqEaZY1pM9aqORSORhJRdNK44Q=="],
+
+    "highlight.js": ["highlight.js@11.12.0", "", {}, "sha512-nbfWpyRMcMrPMmDwJB+dhX/eiaPKtc2RB+0QZskqJ3WjRA/FDS0e9hZrx8EC/lbEv8gXy98FcDbNa/dspAaJMg=="],
+
+    "highlightjs-lean4": ["highlightjs-lean4@github:cyberchitta/highlightjs-lean4#09d2ba2", { "peerDependencies": { "highlight.js": "^11.9.0" } }, "cyberchitta-highlightjs-lean4-09d2ba2", "sha512-9TvG9t/eIAYHKiIb6HWketlRcBtS9zv/LJfPB6biS4+RjOvhdVkCyI6dQW9/oFlB8mLDZ/BvApX033YX2GM7Jw=="],
 
     "is-extendable": ["is-extendable@0.1.1", "", {}, "sha512-5BMULNob1vgFX6EjQw5izWDxrecWK9AM72rugNr0TFldMOi0fj6Jk+zeKIt0xGj4cEfQIJth4w3OKWOJ4f+AFw=="],
 

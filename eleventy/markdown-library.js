@@ -7,6 +7,7 @@
 //   - `markdown-it-anchor` → heading IDs (linkable headings)
 //   - `markdown-it-external-links` → new tab + noopener for off-site links
 //   - `markdown-it-footnote` → `.footnotes` section that SG already styles
+//   - build-time syntax highlighting via highlight.js → `.hljs-*` spans
 //
 // Two entry points:
 //   - `createHouseMarkdownLibrary({ internalDomains })` — for consumers
@@ -23,8 +24,36 @@ import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
 import markdownItExternalLinks from 'markdown-it-external-links';
 import markdownItFootnote from 'markdown-it-footnote';
+import hljs from 'highlight.js/lib/core';
+import graphql from 'highlight.js/lib/languages/graphql';
+import lean4 from 'highlightjs-lean4';
 
 const HOUSE_OPTIONS = { html: true, breaks: true, linkify: true };
+
+// Registered once at module load, not per instance. Only the languages the
+// corpus actually uses: `graphql` (llm-compare-shopify-api) and `lean4`
+// (apodictic). Add a language when an article needs one — a speculative set
+// is dead weight in every consumer's build.
+hljs.registerLanguage('graphql', graphql);
+hljs.registerLanguage('lean4', lean4);
+// Articles fence Lean as ```lean, which is the Lean 3 name upstream; there is
+// no Lean 3 in the corpus, so point it at the Lean 4 grammar.
+hljs.registerAliases(['lean'], { languageName: 'lean4' });
+
+// Returns the highlighted *inner* HTML and lets markdown-it wrap it in its own
+// `<pre><code class="language-x">`. Returning a full `<pre>` would take over
+// the wrapper (markdown-it skips its own when the string starts with `<pre`)
+// and with it responsibility for escaping the language name out of the fence
+// info string. The existing `.article-content pre / pre code` rules already
+// style the container, so there is nothing to gain by owning it.
+//
+// An unlabelled or unknown fence returns '' — markdown-it then escapes the
+// code itself and emits the plain default wrapper. That is a real case
+// (`web-structure.md` has an unlabelled block), not a defensive fallback.
+function highlightCode(code, lang) {
+  if (!lang || !hljs.getLanguage(lang)) return '';
+  return hljs.highlight(code, { language: lang }).value;
+}
 
 function addLinkClass(md) {
   const defaultRender =
@@ -51,6 +80,7 @@ export function applyHousePlugins(md, { internalDomains = [] } = {}) {
   md.options.html = HOUSE_OPTIONS.html;
   md.options.breaks = HOUSE_OPTIONS.breaks;
   md.options.linkify = HOUSE_OPTIONS.linkify;
+  md.options.highlight = highlightCode;
 
   md.use(markdownItAnchor, {
     permalink: false,

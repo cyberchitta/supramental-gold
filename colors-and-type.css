@@ -32,6 +32,21 @@
   --color-link:             #b85420;
   --color-link-hover:       #8a3c14;
 
+  /* Syntax highlighting (highlight.js `.hljs-*` spans, emitted at build time
+     by eleventy/markdown-library.js). Keyed to the warm paper-ink palette
+     rather than a stock hljs theme, which would drop cool blues onto cream. */
+  --syntax-comment:         #8a827a;
+  --syntax-keyword:         #b8501e;
+  --syntax-type:            #8a6a12;
+  --syntax-built-in:        #96751a;
+  --syntax-title:           #7a4a1a;
+  --syntax-string:          #4a6b25;
+  --syntax-number:          #7a3560;
+  --syntax-meta:            #8a827a;
+  --syntax-operator:        #96551f;
+  --syntax-sorry:           #a81c1c;
+  --syntax-sorry-bg:        #f2d9d9;
+
   /* Logo SVG CSS custom props — consumed by /assets/logo.svg and the
      canonical cc-260508.svg mark.
      The underlying symbol was designed by the Mother for the Golden
@@ -92,6 +107,18 @@
   --color-bronze:           #e0804a;
   --color-link:             #e0804a;
   --color-link-hover:       #f0a070;
+
+  --syntax-comment:         #8f877c;
+  --syntax-keyword:         #e0804a;
+  --syntax-type:            #d4a83a;
+  --syntax-built-in:        #d4a83a;
+  --syntax-title:           #e6c98a;
+  --syntax-string:          #9cb36a;
+  --syntax-number:          #d08ab0;
+  --syntax-meta:            #a09786;
+  --syntax-operator:        #e8a070;
+  --syntax-sorry:           #ff8080;
+  --syntax-sorry-bg:        #4a1f1f;
 }
 
 /* ============================================================
@@ -237,6 +264,35 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1.25rem;
 }
 .article-content pre code { background: none; padding: 0; font-size: 0.875rem; }
+
+/* highlight.js token colours. The container is already styled by the two
+   rules above, so nothing here touches layout — only the spans. */
+.article-content .hljs-comment { color: var(--syntax-comment); font-style: italic; }
+.article-content .hljs-keyword { color: var(--syntax-keyword); }
+.article-content .hljs-operator { color: var(--syntax-operator); }
+.article-content .hljs-type,
+.article-content .hljs-literal { color: var(--syntax-type); }
+.article-content .hljs-built_in { color: var(--syntax-built-in); }
+.article-content .hljs-title,
+.article-content .hljs-title.function_,
+.article-content .hljs-title.class_,
+.article-content .hljs-section { color: var(--syntax-title); font-weight: 600; }
+.article-content .hljs-string,
+.article-content .hljs-char\.escape_,
+.article-content .hljs-regexp { color: var(--syntax-string); }
+.article-content .hljs-number { color: var(--syntax-number); }
+.article-content .hljs-meta,
+.article-content .hljs-punctuation,
+.article-content .hljs-attr,
+.article-content .hljs-variable { color: var(--syntax-meta); }
+.article-content .hljs-subst { color: var(--color-base-content); }
+/* `sorry`/`admit`/`#exit` — a non-standard scope emitted by highlightjs-lean4
+   and styled by no stock theme. Upstream Lean marks these `invalid.illegal`:
+   an incomplete proof should be impossible to skim past. */
+.article-content .hljs-sorry {
+  color: var(--syntax-sorry); background-color: var(--syntax-sorry-bg);
+  padding: 0.05em 0.25em; border-radius: 0.2rem; font-weight: 600;
+}
 .article-content ul, .article-content ol { padding-left: 1.5rem; margin-bottom: 1.25rem; }
 .article-content ul { list-style-type: disc; }
 .article-content ol { list-style-type: decimal; }
