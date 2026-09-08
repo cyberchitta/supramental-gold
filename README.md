@@ -57,15 +57,17 @@ When SG source changes — any primitive, helper, CSS, or asset — release a ne
 # 2. Rebuild the bundle — Tailwind class-set may have shifted.
 bun run build:css
 # 3. Bump version in package.json.
-# 4. Commit (include dist/styles.css, package.json, and source).
-git add -A && git commit -F .commit-msg
+# 4. Commit by pathspec — never `-A`, `-u`, or `commit -a`.
+git commit -F .commit-msg -- dist/styles.css package.json <source paths>
 # 5. Tag and push.
-git tag <vX.Y.Z>
+git tag -a <vX.Y.Z> -m "<vX.Y.Z> — <what changed>"
 git push origin main
 git push origin <vX.Y.Z>
 ```
 
-The `build:css` step is mandatory: a release without a rebuilt bundle ships old utilities at the new tag URL, and consumers see class-name drift.
+The `build:css` step is mandatory: a release without a rebuilt bundle ships old utilities at the new tag URL, and consumers see class-name drift. Rebuild even when you expect no change — a no-op rebuild is the cheapest way to prove the committed bundle is current.
+
+The pathspec in step 4 is not style. `.git/index` is one shared file, so `git add -A` in a parallel session's repo sweeps that session's staged work into your release commit — and a release commit is exactly the one you least want to contain a stranger. The pathspec implies `--only`, which leaves the real index alone.
 
 After publishing, in each consumer:
 
