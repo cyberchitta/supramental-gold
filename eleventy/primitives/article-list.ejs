@@ -4,7 +4,11 @@
 //   articles       — [{ url, title, description, group, publishedAt,
 //                       updatedAt?, readingTime?, writers?, showrunner?,
 //                       external?, thread?, threadPart?, threadCount? }]
-//   featuredImages — { [articleUrl]: { url, thumbnailZoom? } } (optional)
+//   featuredImages — { [articleUrl]: { url, thumbnailZoom?, thumbnailFocus? } } (optional)
+//                    thumbnailZoom  — scale factor, zooms about thumbnailFocus
+//                    thumbnailFocus — CSS <position> ('35% 20%', 'center top');
+//                                     the point of the hero the 80x80 crop keeps
+//                                     centred. Defaults to the image centre.
 //   getAuthorImage — (tag) => avatar url, for the showrunner info-button
 //   groupOrder     — group keys in precedence order (optional)
 //   groupNames     — { [groupKey]: display name } (optional)
@@ -42,6 +46,22 @@ const sortedGroups = GROUP_ORDER.filter(g => grouped[g].length > 0).sort((a, b) 
   return sortKey(grouped[b][0]) - sortKey(grouped[a][0]);
 });
 
+// Thumbnail crop: object-position picks which part of the hero the square keeps,
+// transform-origin pins the zoom to that same point so the two compose instead
+// of fighting. Both default to the image centre — an unannotated hero renders
+// exactly as before.
+function thumbStyle(featImg) {
+  const parts = [];
+  if (featImg.thumbnailFocus) {
+    parts.push(`object-position: ${featImg.thumbnailFocus}`);
+  }
+  if (featImg.thumbnailZoom) {
+    parts.push(`transform: scale(${featImg.thumbnailZoom})`);
+    if (featImg.thumbnailFocus) parts.push(`transform-origin: ${featImg.thumbnailFocus}`);
+  }
+  return parts.join('; ');
+}
+
 function formatBylineDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
@@ -55,7 +75,7 @@ function formatBylineDate(dateStr) {
     <article class="mb-4 pb-2 border-b border-base-300 last:border-b-0 last:mb-0 flow-root">
       <% if (featImg) { %>
       <a href="<%= article.url %>" class="float-left mr-4 mb-2 block w-20 h-20 overflow-hidden rounded" aria-hidden="true" tabindex="-1">
-        <img src="<%= featImg.url %>" alt="" class="w-full h-full object-cover"<% if (featImg.thumbnailZoom) { %> style="transform: scale(<%= featImg.thumbnailZoom %>)"<% } %> loading="lazy" decoding="async" width="80" height="80">
+        <img src="<%= featImg.url %>" alt="" class="w-full h-full object-cover"<% if (thumbStyle(featImg)) { %> style="<%= thumbStyle(featImg) %>"<% } %> loading="lazy" decoding="async" width="80" height="80">
       </a>
       <% } %>
       <% if (article.thread) { %>

@@ -1,6 +1,6 @@
 {
   "name": "@cyberchitta/supramental-gold",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "CyberChitta design system \u2014 tokens, primitives, and Eleventy plugin shared across cyberchitta.cc and its sub-sites.",
   "type": "module",
   "license": "MIT",
