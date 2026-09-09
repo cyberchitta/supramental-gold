@@ -1,10 +1,13 @@
 <% if (featuredImage) {
 const imageMetadata = site.images.find(img => img.url === featuredImage);
+// heroFocus — CSS <position> naming the point the crop keeps. The figure is
+// aspect-square on mobile and aspect-video on desktop, so a square hero loses
+// its top and bottom thirds on desktop only. Defaults to the image centre.
 %>
 <figure class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
   <div class="relative">
     <div class="aspect-square md:aspect-video overflow-hidden">
-      <img src="<%= featuredImage %>" alt="<%= imageCredit ? helpers.stripHtml(imageCredit) : 'Featured image for ' + title %>" class="w-full h-full object-cover" width="<%= imageMetadata.width %>" height="<%= imageMetadata.height %>" fetchpriority="high" decoding="async">
+      <img src="<%= featuredImage %>" alt="<%= imageCredit ? helpers.stripHtml(imageCredit) : 'Featured image for ' + title %>" class="w-full h-full object-cover"<% if (imageMetadata.heroFocus) { %> style="object-position: <%= imageMetadata.heroFocus %>"<% } %> width="<%= imageMetadata.width %>" height="<%= imageMetadata.height %>" fetchpriority="high" decoding="async">
     </div>
     <% if (imageCredit) { %>
     <details class="dropdown dropdown-top dropdown-end absolute bottom-2 right-2">
