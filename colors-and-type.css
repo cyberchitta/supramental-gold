@@ -202,6 +202,17 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
+/* Listing dek — the article-list lives inside .article-content on the main
+   site, so `.article-content p`'s prose rhythm (1.25rem, 1.5rem under 768px)
+   outspecifies the utility class on the dek. That opened 24px above the byline
+   and left 8px below it, so the byline read as belonging to the row beneath.
+   Escalate the same way .thread-eyebrow a does, and keep the dek's own
+   spacing tight so the byline groups with its own entry. */
+.article-list p,
+.article-content .article-list p {
+  margin-bottom: 0.5rem;
+}
+
 /* Byline */
 .byline          { font-size: 0.8rem; line-height: 1.6; }
 .byline-writers  { color: var(--color-gold); font-weight: 500; }

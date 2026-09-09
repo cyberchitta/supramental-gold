@@ -72,7 +72,7 @@ function formatBylineDate(dateStr) {
     <h2 class="group-header"><%= GROUP_NAMES[groupKey] || groupKey %></h2>
     <% grouped[groupKey].forEach(article => { %>
     <% const featImg = featImgs[article.url]; %>
-    <article class="mb-4 pb-2 border-b border-base-300 last:border-b-0 last:mb-0 flow-root">
+    <article class="mb-4 pb-4 border-b border-base-300 last:border-b-0 last:mb-0 flow-root">
       <% if (featImg) { %>
       <a href="<%= article.url %>" class="float-left mr-4 mb-2 block w-20 h-20 overflow-hidden rounded" aria-hidden="true" tabindex="-1">
         <img src="<%= featImg.url %>" alt="" class="w-full h-full object-cover"<% if (thumbStyle(featImg)) { %> style="<%= thumbStyle(featImg) %>"<% } %> loading="lazy" decoding="async" width="80" height="80">
