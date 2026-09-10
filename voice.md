@@ -201,7 +201,7 @@ The shared invariants above hold in every register; the moves below are the genr
 | `tags` | yes | list of lowercase-hyphenated keywords |
 | `xConversationId` | optional | X/Twitter thread ID for the piece |
 | `cta` | optional | multi-line block; varies by shelf (companion-piece links for essays / bts, repo + reply-thread for tools, companion-article for research) |
-| `updates` | optional | list of `{date, note}` entries for dated copy-edit notes; bts and tools use this |
+| `updates` | optional | list of `{date, note}` entries for dated copy-edit notes; any shelf may use it. Each `note` is a few words — a signal that something changed and roughly how much, not a changelog. "Added credits", "A quarter shorter; example dropped.", "Independence of uses is ours, not Rothbard's." Say what changed, never how it was done |
 | `forceUTC` | explorer-only | for time-sensitive visualisations |
 | `excludeFromLlmsTxt` | optional | for interactive pieces that don't render well as text |
 
