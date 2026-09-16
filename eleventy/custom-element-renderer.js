@@ -10,6 +10,7 @@
 // `createRenderer(...)` from here.
 
 import ejs from 'ejs';
+import helpers from './helpers.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -115,6 +116,9 @@ class CustomElementRenderer {
           ...parsedBody,
           ...attributes,
           ...this.context,
+          // Same global Eleventy registers for page templates, so primitives
+          // rendered here can call sgHelpers too (article-list's byline).
+          sgHelpers: helpers,
         },
         { views: [this.includesRoot, sgEleventyDir] }
       );

@@ -38,7 +38,7 @@ public repo.)
 | `colors-and-type.css` | Plain CSS custom properties. Light + dark tokens. |
 | `ui-kit.css` | Component styles + wiki design vocabulary. |
 | `eleventy/index.js` | Eleventy plugin — registers `sgHelpers` global, adds `sgWrapCredits` + `sgRepositionFootnotes` HTML transforms, and amends eleventy's default markdown library with house plugins. Accepts `{ internalDomains: [...] }` option, forwarded to `markdown-library`. |
-| `eleventy/helpers.js` | `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`, `removeFirstHeading`, `getLatestUpdateDate`, `stripPTags`, `foldSections`. |
+| `eleventy/helpers.js` | `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`, `removeFirstHeading`, `getLatestUpdateDate`, `getLatestVersion`, `bylineDates`, `stripPTags`, `foldSections`. |
 | `eleventy/site-url.js` | `resolveSiteUrl(canonicalUrl)` — derives `site.url` for the current build context. Production returns the canonical domain; other Netlify contexts self-reference via `DEPLOY_PRIME_URL`; non-Netlify hosts fall through to the canonical. Exists because `DEPLOY_PRIME_URL` is set in *every* Netlify context and names the branch subdomain, so reading it unconditionally publishes a non-canonical host into `og:url`, the canonical link, the sitemap and the feed (www 2026-05-23 → 2026-09-06; the same line had been copied into sorted-studs). |
 | `eleventy/build-helpers.js` | `readingTimeForFile`, `calculateReadingTime`, `stripNonReadingSections`. Build-time only (imports `fs` + `gray-matter`); not template helpers. Encodes the house rule that Credits and Document History don't count toward reading time. |
 | `eleventy/markdown-library.js` | `createHouseMarkdownLibrary({ internalDomains })`, `applyHousePlugins(md, opts)`. House markdown shape: `html`/`breaks`/`linkify` defaults, `.link` class on `<a>`, markdown-it-anchor, markdown-it-external-links, markdown-it-footnote, and build-time syntax highlighting (highlight.js core + `graphql` + `highlightjs-lean4`, with `lean` aliased to `lean4`); an unlabelled or unknown fence falls through to markdown-it's own escaping. SG plugin auto-amends eleventy's default md via `applyHousePlugins`; consumers with a custom `setLibrary` (e.g. live's `_data/markdown.js`) call `createHouseMarkdownLibrary` directly. |
@@ -151,7 +151,7 @@ Inherits the base-chrome contract (the article shim sets `layout: layouts/base`)
 - Page-level locals — all optional, each block gates on its own:
   - `title` — required (renders the `<h1>`).
   - `writers`, `showrunner` — byline block. Absent → no byline.
-  - `publishedAt` — date line in the byline. `updates` (array of `{date, note?}`) drives the "Updated <date>" appendix and the Update History footer section.
+  - `publishedAt` — date line in the byline. `updates` (array of `{date, note?}`) drives the "Updated <date>" appendix and the Update History footer section. `form` (`fixed` default \| `serial` \| `living`) shapes the byline: serial reads "Latest <date>"; living reads "v<version> · <date>" from the last `updates` entry's `version` and never shows `publishedAt` (plain `publishedAt` until the first versioned revision).
   - `cta` — markdown string; rendered into the bordered footer block.
   - `xConversationId` — adds the "Tell us on X" footer line.
 - Optional consumer-provided helpers (only invoked when their gate fires):

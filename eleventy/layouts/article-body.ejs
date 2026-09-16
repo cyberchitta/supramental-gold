@@ -6,6 +6,7 @@
     Optional locals (gated):
       writers, showrunner   → byline block
       publishedAt           → date line + Updated/reading-time appendices
+      form                  → byline shape: fixed (default) | serial | living
       updates               → update-history footer section (and Updated date)
       xConversationId       → X-conversation footer line
       cta                   → CTA footer block (rendered via helpers.renderMarkdown)
@@ -24,6 +25,7 @@
   const hasByline = articleWriters.length > 0 || articleShowrunner;
   const hasUpdateNotes = articleUpdates && articleUpdates.some((u) => u.note);
   const latestUpdateDate = sgHelpers.getLatestUpdateDate(articleUpdates);
+  const articleForm = typeof form !== 'undefined' ? form : null;
   let readingTime = null;
   if (site.articles && Array.isArray(site.articles)) {
     const current = site.articles.find((a) => a.url === page.url);
@@ -58,8 +60,7 @@
         <% if (articleWriters.length > 0 && articlePublishedAt) { %><br class="sm:hidden"><span class="byline-sep sm:inline hidden"> · </span><% } %>
       <% } %>
       <% if (articlePublishedAt) { %>
-      <time datetime="<%= articlePublishedAt %>" class="byline-meta"><%= sgHelpers.formatDate(articlePublishedAt) %></time>
-      <% if (latestUpdateDate) { %> <span class="byline-sep">·</span> <span class="byline-meta">Updated <%= sgHelpers.formatDate(latestUpdateDate) %></span><% } %>
+      <%- sgHelpers.bylineDates({ form: articleForm, publishedAt: articlePublishedAt, latestAt: latestUpdateDate, version: sgHelpers.getLatestVersion(articleUpdates) }) %>
       <% if (readingTime) { %> <span class="byline-sep">·</span> <span class="byline-meta"><%= readingTime %> min</span><% } %>
       <% } %>
     </div>
@@ -76,7 +77,7 @@
         <% articleUpdates.filter((u) => u.note).reverse().forEach((u) => { %>
         <li class="p-0">
           <span>
-            <time datetime="<%= u.date %>"><%= sgHelpers.formatDate(u.date) %></time>
+            <time datetime="<%= u.date %>"><%= sgHelpers.formatDate(u.date) %></time><% if (articleForm === 'living' && u.version) { %> · v<%= u.version %><% } %>
             — <%- sgHelpers.stripPTags(helpers.renderMarkdown(u.note)) %>
           </span>
         </li>

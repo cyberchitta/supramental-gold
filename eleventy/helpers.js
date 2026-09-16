@@ -64,6 +64,34 @@ const helpers = {
   },
   getLatestUpdateDate: (updates) =>
     !updates || updates.length === 0 ? null : updates[updates.length - 1].date,
+  // A living article's version rides on the updates[] entry that produced it;
+  // the current one is the last entry's. Null before the first revision.
+  getLatestVersion: (updates) =>
+    !updates || updates.length === 0 ? null : (updates[updates.length - 1].version ?? null),
+  // The byline's date run, shared by the article header and the article list
+  // so the two cannot disagree. `form` decides the shape (voice.md § frontmatter):
+  //   fixed (default) — <publishedAt> · Updated <latestAt>
+  //   serial          — <publishedAt> · Latest <latestAt>
+  //   living          — v<version> · <latestAt>; publishedAt never renders once
+  //                     versioned, and a living article with no version yet
+  //                     shows the plain publishedAt.
+  // Unknown forms read as fixed, matching the main-site indexer. A serial's
+  // updates are readings, not corrections; the label stays one word because
+  // on mobile the date run gets its own line.
+  bylineDates: ({ form, publishedAt, latestAt, version }) => {
+    const esc = (v) => String(v).replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+    const time = (d) => `<time datetime="${esc(d)}" class="byline-meta">${esc(helpers.formatDate(d))}</time>`;
+    const sep = ' <span class="byline-sep">·</span> ';
+    if (form === 'living') {
+      return version
+        ? `<span class="byline-meta">v${esc(version)}</span>${sep}${time(latestAt || publishedAt)}`
+        : time(publishedAt);
+    }
+    const label = form === 'serial' ? 'Latest' : 'Updated';
+    return latestAt && latestAt !== publishedAt
+      ? `${time(publishedAt)}${sep}<span class="byline-meta">${label} ${esc(helpers.formatDate(latestAt))}</span>`
+      : time(publishedAt);
+  },
   stripPTags: (html) => {
     if (typeof html !== 'string') return html;
     if (html.startsWith('<p>') && html.endsWith('</p>\n') && !html.slice(3, -5).includes('\n')) {

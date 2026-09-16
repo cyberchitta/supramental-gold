@@ -74,17 +74,6 @@ function thumbStyle(featImg) {
   }
   return parts.join('; ');
 }
-
-function formatBylineDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
-
-// What the trailing date is called depends on what kind of thing the article
-// is. A serial's updates are readings, not corrections — and on mobile the
-// byline's date run gets its own line, so the label stays one word.
-function updateLabel(article) {
-  return article.form === 'serial' ? 'Latest' : 'Updated';
-}
 %>
 <div class="article-list">
   <% sortedGroups.forEach((groupKey, groupIdx) => { %>
@@ -109,7 +98,7 @@ function updateLabel(article) {
       <p class="text-base-content/70 mb-2 text-sm"><%= article.description %></p>
       <% if (!article.external || (article.writers || []).length > 0 || article.showrunner) { %>
       <div class="byline mb-0 clear-left">
-        <span class="byline-writers"><%= (article.writers || []).join(' · ') %></span><% if (article.showrunner) { %><details class="byline-info dropdown dropdown-top dropdown-end"><summary class="btn btn-ghost btn-circle btn-xs list-none text-[var(--color-link)] hover:text-[var(--color-link-hover)]" aria-label="Showrunner"><span class="icon icon-info" style="width:1rem;height:1rem"></span></summary><div class="dropdown-content w-36 px-3 py-2 shadow rounded-box bg-base-200 text-base-content"><div class="whitespace-nowrap"><div class="text-xs text-base-content/70 mb-1">Showrunner</div><div class="flex items-center gap-2"><img src="<%= getAuthorImage(article.showrunner) %>" alt="Showrunner" class="w-6 h-6 rounded-full flex-shrink-0" loading="lazy" decoding="async" width="24" height="24"><span class="text-xs text-[var(--color-gold)]"><%= article.showrunner %></span></div></div></div></details><% } %><% if (article.publishedAt) { %><% if ((article.writers || []).length > 0) { %><br class="sm:hidden"><span class="byline-sep sm:inline hidden"> · </span><% } %><% if (article.form === 'living' && article.version) { %><span class="byline-meta">v<%= article.version %></span> <span class="byline-sep">·</span> <time datetime="<%= article.currentAt || article.publishedAt %>" class="byline-meta"><%= formatBylineDate(article.currentAt || article.publishedAt) %></time><% } else { %><time datetime="<%= article.publishedAt %>" class="byline-meta"><%= formatBylineDate(article.publishedAt) %></time><% if (article.updatedAt && article.updatedAt !== article.publishedAt) { %> <span class="byline-sep">·</span> <span class="byline-meta"><%= updateLabel(article) %> <%= formatBylineDate(article.updatedAt) %></span><% } %><% } %><% if (article.readingTime) { %> <span class="byline-sep">·</span> <span class="byline-meta"><%= article.readingTime %> min</span><% } %><% } %>
+        <span class="byline-writers"><%= (article.writers || []).join(' · ') %></span><% if (article.showrunner) { %><details class="byline-info dropdown dropdown-top dropdown-end"><summary class="btn btn-ghost btn-circle btn-xs list-none text-[var(--color-link)] hover:text-[var(--color-link-hover)]" aria-label="Showrunner"><span class="icon icon-info" style="width:1rem;height:1rem"></span></summary><div class="dropdown-content w-36 px-3 py-2 shadow rounded-box bg-base-200 text-base-content"><div class="whitespace-nowrap"><div class="text-xs text-base-content/70 mb-1">Showrunner</div><div class="flex items-center gap-2"><img src="<%= getAuthorImage(article.showrunner) %>" alt="Showrunner" class="w-6 h-6 rounded-full flex-shrink-0" loading="lazy" decoding="async" width="24" height="24"><span class="text-xs text-[var(--color-gold)]"><%= article.showrunner %></span></div></div></div></details><% } %><% if (article.publishedAt) { %><% if ((article.writers || []).length > 0) { %><br class="sm:hidden"><span class="byline-sep sm:inline hidden"> · </span><% } %><%- sgHelpers.bylineDates({ form: article.form, publishedAt: article.publishedAt, latestAt: article.updatedAt, version: article.version }) %><% if (article.readingTime) { %> <span class="byline-sep">·</span> <span class="byline-meta"><%= article.readingTime %> min</span><% } %><% } %>
       </div>
       <% } %>
     </article>
