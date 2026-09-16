@@ -2,8 +2,14 @@
 // Grouped article list — the production listing surface of www.cyberchitta.cc.
 // Locals:
 //   articles       — [{ url, title, description, group, publishedAt,
-//                       updatedAt?, readingTime?, writers?, showrunner?,
-//                       external?, thread?, threadPart?, threadCount? }]
+//                       updatedAt?, currentAt?, form?, version?, readingTime?,
+//                       writers?, showrunner?, external?, thread?, threadPart?,
+//                       threadCount? }]
+//                    form — 'fixed' (default) | 'serial' | 'living'; see
+//                    the sort-key and byline notes below. `version` is a
+//                    living article's current version, carried on the
+//                    updates[] entry that produced it; absent until its
+//                    first revision, when the byline is a plain date.
 //   featuredImages — { [articleUrl]: { url, thumbnailZoom?, thumbnailFocus? } } (optional)
 //                    thumbnailZoom  — scale factor, zooms about thumbnailFocus
 //                    thumbnailFocus — CSS <position> ('35% 20%', 'center top');
@@ -34,14 +40,21 @@ articles.forEach(article => {
   grouped[g].push(article);
 });
 
-// Sort articles within each group: reverse-chronological by publishedAt.
-// External entries have no publishedAt — fall back to 0 so they sort last.
-const sortKey = (a) => (a.publishedAt ? new Date(a.publishedAt).valueOf() : 0);
+// Sort articles within each group: reverse-chronological by `currentAt` — the
+// date the article last became worth opening. For a `fixed` article that is
+// publishedAt (errata must not float an old essay); for a `serial` or a
+// `living` document it is the newest update, which is the whole point of both.
+// The indexer derives it; fall back to publishedAt for entries baked before it
+// existed, and to 0 for entries with no date at all so they sort last.
+const sortKey = (a) => {
+  const d = a.currentAt || a.publishedAt;
+  return d ? new Date(d).valueOf() : 0;
+};
 GROUP_ORDER.forEach(g => {
   grouped[g].sort((a, b) => sortKey(b) - sortKey(a));
 });
 
-// Sort groups by most recent publishedAt within each group
+// Sort groups by the most recent article within each group
 const sortedGroups = GROUP_ORDER.filter(g => grouped[g].length > 0).sort((a, b) => {
   return sortKey(grouped[b][0]) - sortKey(grouped[a][0]);
 });
@@ -64,6 +77,13 @@ function thumbStyle(featImg) {
 
 function formatBylineDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// What the trailing date is called depends on what kind of thing the article
+// is. A serial's updates are readings, not corrections — and on mobile the
+// byline's date run gets its own line, so the label stays one word.
+function updateLabel(article) {
+  return article.form === 'serial' ? 'Latest' : 'Updated';
 }
 %>
 <div class="article-list">
@@ -89,7 +109,7 @@ function formatBylineDate(dateStr) {
       <p class="text-base-content/70 mb-2 text-sm"><%= article.description %></p>
       <% if (!article.external || (article.writers || []).length > 0 || article.showrunner) { %>
       <div class="byline mb-0 clear-left">
-        <span class="byline-writers"><%= (article.writers || []).join(' · ') %></span><% if (article.showrunner) { %><details class="byline-info dropdown dropdown-top dropdown-end"><summary class="btn btn-ghost btn-circle btn-xs list-none text-[var(--color-link)] hover:text-[var(--color-link-hover)]" aria-label="Showrunner"><span class="icon icon-info" style="width:1rem;height:1rem"></span></summary><div class="dropdown-content w-36 px-3 py-2 shadow rounded-box bg-base-200 text-base-content"><div class="whitespace-nowrap"><div class="text-xs text-base-content/70 mb-1">Showrunner</div><div class="flex items-center gap-2"><img src="<%= getAuthorImage(article.showrunner) %>" alt="Showrunner" class="w-6 h-6 rounded-full flex-shrink-0" loading="lazy" decoding="async" width="24" height="24"><span class="text-xs text-[var(--color-gold)]"><%= article.showrunner %></span></div></div></div></details><% } %><% if (article.publishedAt) { %><% if ((article.writers || []).length > 0) { %><br class="sm:hidden"><span class="byline-sep sm:inline hidden"> · </span><% } %><time datetime="<%= article.publishedAt %>" class="byline-meta"><%= formatBylineDate(article.publishedAt) %></time><% if (article.updatedAt && article.updatedAt !== article.publishedAt) { %> <span class="byline-sep">·</span> <span class="byline-meta">Updated <%= formatBylineDate(article.updatedAt) %></span><% } %><% if (article.readingTime) { %> <span class="byline-sep">·</span> <span class="byline-meta"><%= article.readingTime %> min</span><% } %><% } %>
+        <span class="byline-writers"><%= (article.writers || []).join(' · ') %></span><% if (article.showrunner) { %><details class="byline-info dropdown dropdown-top dropdown-end"><summary class="btn btn-ghost btn-circle btn-xs list-none text-[var(--color-link)] hover:text-[var(--color-link-hover)]" aria-label="Showrunner"><span class="icon icon-info" style="width:1rem;height:1rem"></span></summary><div class="dropdown-content w-36 px-3 py-2 shadow rounded-box bg-base-200 text-base-content"><div class="whitespace-nowrap"><div class="text-xs text-base-content/70 mb-1">Showrunner</div><div class="flex items-center gap-2"><img src="<%= getAuthorImage(article.showrunner) %>" alt="Showrunner" class="w-6 h-6 rounded-full flex-shrink-0" loading="lazy" decoding="async" width="24" height="24"><span class="text-xs text-[var(--color-gold)]"><%= article.showrunner %></span></div></div></div></details><% } %><% if (article.publishedAt) { %><% if ((article.writers || []).length > 0) { %><br class="sm:hidden"><span class="byline-sep sm:inline hidden"> · </span><% } %><% if (article.form === 'living' && article.version) { %><span class="byline-meta">v<%= article.version %></span> <span class="byline-sep">·</span> <time datetime="<%= article.currentAt || article.publishedAt %>" class="byline-meta"><%= formatBylineDate(article.currentAt || article.publishedAt) %></time><% } else { %><time datetime="<%= article.publishedAt %>" class="byline-meta"><%= formatBylineDate(article.publishedAt) %></time><% if (article.updatedAt && article.updatedAt !== article.publishedAt) { %> <span class="byline-sep">·</span> <span class="byline-meta"><%= updateLabel(article) %> <%= formatBylineDate(article.updatedAt) %></span><% } %><% } %><% if (article.readingTime) { %> <span class="byline-sep">·</span> <span class="byline-meta"><%= article.readingTime %> min</span><% } %><% } %>
       </div>
       <% } %>
     </article>

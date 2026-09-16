@@ -194,14 +194,15 @@ The shared invariants above hold in every register; the moves below are the genr
 | `layout` | yes | `article` default; specialised layouts: `vibe-gain`, `land-cover` |
 | `title` | yes | Title Case; essays use two-part with colon |
 | `ogDescription` | yes | dek; one to two declarative sentences setting tension |
-| `publishedAt` | yes | ISO date |
+| `publishedAt` | yes | ISO date. Immutable — it is provenance, not recency. Never bump it to resurface a piece; that is what `form` is for |
+| `form` | optional | `fixed` (default) \| `serial` \| `living` — what kind of thing the article is, which decides whether an update counts as recency. `fixed`: a finished piece whose `updates` are errata; it never resurfaces. `serial`: readings accrete and the original stays true (private-canary); byline *Latest <date>*. `living`: rewritten whole, prior versions superseded (sorted-studs); byline *v0.0.2 · <date>*, and `publishedAt` never renders |
 | `group` | yes | the shelf: `essays` \| `bts` \| `research` \| `tools` \| `practice` — see § Shelf and register; it does not fix the register |
 | `showrunner` | yes | `'@restlessronin'` |
 | `writers` | yes | list of `@handles` (one or more) |
 | `tags` | yes | list of lowercase-hyphenated keywords |
 | `xConversationId` | optional | X/Twitter thread ID for the piece |
 | `cta` | optional | multi-line block; varies by shelf (companion-piece links for essays / bts, repo + reply-thread for tools, companion-article for research) |
-| `updates` | optional | list of `{date, note}` entries for dated copy-edit notes; any shelf may use it. Each `note` is a few words — a signal that something changed and roughly how much, not a changelog. "Added credits", "A quarter shorter; example dropped.", "Independence of uses is ours, not Rothbard's." Say what changed, never how it was done |
+| `updates` | optional | list of `{date, note}` entries for dated copy-edit notes; any shelf may use it. On a `living` article each entry is a revision and carries a `version:` — `{date, version, note}`. The version rides on the entry so it cannot drift from its date; the byline shows the newest one, rendered verbatim, so any scheme works (`2`, `0.0.2`). Before a living article's first revision there is no version and the byline is a plain date. Each `note` is a few words — a signal that something changed and roughly how much, not a changelog. "Added credits", "A quarter shorter; example dropped.", "Independence of uses is ours, not Rothbard's." Say what changed, never how it was done |
 | `forceUTC` | explorer-only | for time-sensitive visualisations |
 | `excludeFromLlmsTxt` | optional | for interactive pieces that don't render well as text |
 
