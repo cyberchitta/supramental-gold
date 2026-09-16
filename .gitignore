@@ -7,9 +7,6 @@ node_modules/
 _site/
 .eleventy-cache/
 
-# Local commit-message drafts
-.commit-msg
-
 # Working notes — the private working-notes repo, symlinked in.
 # No trailing slash: this is a symlink, and git treats a symlink as a file.
 _notes

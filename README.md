@@ -57,8 +57,12 @@ When SG source changes — any primitive, helper, CSS, or asset — release a ne
 # 2. Rebuild the bundle — Tailwind class-set may have shifted.
 bun run build:css
 # 3. Bump version in package.json.
-# 4. Commit by pathspec — never `-A`, `-u`, or `commit -a`.
-git commit -F .commit-msg -- dist/styles.css package.json <source paths>
+# 4. Commit by pathspec, message on stdin — never `-A`, `-u`, or `commit -a`.
+git commit -F - -- dist/styles.css package.json <source paths> <<'EOF'
+<type>(<scope>): <subject>; v<X.Y.Z>
+
+Co-authored-by: <model name> <<model-slug>@<tool>>
+EOF
 # 5. Tag and push.
 git tag -a <vX.Y.Z> -m "<vX.Y.Z> — <what changed>"
 git push origin main
@@ -66,6 +70,12 @@ git push origin <vX.Y.Z>
 ```
 
 The `build:css` step is mandatory: a release without a rebuilt bundle ships old utilities at the new tag URL, and consumers see class-name drift. Rebuild even when you expect no change — a no-op rebuild is the cheapest way to prove the committed bundle is current.
+
+The heredoc in step 4 is not style either. A shared `.commit-msg` file, which this
+workflow used to name, leaves stale drafts lying around as decoys and lets a parallel
+session redraft the message between the moment you review it and the moment it is
+committed; on `annam` that cost a force-push and a prod reset. A message on stdin
+cannot be clobbered between draft and commit.
 
 The pathspec in step 4 is not style. `.git/index` is one shared file, so `git add -A` in a parallel session's repo sweeps that session's staged work into your release commit — and a release commit is exactly the one you least want to contain a stranger. The pathspec implies `--only`, which leaves the real index alone.
 
