@@ -145,6 +145,7 @@ The shared invariants above hold in every register; the moves below are the genr
 - **Opener:** short, direct, claim-shaped. *"Vibe Cading is a thing now."* *"36 alternatives to LLM Context."*
 - **Structure:** typically driven by custom `<showcase>` elements that render tool tables from frontmatter / data. Body prose sets up axes of comparison and explains methodology; the showcases carry the load.
 - **CTA frontmatter:** points to an X/Twitter announcement thread for reader contribution. *"Know of a tool we missed? Reply to the [announcement thread]."*
+- **Form:** `serial`. Each re-survey is a dated `updates` entry whose note says what was added and what went inactive, like private-canary's readings.
 
 ### Prose practice (default for `practice`; prose pieces on `research`)
 

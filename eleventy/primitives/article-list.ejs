@@ -20,8 +20,8 @@
 //   getAuthorImage — (tag) => avatar url, for the showrunner info-button
 //   groupOrder     — group keys in precedence order (optional)
 //   groupNames     — { [groupKey]: display name } (optional)
-//   shelfCap       — rows shown per shelf before the rest fold into an
-//                    "All k" expander, chosen thread-first (optional;
+//   shelfCap       — rows shown per shelf before the rest fold into a
+//                    "k more" expander, chosen thread-first (optional;
 //                    default: no cap)
 //   threadHref     — where a thread eyebrow links (optional)
 const GROUP_ORDER = (typeof groupOrder !== 'undefined' && groupOrder) ||
@@ -39,7 +39,7 @@ const GROUP_NAMES = (typeof groupNames !== 'undefined' && groupNames) || {
 // put it above the latest essay.
 const LAST_GROUPS = ['reference'];
 const SHELF_CAP = (typeof shelfCap !== 'undefined' && shelfCap) || Infinity;
-const THREAD_HREF = (typeof threadHref !== 'undefined' && threadHref) || '/colophon.html#the-threads';
+const THREAD_HREF = (typeof threadHref !== 'undefined' && threadHref) || '/shala.html#the-threads';
 const featImgs = (typeof featuredImages !== 'undefined' && featuredImages) || {};
 
 // Group articles
@@ -153,7 +153,7 @@ function thumbStyle(featImg) {
     <%_ visible.forEach(renderRow) _%>
     <%_ if (folded.length) { _%>
     <details>
-      <summary class="cursor-pointer text-sm text-[var(--color-link)] hover:text-[var(--color-link-hover)]">All <%= grouped[groupKey].length %> <%= GROUP_NAMES[groupKey] || groupKey %> pieces</summary>
+      <summary class="cursor-pointer text-sm text-[var(--color-link)] hover:text-[var(--color-link-hover)]"><%= folded.length %> more <%= GROUP_NAMES[groupKey] || groupKey %> <%= folded.length === 1 ? 'piece' : 'pieces' %></summary>
       <div class="mt-4">
       <% folded.forEach(renderRow) %>
       </div>
