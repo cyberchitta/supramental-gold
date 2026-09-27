@@ -8,7 +8,7 @@ For **editing an existing CyberChitta draft**: rewriting, tightening, clarifying
 
 ## Read these first
 
-1. **`../../voice.md`** — house voice, attribution, shelf vs register, the registers (essay / bts / tools / prose-practice / explorer / wiki), the cut patterns, frontmatter conventions. **Required.** Every pass below tests against it.
+1. **`../../voice.md`** — house voice, attribution, shelf vs register, the registers (essay / bts / reference catalog / prose-practice / explorer / wiki), the cut patterns, frontmatter conventions. **Required.** Every pass below tests against it.
 2. **`references/mode-selection.md`** — the assembly-vs-compression heuristic. Read at the start of a run if mode isn't obvious from the user's request.
 3. **`references/pass-checklists.md`** — concrete per-pass checklist. Load when you actually reach the passes, not at skill entry.
 
@@ -30,7 +30,7 @@ Never skip a pass. Never run a later pass before an earlier one — a clarity re
 
 1. **Structural** — Reorder sections for argument flow. Eliminate duplicated ideas. One job per section. Section openers and closers carry the rhythm voice.md describes for the piece's register (rhetorical-question closers for essays, time-and-count for bts, short declarative reframes for prose practice, etc.).
 2. **Epistemic** — Identify unsupported claims. Add citations, soften certainty, or remove. Verify quote attribution. **Flag uncertain factual claims explicitly; never silently rewrite them as facts.**
-3. **Clarity + concision** — Apply voice.md's cut list (*"It's worth noting that…"*, *"This is important because…"*, soft qualifiers, restatements). Branch on the register for its moves: aphoristic short closers for essays, named-actor narration for bts, punchy claim openers for tools, named actors and artifacts as subjects for prose practice, "What to look for" captions for explorers. The register is the shelf's default unless the HANDOFF records otherwise — don't revert a recorded deviation.
+3. **Clarity + concision** — Apply voice.md's cut list (*"It's worth noting that…"*, *"This is important because…"*, soft qualifiers, restatements). Branch on the register for its moves: aphoristic short closers for essays, named-actor narration for bts, punchy claim openers for reference catalogs, named actors and artifacts as subjects for prose practice, "What to look for" captions for explorers. The register is the shelf's default unless the HANDOFF records otherwise — don't revert a recorded deviation.
 4. **Linking + packaging** — Validate internal links, citations, CTAs. Tighten title / `ogDescription` / closing alignment. Check frontmatter against the table in voice.md.
 5. **Micro copyedit** — Grammar, diction, punctuation. Em-dash discipline (real `—`, not `--` or `-`). Lowercase `@handle` attribution. Title Case for titles, Sentence case for section subheads. Final terminology sweep.
 

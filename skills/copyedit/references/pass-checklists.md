@@ -18,7 +18,7 @@ The voice rules these passes enforce live in `../../voice.md`. Surface-specific 
 - [ ] Section openers and closers carry the rhythm voice.md describes for the relevant surface:
   - **essay** — rhetorical-question or aphoristic short-sentence closer.
   - **bts** — time-and-count closer ("Five commits, four days.").
-  - **tools** — short claim-shaped opener; closers point outward (CTA, repo, thread).
+  - **reference catalog** — short claim-shaped opener; closers point outward (CTA, thread).
   - **research** — "What to look for" caption on each chart / interactive section.
 - [ ] The article's `group:` matches what the structure is actually doing. If a piece tagged `essays` reads like `bts`, flag the mismatch.
 
@@ -81,11 +81,11 @@ The voice rules these passes enforce live in `../../voice.md`. Surface-specific 
 - [ ] Companion-piece cross-linking present if a partner article exists.
 
 **`group: reference`** (catalogs)
-- [ ] First-person plural ("our take", "we chose") when CyberChitta is the subject.
+- [ ] First-person plural ("our take", "we chose") for the catalog's own judgments; our own tool, if any, is one entry, not the centre.
 - [ ] Direct "you" address for tool-use guidance.
 - [ ] Opener is short, claim-shaped, punchy.
 - [ ] Body prose sets up comparison axes; `<showcase>` carries the data.
-- [ ] CTA points to repo + announcement thread for reader contribution.
+- [ ] CTA points to the announcement thread for reader contribution.
 
 **`group: research` / `practice`**
 - [ ] First-person plural for prior-work reference; imperative second person for interactions.
@@ -109,7 +109,7 @@ The voice rules these passes enforce live in `../../voice.md`. Surface-specific 
 - [ ] Frontmatter complete against voice.md's table: `layout`, `title`, `ogDescription`, `publishedAt`, `group`, `showrunner`, `writers`, `tags`. Optional fields (`cta`, `updates`, `xConversationId`) included if relevant.
 - [ ] `writers` list reflects who actually drafted. `showrunner` is `@restlessronin`.
 - [ ] `tags` are lowercase-hyphenated.
-- [ ] CTA block present where the surface convention calls for one (companion-piece links for essays / bts, repo + thread for tools, companion-article for research).
+- [ ] CTA block present where the surface convention calls for one (companion-piece links for essays / bts, announcement thread for reference catalogs, companion-article for research).
 - [ ] Credits section shape matches voice.md: named attribution for what each contributor did, with the workflow narrated where it's multi-stage.
 
 ---

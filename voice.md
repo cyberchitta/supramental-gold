@@ -93,8 +93,8 @@ Two decisions, one field each. They correlate; they are not the same decision.
 |---|---|---|
 | `essays` | an argument | supramental-ai, privacy-coins-ai-money |
 | `research` | a finding — a method applied, results reported | os-vibe-gains, llm-compare-shopify-api, private-canary |
-| `practice` | a method in use — the doing is the payload | auro-darshan, ai-derisks-niche |
-| `bts` | the room — how the publication itself works | writers-room, supramental-gold |
+| `practice` | a project and what it showed — the project is the subject | auro-darshan, ai-derisks-niche, sorted-studs |
+| `bts` | the room at work — how it works with models, on any project | writers-room, supramental-gold, full-context-magic |
 | `reference` | a place to come back to — consulted rather than read once, and kept current | lc-alternatives, cad-llm-tools; the ch-ai-tanya and apodictic sub-sites |
 
 A finding reached by formal proof shelves as research alongside one reached by counting commits; the shelf doesn't care whether the piece is quantitative, interactive, or prose.
@@ -137,18 +137,18 @@ The shared invariants above hold in every register; the moves below are the genr
 
 ### Reference catalog (default for `reference`)
 
-**Job:** survey a landscape of tools, place CyberChitta's own work within it, point readers at what's worth using — and stay current, since the reader comes back. Corpus sub-sites on the same shelf (ch-ai-tanya, apodictic) keep their own registers; this one governs the catalogs.
+**Job:** survey a landscape of tools and point readers at what's worth using — and stay current, since the reader comes back. Corpus sub-sites on the same shelf (ch-ai-tanya, apodictic) keep their own registers; this one governs the catalogs. Our own tool, if there is one, is one entry in the landscape, not its centre.
 
-- **Voice:** first-person plural ("our take", "we chose") when CyberChitta itself is the subject. Addresses **"you"** directly for tool-use guidance — *"In most, you do. You look at the render, describe what's wrong, the LLM tries again."*
+- **Voice:** first-person plural ("our take", "we chose") for the catalog's own judgments. Addresses **"you"** directly for tool-use guidance — *"In most, you do. You look at the render, describe what's wrong, the LLM tries again."*
 - **Tone:** punchy, confident, list-friendly.
 - **Density:** relaxed. Catalogs address newcomers to the ecosystem — concepts can be unpacked, problems explained, methodology spelled out. Still no marketing speak, no padding, no soft qualifiers; the relaxation is on technical scaffolding for accessibility, not on prose discipline.
 - **Opener:** short, direct, claim-shaped. *"Vibe Cading is a thing now."* *"36 alternatives to LLM Context."*
 - **Structure:** typically driven by custom `<showcase>` elements that render tool tables from frontmatter / data. Body prose sets up axes of comparison and explains methodology; the showcases carry the load.
-- **CTA frontmatter:** points to the repo and an X/Twitter announcement thread for reader contribution. *"Try [CAD Khana]. Know of other tools? Reply to the [announcement thread]."*
+- **CTA frontmatter:** points to an X/Twitter announcement thread for reader contribution. *"Know of a tool we missed? Reply to the [announcement thread]."*
 
 ### Prose practice (default for `practice`; prose pieces on `research`)
 
-**Job:** show a method in use, or a finding it produced, through what was actually done — named actors, named artifacts, dated steps — with the figures carrying the evidence. Derived from the five shipped `practice` pieces (auro-darshan, geo-darshan-skill, ai-derisks-niche, wt-visualizations, av-land-use-from-AEF).
+**Job:** show a project and what it showed, or a finding it produced, through what was actually done — named actors, named artifacts, dated steps — with the figures carrying the evidence. Derived from the five shipped `practice` pieces (auro-darshan, geo-darshan-skill, ai-derisks-niche, wt-visualizations, av-land-use-from-AEF).
 
 - **Voice:** third-person declarative. Subjects are named actors (`@restlessronin`, `@claude-opus-4.7`, "the agents", "the readers") and named artifacts (a file, a cluster ID, a date) doing verbs — not concept-nouns arriving or sitting. The showrunner appears in body prose by handle or role, never as "I"; no "we" except for prior-work reference, no "you".
 - **Tone:** matter-of-fact, exact, with insider specificity as texture — artifacts can be named even when the reader can't fully grok them, so long as a descriptive tail lets them see the shape.
@@ -201,7 +201,7 @@ The shared invariants above hold in every register; the moves below are the genr
 | `writers` | yes | list of `@handles` (one or more) |
 | `tags` | yes | list of lowercase-hyphenated keywords |
 | `xConversationId` | optional | X/Twitter thread ID for the piece |
-| `cta` | optional | multi-line block; varies by shelf (companion-piece links for essays / bts, repo + reply-thread for reference catalogs, companion-article for research) |
+| `cta` | optional | multi-line block; varies by shelf (companion-piece links for essays / bts, reply-thread for reference catalogs, companion-article for research) |
 | `updates` | optional | list of `{date, note}` entries for dated copy-edit notes; any shelf may use it. On a `living` article each entry is a revision and carries a `version:` — `{date, version, note}`. The version rides on the entry so it cannot drift from its date; the byline shows the newest one, rendered verbatim, so any scheme works (`2`, `0.0.2`). Before a living article's first revision there is no version and the byline is a plain date. Each `note` is a few words — a signal that something changed and roughly how much, not a changelog. "Added credits", "A quarter shorter; example dropped.", "Independence of uses is ours, not Rothbard's." Say what changed, never how it was done |
 | `forceUTC` | explorer-only | for time-sensitive visualisations |
 | `excludeFromLlmsTxt` | optional | for interactive pieces that don't render well as text |

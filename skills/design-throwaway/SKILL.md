@@ -55,7 +55,7 @@ Ask the user:
 
 1. What artifact? (slide, social card, OG image, single-page mock, deck, demo)
 2. Light, dark, or both?
-3. Does this need to include sample copy? If yes, which register (essay / bts / tools / prose-practice / explorer) so I can pick the right voice from `voice.md`?
+3. Does this need to include sample copy? If yes, which register (essay / bts / reference catalog / prose-practice / explorer) so I can pick the right voice from `voice.md`?
 4. Pixel-fidelity matters or rough-pass okay?
 
 Then output HTML / SVG / EJS / JSX as appropriate — never inventing new tokens, never breaking the anti-patterns in `visual.md § What to avoid`.

@@ -1,6 +1,6 @@
 ---
 name: draft-article
-description: Use this skill to produce a first complete CyberChitta draft from an outline, brief, or evidence pile. Cold start to assembled first-pass draft with frontmatter, sections, and Credits scaffold. Shelf-aware (group:) and register-aware (essay / bts / tools / prose-practice / explorer) — the two are decided separately. Hands off to copyedit once a complete draft exists.
+description: Use this skill to produce a first complete CyberChitta draft from an outline, brief, or evidence pile. Cold start to assembled first-pass draft with frontmatter, sections, and Credits scaffold. Shelf-aware (group:) and register-aware (essay / bts / reference catalog / prose-practice / explorer) — the two are decided separately. Hands off to copyedit once a complete draft exists.
 user-invocable: true
 ---
 
@@ -8,7 +8,7 @@ For **cold-start drafting** of a new CyberChitta article. Input: an outline, a b
 
 ## Read these first
 
-1. **`../../voice.md`** — required. Shelf and register (why they are separate decisions), the registers (essay / bts / tools / prose-practice / explorer), shared invariants, attribution conventions, frontmatter table, and what to cut. Drafting without reading voice.md will produce text that fails copyedit pass 3.
+1. **`../../voice.md`** — required. Shelf and register (why they are separate decisions), the registers (essay / bts / reference catalog / prose-practice / explorer), shared invariants, attribution conventions, frontmatter table, and what to cut. Drafting without reading voice.md will produce text that fails copyedit pass 3.
 2. **`../../visual.md`** — only if the draft will include visual elements (showcases, charts, primitives) where layout decisions inform prose framing. Otherwise skip.
 
 The Credits and frontmatter shapes are in voice.md. Don't reinvent them.
@@ -29,14 +29,14 @@ The goal is a **complete** first draft, not a polished one. Complete means: ever
 
 Two decisions, in order. Both are in voice.md § "Shelf and register" and § "Registers".
 
-**Shelf (`group:`)** — what the reader carries away: an argument (`essays`), a finding (`research`), a method in use (`practice`), the room (`bts`), a place to come back to (`reference`). Not the piece's form: a prose piece whose payload is a finding is `research`.
+**Shelf (`group:`)** — what the reader carries away: an argument (`essays`), a finding (`research`), a project and what it showed (`practice`), the room at work (`bts`), a place to come back to (`reference`). Not the piece's form: a prose piece whose payload is a finding is `research`.
 
 **Register** — the moves, chosen by the piece's form. The shelf names a default; take the default unless the form says otherwise:
 
 - **essay** — argue by rhetoric. Third-person declarative. Rhetorical-question closers. Two-part title with colon. Default for `essays`.
 - **bts** — narrate the shala's own work. Named `@handles` as actors. Time-and-count closers. Companion link. Default for `bts`.
 - **reference catalog** — survey a landscape and keep it current. First-person plural for us, "you" for the reader. Showcase-driven. Default for `reference`.
-- **prose practice** — show the method in use through named actors and artifacts; figures carry the evidence; short declarative closers. Default for `practice`, and for a prose piece on `research`.
+- **prose practice** — show the project and what it showed through named actors and artifacts; figures carry the evidence; short declarative closers. Default for `practice`, and for a prose piece on `research`.
 - **explorer** — quantitative or interactive on a specialised layout. Imperative second person for interactions; "What to look for" captions only where one chart type repeats. For `research` or `practice` pieces built around an interactive.
 
 If either decision isn't obvious from the input, ask before drafting. Drafting in the wrong register wastes a full run. When the register is not the shelf's default, say so in the HANDOFF with the reason.
@@ -51,7 +51,7 @@ layout: article  # or vibe-gain / land-cover for explorer pieces
 title: ...
 ogDescription: ...
 publishedAt: <today, ISO>
-group: <essays | bts | tools | research | practice>
+group: <essays | bts | research | practice | reference>
 showrunner: '@restlessronin'
 writers:
   - '@<model-handle>'  # the writer(s) drafting this piece
@@ -78,12 +78,12 @@ For each section, note:
 
 Run section-by-section. Don't try to draft the whole article in one pass. For each section:
 
-1. Write the opener in the chosen register (punchy claim for tools, declarative setup for essays, named-actor lead for bts, a concrete count for prose practice, etc.).
+1. Write the opener in the chosen register (punchy claim for a reference catalog, declarative setup for essays, named-actor lead for bts, a concrete count for prose practice, etc.).
 2. Body — deliver the claim, ground it in evidence with inline links.
 3. Closer in the chosen register:
    - **essay** — short rhetorical question, italicised or bare, that turns the section's finding into a koan.
    - **bts** — terse fact summary ("Five commits, four days.").
-   - **tools** — pivot to the next axis or the showcase that carries the data.
+   - **reference catalog** — pivot to the next axis or the showcase that carries the data.
    - **prose practice** — one short declarative reframe, not a question.
    - **explorer** — "What to look for" caption only where the same chart type repeats.
 
