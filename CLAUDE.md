@@ -54,7 +54,7 @@ public repo.)
 | `eleventy/layouts/article-body.ejs` | Shared article shell — `<article>` with byline header, content section, and footer (update history, X conversation link, CTA). Consumer's `_includes/layouts/article.ejs` is a thin shim: sets `layout: layouts/base` + `ogType: article`, then `<%- include('layouts/article-body') %>`. Byline and footer blocks gate on optional locals so sub-sites can opt out. |
 | `eleventy/partials/site-meta.ejs`, `site-fonts.ejs`, `theme-init.ejs`, `featured-image-figure.ejs` | Lifted from the main site's `base.ejs` decomposition. Consumed by `layouts/base-chrome`. Override by placing the same path in the consumer's `_includes/`. |
 | `eleventy/partials/site-analytics.ejs`, `site-scripts.ejs` | Empty defaults. Slots shadowed by the consumer; main site uses them for GA and the CSR template-manager wiring. |
-| `assets/cc-260508.{svg,png}` | Canonical CC mark. Plain blobs (not LFS). Served via jsDelivr. |
+| `assets/cc-260508.{svg,png}` | Canonical CC mark. Plain blobs, never LFS: jsDelivr serves an LFS pointer as the response body, under an image content-type (jsdelivr/jsdelivr#18235). Served via jsDelivr. |
 | `assets/cc-250815-v3.svg` | Source-of-mark working file; not used at runtime. |
 | `assets/logo.svg` | CSS-themable mark — picks up palette custom props from the host page. Used by `examples/index.html`; not served via jsDelivr. |
 | `examples/index.html` | Static rendered preview, not for production. |
