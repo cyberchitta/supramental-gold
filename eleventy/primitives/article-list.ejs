@@ -11,7 +11,7 @@
 //                    updates[] entry that produced it; absent until its
 //                    first revision, when the byline is a plain date.
 //                    `pinned` — keeps the piece among its shelf's visible rows
-//                    under a cap even when it is older; see the cap note below.
+//                    under a cap even when it would fold; see the cap note below.
 //   featuredImages — { [articleUrl]: { url, thumbnailZoom?, thumbnailFocus? } } (optional)
 //                    thumbnailZoom  — scale factor, zooms about thumbnailFocus
 //                    thumbnailFocus — CSS <position> ('35% 20%', 'center top');
@@ -21,7 +21,8 @@
 //   groupOrder     — group keys in precedence order (optional)
 //   groupNames     — { [groupKey]: display name } (optional)
 //   shelfCap       — rows shown per shelf before the rest fold into an
-//                    "All k" expander (optional; default: no cap)
+//                    "All k" expander, chosen thread-first (optional;
+//                    default: no cap)
 //   threadHref     — where a thread eyebrow links (optional)
 const GROUP_ORDER = (typeof groupOrder !== 'undefined' && groupOrder) ||
   ['essays', 'research', 'tools', 'practice', 'bts', 'reference'];
@@ -74,18 +75,34 @@ const sortedGroups = [
   ...LAST_GROUPS.filter(g => nonEmpty.includes(g)),
 ];
 
-// Cap: the SHELF_CAP most recent pieces show, the rest fold into a <details>
-// expander. A pinned piece takes the last visible slot when it would otherwise
-// fold, and keeps its date position among the visible rows — the pin decides
+// Cap: a shelf over SHELF_CAP shows SHELF_CAP pieces and folds the rest into a
+// <details> expander. Selection is thread-first, so one busy thread cannot fill
+// the shelf: the newest piece of each distinct thread (an unthreaded piece is
+// its own thread), then the remaining slots by recency. A pinned piece takes a
+// slot when it would otherwise fold, displacing the lowest-priority pick — the
+// last recency fill, else the oldest thread-first pick. Whatever selected them,
+// visible rows render in date order like the folded ones; selection decides
 // whether a piece shows, not where. One pin per shelf.
 function splitShelf(items) {
   const pins = items.filter(a => a.pinned);
   if (pins.length > 1) {
     throw new Error(`article-list: more than one pinned piece in shelf "${items[0].group}": ${pins.map(a => a.url).join(', ')}`);
   }
-  const visible = items.slice(0, SHELF_CAP);
-  if (pins.length && !visible.includes(pins[0])) visible[SHELF_CAP - 1] = pins[0];
-  return { visible, folded: items.filter(a => !visible.includes(a)) };
+  if (items.length <= SHELF_CAP) return { visible: items, folded: [] };
+  const seen = new Set();
+  const threadFirst = items.filter(a => {
+    const key = a.thread || a.url;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).slice(0, SHELF_CAP);
+  const fill = items.filter(a => !threadFirst.includes(a)).slice(0, SHELF_CAP - threadFirst.length);
+  const picks = [...threadFirst, ...fill];  // priority order: the last is the first to give way
+  if (pins.length && !picks.includes(pins[0])) picks[picks.length - 1] = pins[0];
+  return {
+    visible: items.filter(a => picks.includes(a)),
+    folded: items.filter(a => !picks.includes(a)),
+  };
 }
 
 // Thumbnail crop: object-position picks which part of the hero the square keeps,
