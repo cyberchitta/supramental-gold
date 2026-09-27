@@ -97,6 +97,8 @@ const helpers = {
   // reads "<n> models" and `overflow` tells the surface to list the handles in
   // its ⓘ dropdown instead. A count, not "the AI": the names stay one click
   // away. Same cut as provenance.ejs's "et al." at three paper authors.
+  // Surfaces open the overflow dropdown start-aligned: the count is short, so
+  // the ⓘ sits near the line start and an end-aligned popover leaves the screen.
   bylineWriters: (writers) => {
     const all = writers || [];
     const overflow = all.length > 3;
