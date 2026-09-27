@@ -6,7 +6,7 @@
 //             empty .article-content is rendered (you can put markdown
 //             or an EJS slot there in your layout).
 const a = article;
-const writers = (a.collaborators || []).map(c => '@' + String(c).replace(/^@/, ''));
+const writers = sgHelpers.bylineWriters((a.collaborators || []).map(c => '@' + String(c).replace(/^@/, '')));
 const _body = (typeof body !== 'undefined') ? body : '';
 %>
 <%- include('hero', { src: a.hero || 'https://www.cyberchitta.cc/assets/images/shared/llm-lot-2504.webp', attribution: a.attribution || null }) %>
@@ -17,7 +17,20 @@ const _body = (typeof body !== 'undefined') ? body : '';
       <h1><%= a.title %></h1>
     </div>
     <div class="byline" style="margin-bottom: 1.5rem;">
-      <span class="byline-writers"><%= writers.join(' · ') %></span>
+      <span class="byline-writers"><%= writers.text %></span>
+      <% if (writers.overflow) { %>
+      <details class="cc-byline-info">
+        <summary aria-label="Writers">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </summary>
+        <div class="cc-byline-info-card">
+          <div class="cc-byline-info-label">Writers</div>
+          <% writers.all.forEach((w) => { %><div class="cc-byline-info-row"><span><%= w %></span></div><% }) %>
+        </div>
+      </details>
+      <% } %>
       <span class="byline-sep"> · </span>
       <time class="byline-meta"><%= a.date %></time>
       <% if (a.updated) { %> <span class="byline-sep">·</span> <span class="byline-meta">Updated <%= a.updated %></span><% } %>

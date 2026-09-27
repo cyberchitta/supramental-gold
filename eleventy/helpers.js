@@ -92,6 +92,16 @@ const helpers = {
       ? `${time(publishedAt)}${sep}<span class="byline-meta">${label} ${esc(helpers.formatDate(latestAt))}</span>`
       : time(publishedAt);
   },
+  // The byline's writer run, shared by every byline surface so the threshold
+  // cannot drift. Up to three handles are listed inline; past that the byline
+  // reads "<n> models" and `overflow` tells the surface to list the handles in
+  // its ⓘ dropdown instead. A count, not "the AI": the names stay one click
+  // away. Same cut as provenance.ejs's "et al." at three paper authors.
+  bylineWriters: (writers) => {
+    const all = writers || [];
+    const overflow = all.length > 3;
+    return { text: overflow ? `${all.length} models` : all.join(' · '), overflow, all };
+  },
   stripPTags: (html) => {
     if (typeof html !== 'string') return html;
     if (html.startsWith('<p>') && html.endsWith('</p>\n') && !html.slice(3, -5).includes('\n')) {

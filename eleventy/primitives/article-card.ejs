@@ -4,7 +4,7 @@
 //   article — { title, dek, collaborators: string[], showrunner?,
 //               date, updated?, readTime?, url }
 const a = article;
-const writers = (a.collaborators || []).map(c => '@' + String(c).replace(/^@/, ''));
+const writers = sgHelpers.bylineWriters((a.collaborators || []).map(c => '@' + String(c).replace(/^@/, '')));
 %>
 <article class="cc-article">
   <h3 class="cc-article-title">
@@ -12,20 +12,26 @@ const writers = (a.collaborators || []).map(c => '@' + String(c).replace(/^@/, '
   </h3>
   <% if (a.dek) { %><p class="cc-article-dek"><%= a.dek %></p><% } %>
   <div class="byline">
-    <span class="byline-writers"><%= writers.join(' · ') %></span>
-    <% if (a.showrunner) { %>
+    <span class="byline-writers"><%= writers.text %></span>
+    <% if (a.showrunner || writers.overflow) { %>
     <details class="cc-byline-info">
-      <summary aria-label="Showrunner">
+      <summary aria-label="<%= writers.overflow ? 'Credits' : 'Showrunner' %>">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
       </summary>
       <div class="cc-byline-info-card">
+        <% if (a.showrunner) { %>
         <div class="cc-byline-info-label">Showrunner</div>
         <div class="cc-byline-info-row">
           <span class="cc-showrunner-initial"><%= String(a.showrunner).charAt(0).toUpperCase() %></span>
           <span>@<%= String(a.showrunner).replace(/^@/, '') %></span>
         </div>
+        <% } %>
+        <% if (writers.overflow) { %>
+        <div class="cc-byline-info-label">Writers</div>
+        <% writers.all.forEach((w) => { %><div class="cc-byline-info-row"><span><%= w %></span></div><% }) %>
+        <% } %>
       </div>
     </details>
     <% } %>

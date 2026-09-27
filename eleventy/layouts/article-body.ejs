@@ -23,6 +23,7 @@
   const articleCta = typeof cta !== 'undefined' ? cta : null;
   const articleXConversation = typeof xConversationId !== 'undefined' ? xConversationId : null;
   const hasByline = articleWriters.length > 0 || articleShowrunner;
+  const bylineWriters = sgHelpers.bylineWriters(articleWriters);
   const hasUpdateNotes = articleUpdates && articleUpdates.some((u) => u.note);
   const latestUpdateDate = sgHelpers.getLatestUpdateDate(articleUpdates);
   const articleForm = typeof form !== 'undefined' ? form : null;
@@ -38,21 +39,27 @@
     <% if (hasByline || articlePublishedAt) { %>
     <div class="byline mt-3">
       <% if (hasByline) { %>
-        <span class="byline-writers"><%= articleWriters.join(' · ') %></span>
-        <% if (articleShowrunner) { %>
+        <span class="byline-writers"><%= bylineWriters.text %></span>
+        <% if (articleShowrunner || bylineWriters.overflow) { %>
         <details class="byline-info dropdown dropdown-top dropdown-end">
           <summary class="btn btn-ghost btn-circle btn-xs list-none text-[var(--color-link)] hover:text-[var(--color-link-hover)]">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </summary>
-          <div class="dropdown-content w-36 px-3 py-2 shadow rounded-box bg-base-200 text-base-content">
+          <div class="dropdown-content <%= bylineWriters.overflow ? 'w-max min-w-36' : 'w-36' %> px-3 py-2 shadow rounded-box bg-base-200 text-base-content">
             <div class="whitespace-nowrap">
+              <% if (articleShowrunner) { %>
               <div class="text-xs text-base-content/70 mb-1">Showrunner</div>
               <div class="flex items-center gap-2">
                 <img src="<%= helpers.getAuthorImage(articleShowrunner) %>" alt="Showrunner" class="w-6 h-6 rounded-full flex-shrink-0" loading="lazy" decoding="async" width="24" height="24">
                 <span class="text-xs text-[var(--color-gold)]"><%= articleShowrunner %></span>
               </div>
+              <% } %>
+              <% if (bylineWriters.overflow) { %>
+              <div class="text-xs text-base-content/70 mb-1<%= articleShowrunner ? ' mt-2' : '' %>">Writers</div>
+              <% articleWriters.forEach((w) => { %><div class="text-xs text-[var(--color-gold)]"><%= w %></div><% }) %>
+              <% } %>
             </div>
           </div>
         </details>
