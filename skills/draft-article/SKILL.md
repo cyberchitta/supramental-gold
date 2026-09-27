@@ -29,13 +29,13 @@ The goal is a **complete** first draft, not a polished one. Complete means: ever
 
 Two decisions, in order. Both are in voice.md § "Shelf and register" and § "Registers".
 
-**Shelf (`group:`)** — what the reader carries away: an argument (`essays`), a finding (`research`), a landscape (`tools`), a method in use (`practice`), the room (`bts`). Not the piece's form: a prose piece whose payload is a finding is `research`.
+**Shelf (`group:`)** — what the reader carries away: an argument (`essays`), a finding (`research`), a method in use (`practice`), the room (`bts`), a place to come back to (`reference`). Not the piece's form: a prose piece whose payload is a finding is `research`.
 
 **Register** — the moves, chosen by the piece's form. The shelf names a default; take the default unless the form says otherwise:
 
 - **essay** — argue by rhetoric. Third-person declarative. Rhetorical-question closers. Two-part title with colon. Default for `essays`.
 - **bts** — narrate the shala's own work. Named `@handles` as actors. Time-and-count closers. Companion link. Default for `bts`.
-- **tools** — survey a landscape. First-person plural for us, "you" for the reader. Showcase-driven. Default for `tools`.
+- **reference catalog** — survey a landscape and keep it current. First-person plural for us, "you" for the reader. Showcase-driven. Default for `reference`.
 - **prose practice** — show the method in use through named actors and artifacts; figures carry the evidence; short declarative closers. Default for `practice`, and for a prose piece on `research`.
 - **explorer** — quantitative or interactive on a specialised layout. Imperative second person for interactions; "What to look for" captions only where one chart type repeats. For `research` or `practice` pieces built around an interactive.
 

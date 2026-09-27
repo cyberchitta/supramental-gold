@@ -80,7 +80,7 @@ The voice rules these passes enforce live in `../../voice.md`. Surface-specific 
 - [ ] Specific technical details called out: file paths, config flags, commit counts.
 - [ ] Companion-piece cross-linking present if a partner article exists.
 
-**`group: tools`**
+**`group: reference`** (catalogs)
 - [ ] First-person plural ("our take", "we chose") when CyberChitta is the subject.
 - [ ] Direct "you" address for tool-use guidance.
 - [ ] Opener is short, claim-shaped, punchy.

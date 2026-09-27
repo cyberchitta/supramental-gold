@@ -4,7 +4,7 @@
 
 This is the editorial half of CyberChitta's craft brief: house voice, attribution conventions, surface-specific registers, and the moves already ruled out in prose. Companion file: `visual.md` (look, layout, motion, anti-patterns). Read both before drafting or copyediting.
 
-The aim is to keep every CyberChitta surface recognisably **CyberChitta**, while letting each genre (essay, process piece, tools list, research explorer, wiki concept) execute in the register that genre naturally needs.
+The aim is to keep every CyberChitta surface recognisably **CyberChitta**, while letting each genre (essay, process piece, reference catalog, research explorer, wiki concept) execute in the register that genre naturally needs.
 
 ---
 
@@ -31,7 +31,7 @@ These hold across **every** surface. They are the part of the voice that makes a
 
 ### Audience and density
 - **We write for AIs and humans together.** AI co-authors are first-class consumers of CyberChitta output (RAG indexes, search, training corpora) alongside human readers. The moves that follow — clean structure, named entities, link discipline, attribution as data — each serve both audiences. We don't trade one off for the other.
-- **Don't over-explain.** Assume a human reader can ask an AI to unpack any term they don't know. Use the right word for the concept, link the canonical source, skip the patient glossary unpacking. This is register-dependent (see Registers below): essays, prose practice and explorers hold the line strictly; tools relaxes it for ecosystem newcomers.
+- **Don't over-explain.** Assume a human reader can ask an AI to unpack any term they don't know. Use the right word for the concept, link the canonical source, skip the patient glossary unpacking. This is register-dependent (see Registers below): essays, prose practice and explorers hold the line strictly; reference catalogs relax it for ecosystem newcomers.
 - **Articles are short.** Current CyberChitta corpus ranges 500–1,300 words, median ~950. That is deliberately ~25–50% below conventional essay length (Stratechery 1.5–2.5k, Paul Graham 2–4k, typical long-form blog 1.2–2k). Length is earned by argument surface area, not defaulted to.
 - **Trust the reader to hold the thread.** No "as mentioned earlier", no "to recap", no closing summary section. Short pieces don't need redundant scaffolding; AI-assisted reading doesn't either. If a point seems to need restating, the piece is too long for its argument, or the argument is wrong.
 
@@ -44,7 +44,7 @@ These hold across **every** surface. They are the part of the voice that makes a
 - **Short words and fewer words.** Trust readers to carry context.
 - **State points directly.** Remove qualifying phrases that add no information.
 - **Combine related ideas into single statements.** A sentence that picks up the next sentence's clause usually wins. Resist the AI default of one-claim-per-sentence; resist also the opposite extreme of stacked subordinate clauses.
-- **Questions stay genuinely neutral.** Direct questions to the reader (explorer/tools second-person; *"What to look for"* captions) avoid leading shape — name what to look at, not what to conclude. Rhetorical-question section-enders in essays are a different move (see Essay register signature); those frame, they don't poll.
+- **Questions stay genuinely neutral.** Direct questions to the reader (explorer/catalog second-person; *"What to look for"* captions) avoid leading shape — name what to look at, not what to conclude. Rhetorical-question section-enders in essays are a different move (see Essay register signature); those frame, they don't poll.
 - **Specific numbers wherever possible.** *"12–24% to 78%"*, *"61 open source tools"*, *"2–2.5x gains"*, *"five commits, four days"*. Avoid "many", "often", "most" when a real number is available.
 - **Inline links for empirical claims.** Every fact a reader might want to verify carries a link to its primary source. Unsourced claims get qualified or cut during copyedit.
 
@@ -61,7 +61,7 @@ These hold across **every** surface. They are the part of the voice that makes a
 
 ### Closing structure
 - Essays and BTS pieces: horizontal rule `---` → short reframe / tagline paragraph → `## Credits`.
-- Tools-lists: skip the reframe; go straight to `## Credits` after the content.
+- Reference catalogs: skip the reframe; go straight to `## Credits` after the content.
 - Research explorers: no `## Credits` section in the body when `writers:` frontmatter carries the attribution.
 
 ### Credits section
@@ -93,9 +93,9 @@ Two decisions, one field each. They correlate; they are not the same decision.
 |---|---|---|
 | `essays` | an argument | supramental-ai, privacy-coins-ai-money |
 | `research` | a finding — a method applied, results reported | os-vibe-gains, llm-compare-shopify-api, private-canary |
-| `tools` | a landscape | lc-alternatives, cad-llm-tools |
 | `practice` | a method in use — the doing is the payload | auro-darshan, ai-derisks-niche |
 | `bts` | the room — how the publication itself works | writers-room, supramental-gold |
+| `reference` | a place to come back to — consulted rather than read once, and kept current | lc-alternatives, cad-llm-tools; the ch-ai-tanya and apodictic sub-sites |
 
 A finding reached by formal proof shelves as research alongside one reached by counting commits; the shelf doesn't care whether the piece is quantitative, interactive, or prose.
 
@@ -135,13 +135,13 @@ The shared invariants above hold in every register; the moves below are the genr
   - **Companion-piece cross-linking.** BTS pieces often pair with a partner article; link generously.
   - **Closing tagline.** Short reframe sentence that becomes the piece's takeaway. *"Patience has compounding returns."*
 
-### Tools / list (default for `tools`)
+### Reference catalog (default for `reference`)
 
-**Job:** survey a landscape of tools, place CyberChitta's own work within it, point readers at what's worth using.
+**Job:** survey a landscape of tools, place CyberChitta's own work within it, point readers at what's worth using — and stay current, since the reader comes back. Corpus sub-sites on the same shelf (ch-ai-tanya, apodictic) keep their own registers; this one governs the catalogs.
 
 - **Voice:** first-person plural ("our take", "we chose") when CyberChitta itself is the subject. Addresses **"you"** directly for tool-use guidance — *"In most, you do. You look at the render, describe what's wrong, the LLM tries again."*
 - **Tone:** punchy, confident, list-friendly.
-- **Density:** relaxed. Tools pieces address newcomers to the ecosystem — concepts can be unpacked, problems explained, methodology spelled out. Still no marketing speak, no padding, no soft qualifiers; the relaxation is on technical scaffolding for accessibility, not on prose discipline.
+- **Density:** relaxed. Catalogs address newcomers to the ecosystem — concepts can be unpacked, problems explained, methodology spelled out. Still no marketing speak, no padding, no soft qualifiers; the relaxation is on technical scaffolding for accessibility, not on prose discipline.
 - **Opener:** short, direct, claim-shaped. *"Vibe Cading is a thing now."* *"36 alternatives to LLM Context."*
 - **Structure:** typically driven by custom `<showcase>` elements that render tool tables from frontmatter / data. Body prose sets up axes of comparison and explains methodology; the showcases carry the load.
 - **CTA frontmatter:** points to the repo and an X/Twitter announcement thread for reader contribution. *"Try [CAD Khana]. Know of other tools? Reply to the [announcement thread]."*
@@ -196,12 +196,12 @@ The shared invariants above hold in every register; the moves below are the genr
 | `ogDescription` | yes | dek; one to two declarative sentences setting tension |
 | `publishedAt` | yes | ISO date. Immutable — it is provenance, not recency. Never bump it to resurface a piece; that is what `form` is for |
 | `form` | optional | `fixed` (default) \| `serial` \| `living` — what kind of thing the article is, which decides whether an update counts as recency. `fixed`: a finished piece whose `updates` are errata; it never resurfaces. `serial`: readings accrete and the original stays true (private-canary); byline *Latest <date>*. `living`: rewritten whole, prior versions superseded (sorted-studs); byline *v0.0.2 · <date>*, and `publishedAt` never renders |
-| `group` | yes | the shelf: `essays` \| `bts` \| `research` \| `tools` \| `practice` — see § Shelf and register; it does not fix the register |
+| `group` | yes | the shelf: `essays` \| `bts` \| `research` \| `practice` \| `reference` — see § Shelf and register; it does not fix the register |
 | `showrunner` | yes | `'@restlessronin'` |
 | `writers` | yes | list of `@handles` (one or more) |
 | `tags` | yes | list of lowercase-hyphenated keywords |
 | `xConversationId` | optional | X/Twitter thread ID for the piece |
-| `cta` | optional | multi-line block; varies by shelf (companion-piece links for essays / bts, repo + reply-thread for tools, companion-article for research) |
+| `cta` | optional | multi-line block; varies by shelf (companion-piece links for essays / bts, repo + reply-thread for reference catalogs, companion-article for research) |
 | `updates` | optional | list of `{date, note}` entries for dated copy-edit notes; any shelf may use it. On a `living` article each entry is a revision and carries a `version:` — `{date, version, note}`. The version rides on the entry so it cannot drift from its date; the byline shows the newest one, rendered verbatim, so any scheme works (`2`, `0.0.2`). Before a living article's first revision there is no version and the byline is a plain date. Each `note` is a few words — a signal that something changed and roughly how much, not a changelog. "Added credits", "A quarter shorter; example dropped.", "Independence of uses is ours, not Rothbard's." Say what changed, never how it was done |
 | `forceUTC` | explorer-only | for time-sensitive visualisations |
 | `excludeFromLlmsTxt` | optional | for interactive pieces that don't render well as text |
