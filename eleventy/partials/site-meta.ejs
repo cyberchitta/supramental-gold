@@ -1,5 +1,5 @@
 <% const _resolvedTitle = title || site.title; %>
-<title><%= title && title !== site.title ? `${title} - ${site.title}` : site.title %></title>
+<title><%= title && !title.startsWith(site.title) ? `${title} - ${site.title}` : _resolvedTitle %></title>
 <meta name="author" content="CyberChitta">
 <% if (pageDescription) { %>
 <meta name="description" content="<%= pageDescription %>">
