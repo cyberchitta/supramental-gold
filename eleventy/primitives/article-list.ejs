@@ -4,12 +4,14 @@
 //   articles       — [{ url, title, description, group, publishedAt,
 //                       updatedAt?, currentAt?, form?, version?, readingTime?,
 //                       writers?, showrunner?, external?, thread?, threadPart?,
-//                       threadCount? }]
+//                       threadCount?, pinned? }]
 //                    form — 'fixed' (default) | 'serial' | 'living'; see
 //                    the sort-key and byline notes below. `version` is a
 //                    living article's current version, carried on the
 //                    updates[] entry that produced it; absent until its
 //                    first revision, when the byline is a plain date.
+//                    `pinned` — keeps the piece among its shelf's visible rows
+//                    under a cap even when it is older; see the cap note below.
 //   featuredImages — { [articleUrl]: { url, thumbnailZoom?, thumbnailFocus? } } (optional)
 //                    thumbnailZoom  — scale factor, zooms about thumbnailFocus
 //                    thumbnailFocus — CSS <position> ('35% 20%', 'center top');
@@ -18,16 +20,24 @@
 //   getAuthorImage — (tag) => avatar url, for the showrunner info-button
 //   groupOrder     — group keys in precedence order (optional)
 //   groupNames     — { [groupKey]: display name } (optional)
+//   shelfCap       — rows shown per shelf before the rest fold into an
+//                    "All k" expander (optional; default: no cap)
 //   threadHref     — where a thread eyebrow links (optional)
 const GROUP_ORDER = (typeof groupOrder !== 'undefined' && groupOrder) ||
-  ['essays', 'research', 'tools', 'practice', 'bts'];
+  ['essays', 'research', 'tools', 'practice', 'bts', 'reference'];
 const GROUP_NAMES = (typeof groupNames !== 'undefined' && groupNames) || {
   essays: 'Essays',
   research: 'Research',
   tools: 'Tools',
   practice: 'Practice',
   bts: 'Behind the scenes',
+  reference: 'Reference',
 };
+// Shelves that sit below the recency-ordered ones whatever their dates. A
+// reference piece is consulted, not followed, so its freshness is no reason to
+// put it above the latest essay.
+const LAST_GROUPS = ['reference'];
+const SHELF_CAP = (typeof shelfCap !== 'undefined' && shelfCap) || Infinity;
 const THREAD_HREF = (typeof threadHref !== 'undefined' && threadHref) || '/colophon.html#the-threads';
 const featImgs = (typeof featuredImages !== 'undefined' && featuredImages) || {};
 
@@ -50,14 +60,33 @@ const sortKey = (a) => {
   const d = a.currentAt || a.publishedAt;
   return d ? new Date(d).valueOf() : 0;
 };
-GROUP_ORDER.forEach(g => {
+Object.keys(grouped).forEach(g => {
   grouped[g].sort((a, b) => sortKey(b) - sortKey(a));
 });
 
-// Sort groups by the most recent article within each group
-const sortedGroups = GROUP_ORDER.filter(g => grouped[g].length > 0).sort((a, b) => {
-  return sortKey(grouped[b][0]) - sortKey(grouped[a][0]);
-});
+// Sort groups by the most recent article within each group, then append the
+// LAST_GROUPS. Walk every key in `grouped`, not GROUP_ORDER: a group missing
+// from the order must still render, not vanish from the page.
+const nonEmpty = Object.keys(grouped).filter(g => grouped[g].length > 0);
+const sortedGroups = [
+  ...nonEmpty.filter(g => !LAST_GROUPS.includes(g))
+    .sort((a, b) => sortKey(grouped[b][0]) - sortKey(grouped[a][0])),
+  ...LAST_GROUPS.filter(g => nonEmpty.includes(g)),
+];
+
+// Cap: the SHELF_CAP most recent pieces show, the rest fold into a <details>
+// expander. A pinned piece takes the last visible slot when it would otherwise
+// fold, and keeps its date position among the visible rows — the pin decides
+// whether a piece shows, not where. One pin per shelf.
+function splitShelf(items) {
+  const pins = items.filter(a => a.pinned);
+  if (pins.length > 1) {
+    throw new Error(`article-list: more than one pinned piece in shelf "${items[0].group}": ${pins.map(a => a.url).join(', ')}`);
+  }
+  const visible = items.slice(0, SHELF_CAP);
+  if (pins.length && !visible.includes(pins[0])) visible[SHELF_CAP - 1] = pins[0];
+  return { visible, folded: items.filter(a => !visible.includes(a)) };
+}
 
 // Thumbnail crop: object-position picks which part of the hero the square keeps,
 // transform-origin pins the zoom to that same point so the two compose instead
@@ -79,7 +108,8 @@ function thumbStyle(featImg) {
   <% sortedGroups.forEach((groupKey, groupIdx) => { %>
   <section class="article-group<%= groupIdx > 0 ? ' mt-14' : '' %>">
     <h2 class="group-header"><%= GROUP_NAMES[groupKey] || groupKey %></h2>
-    <% grouped[groupKey].forEach(article => { %>
+    <%_ const { visible, folded } = splitShelf(grouped[groupKey]); _%>
+    <%_ const renderRow = (article) => { %>
     <% const featImg = featImgs[article.url]; %>
     <article class="mb-4 pb-4 border-b border-base-300 last:border-b-0 last:mb-0 flow-root">
       <% if (featImg) { %>
@@ -102,7 +132,16 @@ function thumbStyle(featImg) {
       </div>
       <% } %>
     </article>
-    <% }) %>
+    <%_ } _%>
+    <%_ visible.forEach(renderRow) _%>
+    <%_ if (folded.length) { _%>
+    <details>
+      <summary class="cursor-pointer text-sm text-[var(--color-link)] hover:text-[var(--color-link-hover)]">All <%= grouped[groupKey].length %> <%= GROUP_NAMES[groupKey] || groupKey %> pieces</summary>
+      <div class="mt-4">
+      <% folded.forEach(renderRow) %>
+      </div>
+    </details>
+    <% } %>
   </section>
   <% }) %>
 </div>
