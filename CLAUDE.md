@@ -205,3 +205,6 @@ Read directly when relevant:
   draft against the bottom-up `skills/vibe` rulebook
 
 Speculative unless stated otherwise. Do not implement from these without asking.
+
+Sessions may edit `_notes/` directly (authorised by the Showrunner,
+2026-09-27).
