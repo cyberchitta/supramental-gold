@@ -94,15 +94,17 @@ const helpers = {
   },
   // The byline's writer run, shared by every byline surface so the threshold
   // cannot drift. Up to three handles are listed inline; past that the byline
-  // reads "<n> models" and `overflow` tells the surface to list the handles in
-  // its ⓘ dropdown instead. A count, not "the AI": the names stay one click
-  // away. Same cut as provenance.ejs's "et al." at three paper authors.
-  // Surfaces open the overflow dropdown start-aligned: the count is short, so
-  // the ⓘ sits near the line start and an end-aligned popover leaves the screen.
+  // reads "<first> +<rest>" and `overflow` tells the surface to list every
+  // handle in its ⓘ dropdown. `writers` is in contribution order, so the named
+  // handle is the lead writer and the count keeps the size of the room. Same
+  // cut as provenance.ejs's "et al." at three paper authors; "et al." is
+  // citation register, and a byline is chrome.
+  // Surfaces open the overflow dropdown start-aligned: the ⓘ sits one handle
+  // from the line start, so an end-aligned popover leaves the screen.
   bylineWriters: (writers) => {
     const all = writers || [];
     const overflow = all.length > 3;
-    return { text: overflow ? `${all.length} models` : all.join(' · '), overflow, all };
+    return { text: overflow ? `${all[0]} +${all.length - 1}` : all.join(' · '), overflow, all };
   },
   stripPTags: (html) => {
     if (typeof html !== 'string') return html;

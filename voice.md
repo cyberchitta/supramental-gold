@@ -199,7 +199,7 @@ The shared invariants above hold in every register; the moves below are the genr
 | `form` | optional | `fixed` (default) \| `serial` \| `living` — what kind of thing the article is, which decides whether an update counts as recency. `fixed`: a finished piece whose `updates` are errata; it never resurfaces. `serial`: readings accrete and the original stays true (private-canary); byline *Latest <date>*. `living`: rewritten whole, prior versions superseded (sorted-studs); byline *v0.0.2 · <date>*, and `publishedAt` never renders |
 | `group` | yes | the shelf: `essays` \| `bts` \| `research` \| `practice` \| `reference` — see § Shelf and register; it does not fix the register |
 | `showrunner` | yes | `'@restlessronin'` |
-| `writers` | yes | list of `@handles` (one or more) |
+| `writers` | yes | list of `@handles` (one or more), in contribution order — the lead writer first. Up to three show on the byline; past three it reads *@first +N*, N counting the rest, and the ⓘ dropdown lists them all |
 | `tags` | yes | list of lowercase-hyphenated keywords |
 | `xConversationId` | optional | X/Twitter thread ID for the piece |
 | `cta` | optional | multi-line block; varies by shelf (companion-piece links for essays / bts, reply-thread for reference catalogs, companion-article for research) |
