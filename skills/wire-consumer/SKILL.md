@@ -43,8 +43,8 @@ const base = `https://cdn.jsdelivr.net/gh/cyberchitta/supramental-gold@${tag}`;
 export default {
   tag,
   cssBundleUrl: `${base}/dist/styles.css`,
-  logoSvgUrl: `${base}/assets/cc-260508.svg`,
-  logoPngUrl: `${base}/assets/cc-260508.png`,
+  logoSvgUrl: `${base}/assets/cc-260928.svg`,
+  logoPngUrl: `${base}/assets/cc-260928.png`,
 };
 ```
 
@@ -103,7 +103,7 @@ When a child SKILL.md says `../../voice.md`, treat it as `../../../../supramenta
 
 ## Brand assets — never copy
 
-The brand mark (`cc-260508.svg`, `.png`) is **always referenced via the jsDelivr URL from `sg.logoSvgUrl`**, never copied into the consumer repo. The dep-pin tag is the source of truth for which version each consumer ships.
+The brand mark (`cc-260928.svg`, `.png`) is **always referenced via the jsDelivr URL from `sg.logoSvgUrl`**, never copied into the consumer repo. The dep-pin tag is the source of truth for which version each consumer ships.
 
 If the consumer needs a favicon, derive it from the jsDelivr SVG at build time or use the jsDelivr URL directly via `<link rel="icon">`. Don't commit a copy.
 

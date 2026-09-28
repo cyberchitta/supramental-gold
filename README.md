@@ -37,7 +37,7 @@ A versioned, Eleventy-aware design system. It contains:
 Three things flow from SG to consumers:
 
 1. **The compiled CSS bundle** at `dist/styles.css`, served via jsDelivr at `https://cdn.jsdelivr.net/gh/cyberchitta/supramental-gold@<tag>/dist/styles.css`. Loaded in the browser via `<link>`.
-2. **Brand assets** — `assets/cc-260508.svg`, `cc-260508.png` — served via jsDelivr at the same `@<tag>` base. Used for favicon, header logo, OG fallback for brand-marked articles.
+2. **Brand assets** — `assets/cc-260928.svg`, `cc-260928.png` — served via jsDelivr at the same `@<tag>` base. Used for favicon, header logo, OG fallback for brand-marked articles.
 3. **The Eleventy plugin** at `@cyberchitta/supramental-gold/eleventy`. Provides shared helpers and exposes the primitives directory. Used at build time.
 
 The wiring runbook — plumbing pieces, config, checklist — is the
@@ -154,7 +154,7 @@ supramental-gold/
 ├── dist/
 │   └── styles.css           ← compiled bundle (committed; served via jsDelivr)
 ├── assets/
-│   ├── cc-260508.svg/.png   ← canonical CC mark
+│   ├── cc-260928.svg/.png   ← canonical CC mark
 │   └── cc-250815-v4.svg     ← source-of-mark working file
 └── eleventy/
     ├── index.js             ← plugin entry

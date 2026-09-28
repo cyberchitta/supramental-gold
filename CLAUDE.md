@@ -54,14 +54,14 @@ public repo.)
 | `eleventy/layouts/article-body.ejs` | Shared article shell — `<article>` with byline header, content section, and footer (update history, X conversation link, CTA). Consumer's `_includes/layouts/article.ejs` is a thin shim: sets `layout: layouts/base` + `ogType: article`, then `<%- include('layouts/article-body') %>`. Byline and footer blocks gate on optional locals so sub-sites can opt out. |
 | `eleventy/partials/site-meta.ejs`, `site-fonts.ejs`, `theme-init.ejs`, `featured-image-figure.ejs` | Lifted from the main site's `base.ejs` decomposition. Consumed by `layouts/base-chrome`. Override by placing the same path in the consumer's `_includes/`. |
 | `eleventy/partials/site-analytics.ejs`, `site-scripts.ejs` | Empty defaults. Slots shadowed by the consumer; main site uses them for GA and the CSR template-manager wiring. |
-| `assets/cc-260508.{svg,png}` | Canonical CC mark. Plain blobs, never LFS: jsDelivr serves an LFS pointer as the response body, under an image content-type (jsdelivr/jsdelivr#18235). Served via jsDelivr. |
+| `assets/cc-260928.{svg,png}` | Canonical CC mark. Plain blobs, never LFS: jsDelivr serves an LFS pointer as the response body, under an image content-type (jsdelivr/jsdelivr#18235). Served via jsDelivr. |
 | `assets/cc-250815-v4.svg` | Source-of-mark working file; not used at runtime. |
 
 ---
 
 ## Brand-asset routing
 
-- **CSS bundle** + **brand mark** (`cc-260508.svg`, `cc-260508.png`)
+- **CSS bundle** + **brand mark** (`cc-260928.svg`, `cc-260928.png`)
   served from jsDelivr at `@<tag>`. One canonical URL per asset across
   all consumers → real cross-site cache hits.
 - **Per-article featured images** stay on each consumer's own domain
@@ -71,10 +71,6 @@ public repo.)
   the consumer's `featuredImages` entry. The consumer's `base.ejs`
   needs an `absUrl` guard so OG/Twitter meta tags don't double-prefix
   absolute URLs.
-- **Legacy redirects** in live's `netlify.toml` 302 the old
-  `/assets/images/shared/cc-260508.{svg,png}` paths to jsDelivr to
-  preserve pre-migration social-card OG references. Transitional;
-  not part of the live SG version-pin chain.
 
 ---
 

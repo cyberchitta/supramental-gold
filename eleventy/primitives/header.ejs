@@ -1,5 +1,6 @@
 <% const _origin = (typeof mainSiteUrl !== 'undefined' && mainSiteUrl) ? mainSiteUrl : ''; -%>
-<% const _logo = (typeof brandLogoUrl !== 'undefined' && brandLogoUrl) ? brandLogoUrl : `${_origin}/assets/images/shared/cc-260508.svg`; -%>
+<% if (typeof brandLogoUrl === 'undefined' || !brandLogoUrl) throw new Error('primitives/header: brandLogoUrl is required (pass sg.logoSvgUrl)'); -%>
+<% const _logo = brandLogoUrl; -%>
 <nav class="flex items-center justify-between py-4" aria-label="Main Navigation">
   <a href="<%= _origin %>/" class="flex items-center">
     <div class="w-12 h-12 overflow-hidden rounded-full mr-3">

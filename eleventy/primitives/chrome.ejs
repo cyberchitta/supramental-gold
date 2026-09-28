@@ -1,2 +1,1 @@
-<% const _logo = (typeof brandLogoUrl !== 'undefined') ? brandLogoUrl : null; -%>
-<%- include('header', { mainSiteUrl: 'https://www.cyberchitta.cc', brandLogoUrl: _logo }) %>
+<%- include('header', { mainSiteUrl: 'https://www.cyberchitta.cc', brandLogoUrl: (typeof brandLogoUrl !== 'undefined') ? brandLogoUrl : undefined }) %>

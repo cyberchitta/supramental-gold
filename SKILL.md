@@ -55,7 +55,7 @@ These are foundational and stable; child skills load them on demand.
 - **`colors-and-type.css`** + **`ui-kit.css`** — source CSS (tokens + components).
 - **`eleventy/primitives/*.ejs`** — design primitives.
 - **`eleventy/{index,helpers,...}.js`** — Eleventy plugin entry + helpers.
-- **`assets/`** — brand mark (canonical `cc-260508.svg` / `.png`).
+- **`assets/`** — brand mark (canonical `cc-260928.svg` / `.png`).
 - **`dist/styles.css`** — compiled bundle served via jsDelivr.
 
 ## Reporting friction (do this — it's how SG improves)

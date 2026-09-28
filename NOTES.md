@@ -27,10 +27,6 @@ system's, so it canonicalizes at SG.
   featured-image URL is the absolute jsDelivr URL. The consumer's
   `base.ejs` uses an `absUrl` helper to guard OG/Twitter meta
   emission against double-prefixing.
-- Transitional safety net: live's `netlify.toml` 302s old
-  `/assets/images/shared/cc-260508.{svg,png}` paths to jsDelivr so
-  pre-migration social-card cache references keep working until the
-  platforms re-scrape.
 
 ## Single-source version pin via `_data/sg.js`
 
@@ -49,13 +45,12 @@ The alternative — hardcoding jsDelivr URLs in templates alongside the
 dep ref — was the dual-pin bug we used to have: forgetting to bump
 one would diverge runtime CSS from build-time primitives.
 
-## `header.ejs` / `chrome.ejs` accept `brandLogoUrl`
+## `header.ejs` / `chrome.ejs` require `brandLogoUrl`
 
-Non-breaking optional parameter. When passed, becomes the logo
-`<img src>`. When omitted, falls back to the
-`${mainSiteUrl}/assets/images/shared/cc-260508.svg` path that pre-dates
-the jsDelivr canonicalization, so old callers continue to render
-something. New callers should always pass `brandLogoUrl: sg.logoSvgUrl`.
+It becomes the logo `<img src>`; callers pass `sg.logoSvgUrl`. There is
+no fallback: `header.ejs` throws without it, so a caller that forgets
+fails the build instead of rendering a stale or broken mark. (Until
+v0.4.18 it fell back to a pre-jsDelivr path on the main site.)
 
 ## Failure modes are loud
 
