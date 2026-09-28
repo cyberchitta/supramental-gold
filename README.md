@@ -156,8 +156,7 @@ supramental-gold/
 │   └── styles.css           ← compiled bundle (committed; served via jsDelivr)
 ├── assets/
 │   ├── cc-260508.svg/.png   ← canonical CC mark
-│   ├── cc-250815-v4.svg     ← source-of-mark working file
-│   └── logo.svg             ← CSS-themable mark (used by examples/)
+│   └── cc-250815-v4.svg     ← source-of-mark working file
 ├── eleventy/
 │   ├── index.js             ← plugin entry
 │   ├── helpers.js           ← shared helpers
