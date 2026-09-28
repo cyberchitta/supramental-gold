@@ -56,7 +56,6 @@ public repo.)
 | `eleventy/partials/site-analytics.ejs`, `site-scripts.ejs` | Empty defaults. Slots shadowed by the consumer; main site uses them for GA and the CSR template-manager wiring. |
 | `assets/cc-260508.{svg,png}` | Canonical CC mark. Plain blobs, never LFS: jsDelivr serves an LFS pointer as the response body, under an image content-type (jsdelivr/jsdelivr#18235). Served via jsDelivr. |
 | `assets/cc-250815-v4.svg` | Source-of-mark working file; not used at runtime. |
-| `examples/index.html` | Static rendered preview, not for production. |
 
 ---
 
@@ -173,7 +172,6 @@ the two are kept in sync.
 - `bun install && bun run build:css` produces `dist/styles.css`
   without warnings (sibling consumer repos must exist for the
   multi-source scan — see `tailwind.css` for the listed paths).
-- `examples/index.html` opens in a browser and looks like CyberChitta.
 - The sub-sites (`ch-ai-tanya/` and `sorted-studs/subsite/`) both build cleanly against this checkout; use either as a reference consumer (ch-ai-tanya for wiki transforms + section titles; sorted-studs for custom elements + 3D).
 
 ---

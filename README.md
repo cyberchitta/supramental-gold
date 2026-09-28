@@ -24,7 +24,6 @@ A versioned, Eleventy-aware design system. It contains:
 - **`eleventy/section-title-transform.js`** — factory for rewriting wiki H2 titles into the `.group-header` shape with optional list classes.
 - **`eleventy/custom-element-renderer.js`** — exported factory for any consumer that wants to register its own HTML-tag namespace.
 - **`assets/`** — canonical CC mark assets (SVG + PNG), served via jsDelivr.
-- **`examples/index.html`** — static rendered preview, for visual reference.
 
 ## What this is NOT
 
@@ -157,27 +156,25 @@ supramental-gold/
 ├── assets/
 │   ├── cc-260508.svg/.png   ← canonical CC mark
 │   └── cc-250815-v4.svg     ← source-of-mark working file
-├── eleventy/
-│   ├── index.js             ← plugin entry
-│   ├── helpers.js           ← shared helpers
-│   ├── section-title-transform.js
-│   ├── custom-element-renderer.js
-│   └── primitives/
-│       ├── header.ejs       ← canonical (accepts brandLogoUrl)
-│       ├── chrome.ejs       ← canonical (forwards brandLogoUrl)
-│       ├── footer.ejs       ← canonical
-│       ├── sub-site-bar.ejs
-│       ├── status-badge.ejs
-│       ├── entry-title-row.ejs
-│       ├── provenance.ejs
-│       ├── outbound-action.ejs
-│       ├── section-title.ejs
-│       ├── article-card.ejs ← sample
-│       ├── article-view.ejs ← sample
-│       ├── hero.ejs         ← sample
-│       └── collaborator-chip.ejs ← sample
-└── examples/
-    └── index.html           ← static rendered preview
+└── eleventy/
+    ├── index.js             ← plugin entry
+    ├── helpers.js           ← shared helpers
+    ├── section-title-transform.js
+    ├── custom-element-renderer.js
+    └── primitives/
+        ├── header.ejs       ← canonical (accepts brandLogoUrl)
+        ├── chrome.ejs       ← canonical (forwards brandLogoUrl)
+        ├── footer.ejs       ← canonical
+        ├── sub-site-bar.ejs
+        ├── status-badge.ejs
+        ├── entry-title-row.ejs
+        ├── provenance.ejs
+        ├── outbound-action.ejs
+        ├── section-title.ejs
+        ├── article-card.ejs ← sample
+        ├── article-view.ejs ← sample
+        ├── hero.ejs         ← sample
+        └── collaborator-chip.ejs ← sample
 ```
 
 ## Naming

@@ -24,7 +24,6 @@ When designing in production, the relevant files in `supramental-gold/`:
 - **`eleventy/primitives/*.ejs`** — design primitives. Canonical: `header`, `chrome`, `footer`, `sub-site-bar`, `status-badge`, `entry-title-row`, `provenance`, `outbound-action`, `section-title`. Sample (not wired into production by default): `article-card`, `article-view`, `hero`, `collaborator-chip`.
 - **`eleventy/helpers.js`** — `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`.
 - **`eleventy/section-title-transform.js`** — generic factory for rewriting `<h2>` titles into `.group-header` shape + classing the following `<ul>`.
-- **`examples/index.html`** — static rendered preview, useful for visual reference.
 - **`dist/styles.css`** — compiled bundle (~118 KB). Tracked in git, served via jsDelivr; consumers don't import it from source.
 
 ## How the consumer uses SG (already in place; verify, don't reinstall)

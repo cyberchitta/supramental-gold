@@ -22,7 +22,6 @@
 /* SG's own primitives + assets */
 @source "./eleventy/**/*.{ejs,js}";
 @source "./assets/**/*.{html,js,svg}";
-@source "./examples/**/*.{html,ejs}";
 
 /* Main site */
 @source "../www.cyberchitta.cc/src/**/*.{html,js,ejs,md}";
