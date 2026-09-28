@@ -55,7 +55,7 @@ public repo.)
 | `eleventy/partials/site-meta.ejs`, `site-fonts.ejs`, `theme-init.ejs`, `featured-image-figure.ejs` | Lifted from the main site's `base.ejs` decomposition. Consumed by `layouts/base-chrome`. Override by placing the same path in the consumer's `_includes/`. |
 | `eleventy/partials/site-analytics.ejs`, `site-scripts.ejs` | Empty defaults. Slots shadowed by the consumer; main site uses them for GA and the CSR template-manager wiring. |
 | `assets/cc-260508.{svg,png}` | Canonical CC mark. Plain blobs, never LFS: jsDelivr serves an LFS pointer as the response body, under an image content-type (jsdelivr/jsdelivr#18235). Served via jsDelivr. |
-| `assets/cc-250815-v3.svg` | Source-of-mark working file; not used at runtime. |
+| `assets/cc-250815-v4.svg` | Source-of-mark working file; not used at runtime. |
 | `assets/logo.svg` | CSS-themable mark — picks up palette custom props from the host page. Used by `examples/index.html`; not served via jsDelivr. |
 | `examples/index.html` | Static rendered preview, not for production. |
 

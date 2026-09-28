@@ -42,7 +42,7 @@ In production (the live sites) these are loaded via Tailwind/DaisyUI rather than
 Surface these to the user when starting work where pixel fidelity matters:
 
 - **Fonts** are Google Fonts. Licensed / optical-size builds may differ subtly from how a foundry-licensed version renders.
-- **`cc-250815-v3.svg`** is the source-of-mark working file, not what ships — always pull `cc-260508.svg` / `.png` for the canonical render.
+- **`cc-250815-v4.svg`** is the source-of-mark working file, not what ships — always pull `cc-260508.svg` / `.png` for the canonical render.
 - **Showrunner avatar** (`manda-2504.webp`) is not in the SG package — bylines in mocks fall back to initials or a generic placeholder.
 
 ## Wordmark

@@ -165,7 +165,7 @@ If you add icons to a CyberChitta surface, match the existing four:
 ### Logos
 - `assets/cc-260508.svg` — canonical mark (the symbol designed by the Mother for the Golden Day medallion, 29 Feb 1960), served via jsDelivr at `@<tag>` to every consumer. Colors are baked in as hex values so the SVG renders correctly in any loading context (including `<img src>`).
 - `assets/cc-260508.png` — raster fallback for OG / social cards.
-- `assets/cc-250815-v3.svg` — source-of-mark working file. Not used at runtime.
+- `assets/cc-250815-v4.svg` — source-of-mark working file. Not used at runtime.
 - The wordmark **CyberChitta** is text styled with `.logo-text` (Courier Prime + animated gold→bronze gradient) — **not an SVG**. Always render it as live text next to the mark.
 
 To reskin the logo, edit the SVG directly — search-and-replace the palette hexes in the `:root` or the baked-in values.

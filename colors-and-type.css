@@ -48,8 +48,8 @@
   --syntax-sorry:           #a81c1c;
   --syntax-sorry-bg:        #f2d9d9;
 
-  /* Logo SVG CSS custom props — consumed by /assets/logo.svg and the
-     canonical cc-260508.svg mark.
+  /* Logo SVG CSS custom props — consumed by the design master,
+     assets/cc-250815-v4.svg; the shipped marks have them inlined.
      The underlying symbol was designed by the Mother for the Golden
      Day medallion, distributed 29 February 1960. The original symbol
      had no color; the gold + bronze + mythic palette was chosen when
@@ -58,20 +58,17 @@
      square, lotus petals, pads, waves, etc.). */
   --bronze:                 #cd5f2d;
   --gold:                   #d2aa32;
-  --platinum:               #E5E7EB;
   --pond-blue:              #A3BFFA;
   --lotus-rose:             #b43250;
   --pad-green:              #1F7A25;
   --wheel-rim-stroke:       var(--bronze);
-  --spoke-fill:             var(--platinum);
   --pond-square-fill:       var(--pond-blue);
   --pond-border-stroke:     var(--gold);
-  --lotus-upper-background: var(--platinum);
   --lotus-petal-fill:       var(--lotus-rose);
-  --lotus-petal-stroke:     var(--platinum);
-  --waves-stroke:           var(--platinum);
+  --lotus-petal-stroke:     var(--gold);
+  --waves-stroke:           var(--gold);
   --pad-fill:               var(--pad-green);
-  --pad-stroke:             var(--platinum);
+  --pad-stroke:             var(--gold);
 
   /* Type families (real) */
   --font-sans:       'Inter', sans-serif;

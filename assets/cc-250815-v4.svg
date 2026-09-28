@@ -6,30 +6,25 @@
            The underlying symbol is from the Mother's Golden Day medallion (29 Feb 1960). The original design had no color. */
         --bronze: #cd5f2d;
         --gold: #d2aa32;
-        --platinum: #E5E7EB;
         --pond-blue: #A3BFFA;
         --lotus-rose: #b43250;
         --pad-green: #1F7A25;
 
         /* Wheel elements */
         --wheel-rim-stroke: var(--bronze);
-        --spoke-fill: var(--platinum);
 
         /* Pond/Square elements */
         --pond-square-fill: var(--pond-blue);
         --pond-border-stroke: var(--gold);
 
-        /* Lotus background */
-        --lotus-upper-background: var(--platinum);
-
         /* Lotus details */
         --lotus-petal-fill: var(--lotus-rose);
-        --lotus-petal-stroke: var(--platinum);
-        --waves-stroke: var(--platinum);
+        --lotus-petal-stroke: var(--gold);
+        --waves-stroke: var(--gold);
 
         /* Pad elements */
         --pad-fill: var(--pad-green);
-        --pad-stroke: var(--platinum);
+        --pad-stroke: var(--gold);
       }
     </style>
 
@@ -40,48 +35,49 @@
       <stop offset="81.24%" stop-color="var(--gold)" />
       <stop offset="100%" stop-color="var(--gold)" />
     </radialGradient>
+    <!-- Cuts the spokes and the pond square out of the wheel, so the page shows
+         through the spokes and the sky. -->
+    <mask id="wheelCut" maskUnits="userSpaceOnUse" x="0" y="0" width="175" height="175">
+      <circle cx="87.5" cy="87.5" r="80" fill="#fff" />
+      <!-- Wheel spokes (12 spokes, each 10° wide) -->
+      <!-- Spoke 1: 15° -->
+      <path d="M 87.5 87.5 L 114.9 12.3 A 80 80 0 0 1 101.4 8.7 Z" fill="#000" />
+      <!-- Spoke 2: 45° -->
+      <path d="M 87.5 87.5 L 148.8 36.1 A 80 80 0 0 1 138.9 26.2 Z" fill="#000" />
+      <!-- Spoke 3: 75° -->
+      <path d="M 87.5 87.5 L 166.3 73.6 A 80 80 0 0 1 162.7 60.1 Z" fill="#000" />
+      <!-- Spoke 4: 105° -->
+      <path d="M 87.5 87.5 L 162.7 114.9 A 80 80 0 0 1 166.3 101.4 Z" fill="#000" />
+      <!-- Spoke 5: 135° -->
+      <path d="M 87.5 87.5 L 138.9 148.8 A 80 80 0 0 1 148.8 138.9 Z" fill="#000" />
+      <!-- Spoke 6: 165° -->
+      <path d="M 87.5 87.5 L 101.4 166.3 A 80 80 0 0 1 114.9 162.7 Z" fill="#000" />
+      <!-- Spoke 7: 195° -->
+      <path d="M 87.5 87.5 L 60.1 162.7 A 80 80 0 0 1 73.6 166.3 Z" fill="#000" />
+      <!-- Spoke 8: 225° -->
+      <path d="M 87.5 87.5 L 26.2 138.9 A 80 80 0 0 1 36.1 148.8 Z" fill="#000" />
+      <!-- Spoke 9: 255° -->
+      <path d="M 87.5 87.5 L 12.3 114.9 A 80 80 0 0 1 8.7 101.4 Z" fill="#000" />
+      <!-- Spoke 10: 285° -->
+      <path d="M 87.5 87.5 L 12.3 60.1 A 80 80 0 0 1 8.7 73.6 Z" fill="#000" />
+      <!-- Spoke 11: 315° -->
+      <path d="M 87.5 87.5 L 36.1 26.2 A 80 80 0 0 1 26.2 36.1 Z" fill="#000" />
+      <!-- Spoke 12: 345° -->
+      <path d="M 87.5 87.5 L 73.6 8.7 A 80 80 0 0 1 60.1 12.3 Z" fill="#000" />
+      <rect x="52.52" y="52.52" width="69.96" height="69.96" fill="#000" />
+    </mask>
   </defs>
 
   <!-- Wheel circle with radial gradient -->
-  <circle cx="87.5" cy="87.5" r="80" fill="url(#ringGradient)" stroke="none" />
-
-  <!-- Wheel spokes (12 spokes, each 10° wide) -->
-  <g>
-    <!-- Spoke 1: 15° -->
-    <path d="M 87.5 87.5 L 114.9 12.3 A 80 80 0 0 1 101.4 8.7 Z" fill="var(--spoke-fill)" />
-    <!-- Spoke 2: 45° -->
-    <path d="M 87.5 87.5 L 148.8 36.1 A 80 80 0 0 1 138.9 26.2 Z" fill="var(--spoke-fill)" />
-    <!-- Spoke 3: 75° -->
-    <path d="M 87.5 87.5 L 166.3 73.6 A 80 80 0 0 1 162.7 60.1 Z" fill="var(--spoke-fill)" />
-    <!-- Spoke 4: 105° -->
-    <path d="M 87.5 87.5 L 162.7 114.9 A 80 80 0 0 1 166.3 101.4 Z" fill="var(--spoke-fill)" />
-    <!-- Spoke 5: 135° -->
-    <path d="M 87.5 87.5 L 138.9 148.8 A 80 80 0 0 1 148.8 138.9 Z" fill="var(--spoke-fill)" />
-    <!-- Spoke 6: 165° -->
-    <path d="M 87.5 87.5 L 101.4 166.3 A 80 80 0 0 1 114.9 162.7 Z" fill="var(--spoke-fill)" />
-    <!-- Spoke 7: 195° -->
-    <path d="M 87.5 87.5 L 60.1 162.7 A 80 80 0 0 1 73.6 166.3 Z" fill="var(--spoke-fill)" />
-    <!-- Spoke 8: 225° -->
-    <path d="M 87.5 87.5 L 26.2 138.9 A 80 80 0 0 1 36.1 148.8 Z" fill="var(--spoke-fill)" />
-    <!-- Spoke 9: 255° -->
-    <path d="M 87.5 87.5 L 12.3 114.9 A 80 80 0 0 1 8.7 101.4 Z" fill="var(--spoke-fill)" />
-    <!-- Spoke 10: 285° -->
-    <path d="M 87.5 87.5 L 12.3 60.1 A 80 80 0 0 1 8.7 73.6 Z" fill="var(--spoke-fill)" />
-    <!-- Spoke 11: 315° -->
-    <path d="M 87.5 87.5 L 36.1 26.2 A 80 80 0 0 1 26.2 36.1 Z" fill="var(--spoke-fill)" />
-    <!-- Spoke 12: 345° -->
-    <path d="M 87.5 87.5 L 73.6 8.7 A 80 80 0 0 1 60.1 12.3 Z" fill="var(--spoke-fill)" />
-  </g>
+  <circle cx="87.5" cy="87.5" r="80" fill="url(#ringGradient)" stroke="none" mask="url(#wheelCut)" />
 
   <!-- Wheel rim -->
   <circle cx="87.5" cy="87.5" r="80" stroke="var(--wheel-rim-stroke)" stroke-width="3" fill="none" />
 
-  <!-- Pond square -->
-  <rect x="52.52" y="52.52" width="69.96" height="69.96" fill="var(--pond-square-fill)" />
-
   <!-- Central lotus design -->
   <g transform="translate(52.52, 52.52) scale(0.303)">
-    <rect x="0" y="0" width="231" height="133.5" fill="var(--lotus-upper-background)" />
+    <!-- Pond water, below the sky; the sky is left unpainted -->
+    <rect x="0" y="133.5" width="231" height="97.5" fill="var(--pond-square-fill)" />
     <rect x="4" y="4" width="223" height="223" stroke="var(--pond-border-stroke)" stroke-width="8" fill="none" />
 
     <!-- Waves -->
