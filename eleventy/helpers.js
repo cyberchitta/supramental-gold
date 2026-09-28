@@ -104,7 +104,9 @@ const helpers = {
   bylineWriters: (writers) => {
     const all = writers || [];
     const overflow = all.length > 3;
-    return { text: overflow ? `${all[0]} +${all.length - 1}` : all.join(' · '), overflow, all };
+    // Past three, `lead` names the first writer and `more` counts the rest; the
+    // templates render the count muted so it reads as a tally, not a handle.
+    return { lead: overflow ? all[0] : all.join(' · '), more: overflow ? all.length - 1 : 0, overflow, all };
   },
   stripPTags: (html) => {
     if (typeof html !== 'string') return html;

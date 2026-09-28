@@ -12,7 +12,7 @@ const writers = sgHelpers.bylineWriters((a.collaborators || []).map(c => '@' + S
   </h3>
   <% if (a.dek) { %><p class="cc-article-dek"><%= a.dek %></p><% } %>
   <div class="byline">
-    <span class="byline-writers"><%= writers.text %></span>
+    <span class="byline-writers"><%= writers.lead %><% if (writers.more) { %> <span class="byline-meta">+<%= writers.more %></span><% } %></span>
     <% if (a.showrunner || writers.overflow) { %>
     <details class="cc-byline-info">
       <summary aria-label="<%= writers.overflow ? 'Credits' : 'Showrunner' %>">

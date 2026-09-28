@@ -39,7 +39,7 @@
     <% if (hasByline || articlePublishedAt) { %>
     <div class="byline mt-3">
       <% if (hasByline) { %>
-        <span class="byline-writers"><%= bylineWriters.text %></span>
+        <span class="byline-writers"><%= bylineWriters.lead %><% if (bylineWriters.more) { %> <span class="byline-meta">+<%= bylineWriters.more %></span><% } %></span>
         <% if (articleShowrunner || bylineWriters.overflow) { %>
         <details class="byline-info dropdown dropdown-top <%= bylineWriters.overflow ? 'dropdown-start' : 'dropdown-end' %>">
           <summary class="btn btn-ghost btn-circle btn-xs list-none text-[var(--color-link)] hover:text-[var(--color-link-hover)]">

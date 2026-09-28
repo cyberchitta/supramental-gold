@@ -17,7 +17,7 @@ const _body = (typeof body !== 'undefined') ? body : '';
       <h1><%= a.title %></h1>
     </div>
     <div class="byline" style="margin-bottom: 1.5rem;">
-      <span class="byline-writers"><%= writers.text %></span>
+      <span class="byline-writers"><%= writers.lead %><% if (writers.more) { %> <span class="byline-meta">+<%= writers.more %></span><% } %></span>
       <% if (writers.overflow) { %>
       <details class="cc-byline-info">
         <summary aria-label="Writers">

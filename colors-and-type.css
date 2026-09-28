@@ -193,6 +193,17 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.25rem;
   text-transform: lowercase;
 }
+/* Shelf reference — a shelf's name quoted in running text ("3 more in
+   essays"), set in .group-header's small-caps voice so it reads as the label
+   above rather than as a word in the sentence. Keeps its gold on hover. */
+.shelf-ref {
+  font-family: var(--font-serif);
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-gold);
+  text-transform: lowercase;
+}
 .thread-eyebrow a,
 .article-content .thread-eyebrow a {
   color: inherit;
