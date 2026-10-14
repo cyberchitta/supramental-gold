@@ -20,21 +20,28 @@
 //
 // `createCustomElementRenderer` is exported for consumers that want
 // HTML-tag-style authoring for their own primitives (e.g. the live
-// site's <showcase>/<showtable>). SG itself doesn't use it.
+// site's <showcase>/<showtable>). SG itself doesn't use it. Its scan is
+// `createCustomElementScanner`, exported for consumers rendering the same
+// tags to another format (www's llms.txt).
 //
 // The plugin also registers a `wrapCredits` HTML transform so the
 // canonical `## Credits` section gets its `.credits-section` wrapper
-// (which SG's CSS targets) without each consumer wiring it up.
+// (which SG's CSS targets) without each consumer wiring it up, and a
+// `sgGlbScripts` transform that loads <model-viewer> and its theme /
+// reduced-motion script once on any page holding a `primitives/glb-figure`.
 
 import createCustomElementRenderer from './custom-element-renderer.js';
+import createCustomElementScanner from './custom-element-scanner.js';
 import createSectionTitleTransform from './section-title-transform.js';
 import wrapCredits from './wrap-credits.js';
 import repositionFootnotes from './reposition-footnotes.js';
+import addGlbScripts from './glb-scripts.js';
 import helpers from './helpers.js';
 import { applyHousePlugins } from './markdown-library.js';
 
 export {
   createCustomElementRenderer,
+  createCustomElementScanner,
   createSectionTitleTransform,
   wrapCredits,
   repositionFootnotes,
@@ -53,6 +60,12 @@ export default function supramentalGold(eleventyConfig, options = {}) {
   eleventyConfig.addTransform('sgRepositionFootnotes', function (content, outputPath) {
     if (outputPath && outputPath.endsWith('.html')) {
       return repositionFootnotes(content);
+    }
+    return content;
+  });
+  eleventyConfig.addTransform('sgGlbScripts', function (content, outputPath) {
+    if (outputPath && outputPath.endsWith('.html')) {
+      return addGlbScripts(content);
     }
     return content;
   });

@@ -7,130 +7,43 @@
 // This file is the canonical implementation for the CyberChitta design
 // system. Both supramental-gold's plugin and any consumer that needs a
 // renderer of its own (for site-specific tag namespaces) should use
-// `createRenderer(...)` from here.
+// `createRenderer(...)` from here. The scan itself lives in
+// `custom-element-scanner.js`, shared with non-HTML outputs.
 
 import ejs from 'ejs';
 import helpers from './helpers.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import createCustomElementScanner from './custom-element-scanner.js';
 
 // SG's own eleventy dir, exposed to templates as an EJS `views` fallback so a
 // consumer's element template can `include('primitives/<name>')` directly.
 const sgEleventyDir = path.dirname(fileURLToPath(import.meta.url));
 
-const noopParser = () => ({});
-
-function parseAttributes(attributesString) {
-  const attributeRegex = /(\w[\w-]*)="([^"]*)"/g;
-  const attributes = {};
-  let match;
-  while ((match = attributeRegex.exec(attributesString)) !== null) {
-    const [, key, value] = match;
-    attributes[key] = value;
-  }
-  return attributes;
-}
-
-function resolveTemplate(obj, attrs) {
-  if (typeof obj === 'string') return obj;
-  if (typeof obj !== 'object' || obj === null) return null;
-  if (Object.keys(attrs).length === 0) return obj;
-  for (const [key, value] of Object.entries(attrs)) {
-    if (value in obj) {
-      const { [key]: _omit, ...remaining } = attrs;
-      const resolved = resolveTemplate(obj[value], remaining);
-      if (resolved) return resolved;
-    }
-  }
-  return null;
-}
-
-class CustomElementRenderer {
-  constructor(elementConfigs, includesRoot, context, contentParsers) {
-    const tagRegex = Object.keys(elementConfigs)
-      .map((tag) => (/^[a-zA-Z][a-zA-Z0-9-]*$/.test(tag) ? tag.toLowerCase() : null))
-      .filter(Boolean)
-      .join('|');
-    if (!tagRegex) {
-      throw new Error('No valid tag names provided to custom-element renderer.');
-    }
-    this.elementConfigs = elementConfigs;
-    this.tagRegex = tagRegex;
-    this.includesRoot = includesRoot;
-    this.context = context || {};
-    this.contentParsers = contentParsers || {};
-  }
-
-  async renderCustomElements(content) {
-    // One alternation scanned once, self-closing branch first: a separate
-    // paired pass also matched `<tag … />` (`[^>]*?` admits the `/`) and ran
-    // its body on to the next element's closing tag, swallowing that element.
-    const element = new RegExp(
-      `<(${this.tagRegex})\\s*([^>]*?)\\s*/>|<(${this.tagRegex})\\s*([^>]*?)>([\\s\\S]*?)<\\/(?:${this.tagRegex})>`,
-      'g',
-    );
-
-    let out = '';
-    let last = 0;
-    let m;
-    while ((m = element.exec(content)) !== null) {
-      const [fullMatch, closedTag, closedAttrs, pairedTag, pairedAttrs, body] = m;
-      const rendered = closedTag
-        ? await this.render(closedTag, closedAttrs, '', fullMatch)
-        : await this.render(pairedTag, pairedAttrs, body.trim(), fullMatch);
-      out += content.slice(last, m.index) + rendered;
-      last = m.index + fullMatch.length;
-    }
-    return out + content.slice(last);
-  }
-
-  async render(tagName, attrsString, body, fullMatch) {
-    try {
-      const attributes = parseAttributes(attrsString);
-      const templateName = resolveTemplate(
-        this.elementConfigs[tagName],
-        attributes,
-      );
-      if (!templateName) {
-        console.error(
-          `[sg] Failed to resolve template for <${tagName}> with attributes:`,
-          attributes,
-        );
-        return fullMatch;
-      }
-      const parser = this.contentParsers[tagName] || noopParser;
-      const parsedBody = body ? parser(body) : {};
-      const templatePath = path.join(this.includesRoot, templateName);
-      return await ejs.renderFile(
-        templatePath,
+export default function createRenderer(
+  elementConfigs,
+  includesRoot,
+  context = {},
+  contentParsers = {},
+) {
+  return createCustomElementScanner({
+    elementConfigs,
+    contentParsers,
+    renderTemplate: ({ templateName, data }) =>
+      ejs.renderFile(
+        path.join(includesRoot, templateName),
         {
-          ...parsedBody,
-          ...attributes,
-          ...this.context,
+          ...data,
+          ...context,
           // Same global Eleventy registers for page templates, so primitives
           // rendered here can call sgHelpers too (article-list's byline).
           sgHelpers: helpers,
         },
-        { views: [this.includesRoot, sgEleventyDir] }
-      );
-    } catch (err) {
+        { views: [includesRoot, sgEleventyDir] },
+      ),
+    onError: (err, { tagName, fullMatch }) => {
       console.error(`[sg] Error rendering <${tagName}>:`, err);
       return fullMatch;
-    }
-  }
-}
-
-export default function createRenderer(
-  elementConfigs,
-  includesRoot,
-  context,
-  contentParsers,
-) {
-  const renderer = new CustomElementRenderer(
-    elementConfigs,
-    includesRoot,
-    context,
-    contentParsers,
-  );
-  return (content) => renderer.renderCustomElements(content);
+    },
+  });
 }

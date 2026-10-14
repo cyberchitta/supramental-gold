@@ -90,8 +90,8 @@ default; most of the site's images are, and that is fine. A `-light` / `-dark`
 pair is an option, not a requirement: worth it when the asset draws on the
 page's ground (a transparent background, line art in ink colors) and would
 read wrong on the other paper. Where a pair exists, the figure shows the one
-matching the page (`themed-image`: a `<picture>` source; `glb-pane` on
-sorted-studs: a script on `data-theme`).
+matching the page (`themed-image`: a `<picture>` source; `glb-figure` with
+`themed`: a script on `data-theme`).
 
 The rest of this section is **data figures only**. Series colors are a
 **named, semantic, page-scoped palette** — CSS custom properties defined in
@@ -265,8 +265,8 @@ The SVG carries `role="img"` and an `aria-label` set from the figcaption, so the
 figure announces its own description. Keep that when adding new chart types.
 A still or a model carries `alt` describing what it shows (the figcaption
 labels; the alt describes). Motion — a crossfade, an autoplaying animation —
-stops under `prefers-reduced-motion: reduce` (`themed-image` does; sorted-studs'
-autoplaying `glb-pane` does not yet).
+stops under `prefers-reduced-motion: reduce` (`themed-image` does; so does
+`glb-figure`, which drops autoplay).
 
 ## 8. Where a figure is defined (N=1 mechanism, firm rule)
 

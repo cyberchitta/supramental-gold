@@ -1,0 +1,47 @@
+<%
+  // A 3D model the reader can orbit, in the house figure frame (figures.md §1).
+  // Consumers register their own tag (`<showcase type="glb">`, `<glb-pane>`)
+  // to a one-line shim that includes this with their own `src` convention
+  // resolved to a URL.
+  //
+  // Locals: src (required; a URL — a cross-origin model must send
+  // Access-Control-Allow-Origin), alt (required), orbit (model-viewer's
+  // camera-orbit, e.g. "0deg 75deg auto"), caption, themed.
+  //
+  // themed: the model ships as a `-light` / `-dark` pair under `src`'s base
+  // name, and the page script sets the viewer's `src` from `data-theme`.
+  // Without it, `src` is the one file (figures.md §8: a pair is optional).
+  //
+  // The <model-viewer> module and the theme / reduced-motion script are not
+  // emitted here: SG's `sgGlbScripts` transform adds them once to any page
+  // carrying `data-sg-glb`.
+  const str = (name) => (typeof locals[name] === 'string' ? locals[name] : '');
+  if (!str('src') || !str('alt')) throw new Error('glb-figure: src and alt are required');
+  const themed = locals.themed === true || locals.themed === 'true';
+  const caption = str('caption');
+%>
+<div class="not-prose bg-base-200 rounded-lg shadow-sm border border-base-300 overflow-hidden" style="margin: 2rem 0">
+  <figure class="m-0">
+    <div class="px-1 sm:px-4 py-1">
+      <div class="overflow-hidden bg-base-100 rounded border border-base-300">
+        <model-viewer
+          data-sg-glb
+          <% if (themed) { %>data-sg-glb-base="<%= str('src') %>"<% } else { %>src="<%= str('src') %>"<% } %>
+          alt="<%= str('alt') %>"
+          autoplay
+          camera-controls
+          camera-orbit="<%= str('orbit') || 'auto auto auto' %>"
+          touch-action="pan-y"
+          interaction-prompt="none"
+          environment-image="neutral"
+          shadow-intensity="1"
+          exposure="1.1"
+          style="width: 100%; height: auto; aspect-ratio: 1 / 1; background: transparent;"
+        ></model-viewer>
+      </div>
+    </div>
+    <% if (caption) { %>
+    <figcaption class="px-1 sm:px-4 py-1 mt-0 mb-1" style="font-size: 0.8125rem; opacity: 0.7"><%= caption %></figcaption>
+    <% } %>
+  </figure>
+</div>

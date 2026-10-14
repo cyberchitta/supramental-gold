@@ -9,6 +9,7 @@
     "./package.json": "./package.json",
     "./eleventy": "./eleventy/index.js",
     "./eleventy/renderer": "./eleventy/custom-element-renderer.js",
+    "./eleventy/scanner": "./eleventy/custom-element-scanner.js",
     "./eleventy/section-title-transform": "./eleventy/section-title-transform.js",
     "./eleventy/site-url": "./eleventy/site-url.js",
     "./eleventy/helpers": "./eleventy/helpers.js",

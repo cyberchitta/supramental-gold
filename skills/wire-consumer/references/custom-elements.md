@@ -8,8 +8,8 @@ use it register their **own** tag namespaces; nothing here assumes a particular
 tag set:
 
 - `www.cyberchitta.cc` — `<showcase>` / `<showtable>` (media, charts, tables).
-- `sorted-studs` — `<glb-pane>` (hides `<model-viewer>` boilerplate).
-- `ch-ai-tanya` — doesn't use it at all.
+- `sorted-studs` — `<glb-pane>` (a 3D model; see `primitives/glb-figure`).
+- `ch-ai-tanya` — `<showcase>` (wiki lists and the concept map).
 
 Everything below is the renderer mechanism plus the authoring facts that follow
 from markdown-it and the transform — true for any consumer that wires it.
@@ -54,6 +54,9 @@ thread eyebrow, byline dropdown), the consumer's element template shrinks to a
 mapper from site data onto the primitive's locals, and the markup (with the
 classes SG's JIT scans) lives in SG per the SG-owns-markup rule.
 `www.cyberchitta.cc`'s `showcase/article-list.ejs` is the reference delegator.
+`primitives/glb-figure.ejs` is the smallest: a consumer's shim resolves its own
+`src` convention to a URL and includes it, and SG's `sgGlbScripts` transform
+loads the viewer once per page.
 
 **Locals each `.ejs` receives** — `{ ...parsedBody, ...attributes, ...context }`:
 
@@ -144,7 +147,11 @@ These follow from markdown-it + the transform and apply to any consumer:
 
 A consumer that produces a markdown/text rendering of its pages (e.g. an
 llms.txt) pairs each `.ejs` with a separate markdown renderer and a second
-render path. That's a **consumer-specific** concern — the rendering convention,
-the build wiring, and the failure modes it introduces are documented by that
-consumer, not here. (See `www.cyberchitta.cc`'s `site-build` skill for a worked
+render path. Use **`createCustomElementScanner`** (`@cyberchitta/supramental-gold/eleventy/scanner`)
+for that path, so both outputs read the same tags the same way: it does the
+scan, attribute parsing, template resolution and content parsing, and your
+`renderTemplate({ tagName, templateName, data, body, extra })` callback renders.
+A second copy of the scan drifted twice (self-closing tags, hyphenated
+attributes) before it was shared. The rendering convention and build wiring are
+the consumer's, documented there, not here. (See `www.cyberchitta.cc`'s `site-build` skill for a worked
 example.)
