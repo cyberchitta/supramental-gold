@@ -62,35 +62,26 @@ class CustomElementRenderer {
   }
 
   async renderCustomElements(content) {
-    const replacements = [];
-    const selfClosing = new RegExp(
-      `<(${this.tagRegex})\\s*([^>]*?)\\s*/>`,
-      'g',
-    );
-    const paired = new RegExp(
-      `<(${this.tagRegex})\\s*([^>]*?)>([\\s\\S]*?)<\\/(?:${this.tagRegex})>`,
+    // One alternation scanned once, self-closing branch first: a separate
+    // paired pass also matched `<tag … />` (`[^>]*?` admits the `/`) and ran
+    // its body on to the next element's closing tag, swallowing that element.
+    const element = new RegExp(
+      `<(${this.tagRegex})\\s*([^>]*?)\\s*/>|<(${this.tagRegex})\\s*([^>]*?)>([\\s\\S]*?)<\\/(?:${this.tagRegex})>`,
       'g',
     );
 
+    let out = '';
+    let last = 0;
     let m;
-    while ((m = selfClosing.exec(content)) !== null) {
-      const [fullMatch, tagName, attrs] = m;
-      replacements.push({
-        fullMatch,
-        rendered: await this.render(tagName, attrs, '', fullMatch),
-      });
+    while ((m = element.exec(content)) !== null) {
+      const [fullMatch, closedTag, closedAttrs, pairedTag, pairedAttrs, body] = m;
+      const rendered = closedTag
+        ? await this.render(closedTag, closedAttrs, '', fullMatch)
+        : await this.render(pairedTag, pairedAttrs, body.trim(), fullMatch);
+      out += content.slice(last, m.index) + rendered;
+      last = m.index + fullMatch.length;
     }
-    while ((m = paired.exec(content)) !== null) {
-      const [fullMatch, tagName, attrs, body] = m;
-      replacements.push({
-        fullMatch,
-        rendered: await this.render(tagName, attrs, body.trim(), fullMatch),
-      });
-    }
-    return replacements.reduce(
-      (out, { fullMatch, rendered }) => out.replace(fullMatch, rendered),
-      content,
-    );
+    return out + content.slice(last);
   }
 
   async render(tagName, attrsString, body, fullMatch) {
