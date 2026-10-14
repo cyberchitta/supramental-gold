@@ -1,8 +1,8 @@
 <%
   // A 3D model the reader can orbit, in the house figure frame (figures.md §1).
   // Consumers register their own tag (`<showcase type="glb">`, `<glb-pane>`)
-  // to a one-line shim that includes this with their own `src` convention
-  // resolved to a URL.
+  // straight to this template; the renderer finds it in SG when the consumer
+  // has no file at `primitives/glb-figure.ejs`.
   //
   // Locals: src (required; a URL — a cross-origin model must send
   // Access-Control-Allow-Origin), alt (required), orbit (model-viewer's

@@ -27,15 +27,28 @@ test('src and alt are required', async () => {
   await expect(render({ src: '/m.glb' })).rejects.toThrow('src and alt are required');
 });
 
-test('a consumer shim registers its own tag to the primitive', async () => {
+test('a consumer tag registers straight to the SG primitive', async () => {
   const renderer = createRenderer(
-    { 'glb-pane': 'model.ejs' },
+    { 'glb-pane': 'primitives/glb-figure.ejs' },
     path.join(root, 'fixtures/custom-elements'),
   );
-  const html = await renderer('<glb-pane src="d.glb" alt="Diverter" caption="Cap" />');
-  expect(html).toContain('data-sg-glb-base="/models/d.glb"');
+  const html = await renderer('<glb-pane src="/d.glb" alt="Diverter" caption="Cap" themed="true" />');
+  expect(html).toContain('data-sg-glb-base="/d.glb"');
   expect(html).toContain('alt="Diverter"');
   expect(html).toContain('>Cap</figcaption>');
+});
+
+test('a consumer template at the same path shadows the SG one', async () => {
+  const renderer = createRenderer(
+    { showcase: 'primitives/glb-figure.ejs' },
+    path.join(root, 'fixtures/shadow'),
+  );
+  expect(await renderer('<showcase />')).toBe('shadowed\n');
+});
+
+test('a template found in neither place leaves the tag as it was', async () => {
+  const renderer = createRenderer({ showcase: 'primitives/nope.ejs' }, path.join(root, 'fixtures/shadow'));
+  expect(await renderer('<showcase />')).toBe('<showcase />');
 });
 
 test('the scripts are added once, and only to a page with a figure', async () => {

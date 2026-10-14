@@ -11,13 +11,16 @@
 // `custom-element-scanner.js`, shared with non-HTML outputs.
 
 import ejs from 'ejs';
+import fs from 'fs';
 import helpers from './helpers.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import createCustomElementScanner from './custom-element-scanner.js';
 
-// SG's own eleventy dir, exposed to templates as an EJS `views` fallback so a
-// consumer's element template can `include('primitives/<name>')` directly.
+// SG's own eleventy dir, the fallback after the consumer's includes both for
+// an element's template (a tag can register straight to
+// `primitives/<name>.ejs`) and for EJS `include`s inside it. A consumer file at
+// the same path shadows SG's.
 const sgEleventyDir = path.dirname(fileURLToPath(import.meta.url));
 
 export default function createRenderer(
@@ -26,12 +29,21 @@ export default function createRenderer(
   context = {},
   contentParsers = {},
 ) {
+  const roots = [includesRoot, sgEleventyDir];
+  const templatePath = (templateName) => {
+    const found = roots
+      .map((root) => path.join(root, templateName))
+      .find((p) => fs.existsSync(p));
+    if (!found) throw new Error(`No template ${templateName} under ${roots.join(' or ')}`);
+    return found;
+  };
+
   return createCustomElementScanner({
     elementConfigs,
     contentParsers,
     renderTemplate: ({ templateName, data }) =>
       ejs.renderFile(
-        path.join(includesRoot, templateName),
+        templatePath(templateName),
         {
           ...data,
           ...context,
@@ -39,7 +51,7 @@ export default function createRenderer(
           // rendered here can call sgHelpers too (article-list's byline).
           sgHelpers: helpers,
         },
-        { views: [includesRoot, sgEleventyDir] },
+        { views: roots },
       ),
     onError: (err, { tagName, fullMatch }) => {
       console.error(`[sg] Error rendering <${tagName}>:`, err);

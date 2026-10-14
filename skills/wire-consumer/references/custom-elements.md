@@ -44,6 +44,10 @@ eleventyConfig.addTransform('renderCustomElements', async (content, outputPath) 
 
 **Template resolution** — a string config *is* the template; a nested object
 dispatches on attribute values (`<showcase type="hero">` → `configs.showcase.hero`).
+The path is looked up under `includesRoot` first, then SG's `eleventy/` (v0.4.22+),
+so a tag can register straight to an SG primitive — `'glb-pane':
+'primitives/glb-figure.ejs'` — and the config names the dependency. A consumer
+file at the same path shadows it.
 
 **Views fallback (v0.4.0+)** — element templates render with
 `views: [includesRoot, <SG's own eleventy dir>]`, so a consumer's `.ejs` can
@@ -54,9 +58,10 @@ thread eyebrow, byline dropdown), the consumer's element template shrinks to a
 mapper from site data onto the primitive's locals, and the markup (with the
 classes SG's JIT scans) lives in SG per the SG-owns-markup rule.
 `www.cyberchitta.cc`'s `showcase/article-list.ejs` is the reference delegator.
-`primitives/glb-figure.ejs` is the smallest: a consumer's shim resolves its own
-`src` convention to a URL and includes it, and SG's `sgGlbScripts` transform
-loads the viewer once per page.
+When a delegator would only forward its locals, skip it and register the tag to
+the primitive itself: `primitives/glb-figure.ejs` takes its locals straight from
+the tag's attributes, and SG's `sgGlbScripts` transform loads the viewer once per
+page.
 
 **Locals each `.ejs` receives** — `{ ...parsedBody, ...attributes, ...context }`:
 
