@@ -29,8 +29,31 @@ export function stripTableSyntax(body) {
     .join('\n');
 }
 
+// Markup in the source — HTML tags, `<style>` / `<script>` blocks, comments,
+// EJS tags — is scaffolding, not reading. Drop it so a page that frames a
+// figure in raw HTML (or includes a partial) counts its prose, not its class
+// names. A tag's inner text is kept, and the tag leaves no gap, so
+// `**<span>x</span>**` still counts one word. Autolinks (`<https://…>`) are
+// not tags. Code (fenced blocks, inline spans) is left alone: a `<showcase>`
+// mentioned in prose is a word the reader reads.
+export function stripMarkup(body) {
+  return body
+    .split(/(```[\s\S]*?```|`[^`\n]*`)/)
+    .map((part, i) =>
+      i % 2
+        ? part
+        : part
+            .replace(/<%[\s\S]*?%>/g, ' ')
+            .replace(/<!--[\s\S]*?-->/g, ' ')
+            .replace(/<(style|script)\b[\s\S]*?<\/\1>/gi, ' ')
+            .replace(/<\/?[a-zA-Z][\w-]*(?:\s[^>]*)?\/?>/g, ''),
+    )
+    .join('');
+}
+
 export function calculateReadingTime(text) {
-  return Math.ceil(stripTableSyntax(text).trim().split(/\s+/).length / WORDS_PER_MINUTE);
+  const words = stripTableSyntax(stripMarkup(text)).trim().split(/\s+/).filter(Boolean);
+  return Math.ceil(words.length / WORDS_PER_MINUTE);
 }
 
 export function stripNonReadingSections(body) {
