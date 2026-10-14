@@ -1,13 +1,20 @@
-# Figures — the house treatment for charts, maps, and visualizations
+# Figures — the house treatment for every figure
 
 **Status: candidate.** Not yet linked from `design-surface/SKILL.md`. Distilled
-from the live figures on `www.cyberchitta.cc` (`vg-strip-plot`, `land-cover-map`,
-`pc-chart`). Fold into the skill once a third surface confirms the line-chart
-conventions generalize. See `_notes/NEXT_STEPS.md`.
+from the live data figures on `www.cyberchitta.cc` (`vg-strip-plot`,
+`land-cover-map`, `pc-chart`), then widened (2026-10-14) to every figure a
+consumer ships: charts and maps, stills, 3D models, animations. Fold into the
+skill once a third surface confirms the line-chart conventions generalize. See
+`_notes/NEXT_STEPS.md`.
+
+**Scope.** §§1, 4, 6, 7, 8 and §5's floating cluster apply to every figure.
+Marked *data figures only*: §2 (axes), §3's series palette, §5's modal legend
+— a still or a model has no axes, series, or key. A figure that does not wear
+this treatment is drift, not a different house style.
 
 This is the figure-level companion to `visual.md`. `visual.md` owns the page's
 look (warm paper-ink, gold + bronze, hairline boundaries, *Less is More*, the
-"what to avoid" tripwires). This doc owns what a **data figure** does inside that
+"what to avoid" tripwires). This doc owns what a **figure** does inside that
 look: container, axes, color, captions, controls, states. Read `visual.md`
 first; nothing here overrides it.
 
@@ -15,10 +22,12 @@ first; nothing here overrides it.
 pattern; `N=1` is the current reference implementation, proposed as the standard
 and to be confirmed by the next figure.
 
-## 1. Container (N=3)
+## 1. Container (N=4)
 
-`vg-strip-plot.ejs`, `land-cover-map.ejs`, and `pc-chart.ejs` share an identical
-wrapper. Match it for any framed figure:
+`vg-strip-plot.ejs`, `land-cover-map.ejs`, `pc-chart.ejs`, and the still
+`themed-image.ejs` share an identical wrapper. Match it for every figure — a
+`<model-viewer>`, an image, or an animation sits in the inner viewport exactly
+as a plot does:
 
 ```ejs
 <div class="… bg-base-200 rounded-lg shadow-sm border border-base-300 overflow-hidden relative">
@@ -38,7 +47,8 @@ wrapper. Match it for any framed figure:
   `border-base-300`, `overflow-hidden`, **`relative`** (positioning context for
   the floating controls).
 - Inner viewport: `bg-base-100`, `rounded`, hairline `border-base-300`. A map is
-  `aspect-square`; a line chart is a fixed pixel height (§2).
+  `aspect-square`; a line chart is a fixed pixel height (§2); a still or a
+  model holds its own aspect ratio, so the figure never reflows on load.
 - `<figure class="m-0 pt-5">` — the `pt-5` reserves headroom under the
   floating control cluster.
 
@@ -47,7 +57,7 @@ wrapper. Match it for any framed figure:
 > it `left-14` (to clear the y-axis) rather than `top-2 right-2`. Neither is a
 > theming divergence.
 
-## 2. Axes & gridlines (N=1 — `pc-chart`, the reference line chart)
+## 2. Axes & gridlines — data figures only (N=1 — `pc-chart`, the reference line chart)
 
 SVG drawn client-side; a 300px fixed height; margins `{ top, right: 10,
 bottom: 26, left: 50 }`. Conventions, all in token colors so light/dark track
@@ -74,9 +84,19 @@ read via an inline `style` so theme toggles need no re-render, like the colors.
 
 ## 3. Color (N=1 palette mechanism, but a firm convention)
 
-Series colors are a **named, semantic, page-scoped palette** — CSS custom
-properties defined in the page layout's `:root` (light) and `[data-theme=dark]`
-blocks, referenced by name in the series definitions:
+**Theming.** Token colors (`base-*`, `base-content`, `primary`) track
+light/dark on their own. A rendered asset — a still, a GLB — is one file by
+default; most of the site's images are, and that is fine. A `-light` / `-dark`
+pair is an option, not a requirement: worth it when the asset draws on the
+page's ground (a transparent background, line art in ink colors) and would
+read wrong on the other paper. Where a pair exists, the figure shows the one
+matching the page (`themed-image`: a `<picture>` source; `glb-pane` on
+sorted-studs: a script on `data-theme`).
+
+The rest of this section is **data figures only**. Series colors are a
+**named, semantic, page-scoped palette** — CSS custom properties defined in
+the page layout's `:root` (light) and `[data-theme=dark]` blocks, referenced by
+name in the series definitions:
 
 ```css
 :root            { --pc-xmr: #f38230; --pc-zec: #4b80e6; --pc-x402: #00b89b;
@@ -123,11 +143,13 @@ Rules:
 
 ## 4. Captions — two levels
 
-A house data figure is captioned twice, at two altitudes:
+A house figure is captioned twice, at two altitudes:
 
 1. **`<figcaption>` — the label.** Short, neutral, says *what this view is*
-   (and updates with the active mode on interactive charts). On `pc-chart`:
-   `font-size: 0.8125rem; opacity: 0.7`.
+   (and updates with the active mode on interactive charts, or with the toggle
+   on a still). On `pc-chart` and `themed-image`:
+   `font-size: 0.8125rem; opacity: 0.7`. The label never sits in the body
+   prose after an uncaptioned `<figure>`.
 2. **"What to look for" — the interpretation (optional, gated).** A
    **bold-lead-in prose line in the article body, right after the figure**,
    telling the reader what the chart is *for* and what reading to take from it:
@@ -143,6 +165,12 @@ A house data figure is captioned twice, at two altitudes:
    optional the same day. Keep the two briefs consistent.
 
 ## 5. Controls — floating cluster + modal legend (N=2)
+
+The floating cluster applies to every figure; the modal legend is **data
+figures only**. `themed-image` (a still whose toggle swaps before ⇄ after or
+draws outlines) is the non-data case: cluster and toggle, no legend. Over a
+`<model-viewer>`, which captures drag on its own surface, the cluster is
+untested — record the first one here.
 
 When a figure needs controls (mode/layer toggles, density switch, opacity) and a
 legend, both `land-cover-map.ejs` and `vg-strip-plot.ejs` use one treatment:
@@ -235,6 +263,10 @@ as the second data point.
 
 The SVG carries `role="img"` and an `aria-label` set from the figcaption, so the
 figure announces its own description. Keep that when adding new chart types.
+A still or a model carries `alt` describing what it shows (the figcaption
+labels; the alt describes). Motion — a crossfade, an autoplaying animation —
+stops under `prefers-reduced-motion: reduce` (`themed-image` does; sorted-studs'
+autoplaying `glb-pane` does not yet).
 
 ## 8. Where a figure is defined (N=1 mechanism, firm rule)
 
