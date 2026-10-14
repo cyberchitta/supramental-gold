@@ -64,7 +64,7 @@ git commit -F - -- dist/styles.css package.json <source paths> <<'EOF'
 Co-authored-by: <model name> <<model-slug>@<tool>>
 EOF
 # 5. Tag and push.
-git tag -a <vX.Y.Z> -m "<vX.Y.Z> — <what changed>"
+git tag <vX.Y.Z>
 git push origin main
 git push origin <vX.Y.Z>
 ```
