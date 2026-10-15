@@ -110,10 +110,11 @@ wrapping a section in a div is the next iteration).
 Repo primitives use a mix of Tailwind utilities and `cc-*` semantic
 classes (defined in `ui-kit.css`). Canonical primitives (header,
 chrome, footer, sub-site-bar, etc.) follow live's Tailwind-utility
-paradigm. Sample primitives (article-card, article-view, hero,
+paradigm. Sample primitives (article-card, article-view,
 collaborator-chip) use `cc-*` semantic classes — these are
 documented design vocabulary, not wired into any production consumer.
-Promoting them requires reconciling the two paradigms.
+Promoting them requires reconciling the two paradigms; `hero` was promoted
+that way in v0.5.0, absorbing the production `featured-image-figure` partial.
 
 ## Credits close with a showrunner end-card
 

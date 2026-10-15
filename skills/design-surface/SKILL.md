@@ -21,7 +21,7 @@ When designing in production, the relevant files in `supramental-gold/`:
 - **`ui-kit.css`** — component styles in two layers:
   - `cc-*` classes — blog surface vocabulary (header, hero, article row, byline-info, footer, article view).
   - Wiki / sub-site primitives — `sub-site-bar`, `status-badge`, `provenance`, `outbound-action`, `entry-title-row`, `finding-list`, `concept-entry`, `backlink-list`, `crumb-nav`, density toggles.
-- **`eleventy/primitives/*.ejs`** — design primitives. Canonical: `header`, `chrome`, `footer`, `sub-site-bar`, `status-badge`, `entry-title-row`, `provenance`, `outbound-action`, `section-title`. Sample (not wired into production by default): `article-card`, `article-view`, `hero`, `collaborator-chip`.
+- **`eleventy/primitives/*.ejs`** — design primitives. Canonical: `header`, `chrome`, `footer`, `sub-site-bar`, `status-badge`, `entry-title-row`, `provenance`, `outbound-action`, `section-title`, `hero`. Sample (not wired into production by default): `article-card`, `article-view`, `collaborator-chip`.
 - **`eleventy/helpers.js`** — `formatDate`, `parentConcepts`, `findingBySlug`, `conceptBySlug`, `byTitle`, `byDateDesc`, `yearMonth`.
 - **`eleventy/section-title-transform.js`** — generic factory for rewriting `<h2>` titles into `.group-header` shape + classing the following `<ul>`.
 - **`dist/styles.css`** — compiled bundle (~118 KB). Tracked in git, served via jsDelivr; consumers don't import it from source.

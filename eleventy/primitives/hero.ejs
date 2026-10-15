@@ -1,28 +1,36 @@
 <%
-// Hero image — full-width inside the max-w-3xl container.
+// Hero — the page's featured image, full-width inside the max-w-3xl container.
+// The frame is square on mobile and 16:9 from md up (.cc-hero-frame).
 // Locals:
-//   src          — image URL (required)
-//   alt          — alt text
-//   attribution  — { artist, artistHref, org, orgHref } (optional)
-const _src   = src;
-const _alt   = (typeof alt !== 'undefined' && alt) || '';
-const _attr  = (typeof attribution !== 'undefined') ? attribution : null;
+//   featuredImage — image URL; nothing renders without it
+//   imageCredit   — HTML for the ⓘ attribution card; also the alt text
+//   imageCaption  — optional caption under the image
+//   title         — alt-text fallback when there is no credit
+// Per-image metadata comes from site.images: width, height, and heroFocus —
+// a CSS <position> naming the point the crop keeps. A square hero loses its
+// top and bottom thirds on desktop only. Defaults to the image centre.
+%>
+<% if (featuredImage) {
+const imageMetadata = site.images.find(img => img.url === featuredImage) || {};
 %>
 <figure class="cc-hero">
   <div class="cc-container">
     <div class="cc-hero-inner">
       <div class="cc-hero-frame">
-        <img src="<%= _src %>" alt="<%= _alt %>">
+        <img src="<%= featuredImage %>" alt="<%= imageCredit ? helpers.stripHtml(imageCredit) : 'Featured image for ' + title %>"<% if (imageMetadata.heroFocus) { %> style="object-position: <%= imageMetadata.heroFocus %>"<% } %> width="<%= imageMetadata.width %>" height="<%= imageMetadata.height %>" fetchpriority="high" decoding="async">
       </div>
-      <% if (_attr) { %>
+      <% if (imageCredit) { %>
       <details class="cc-hero-attr">
-        <summary aria-label="Attribution"><span class="icon icon-info" style="width:0.95rem;height:0.95rem"></span></summary>
-        <div class="cc-hero-attr-card">
-          Image by <a href="<%= _attr.artistHref %>"><%= _attr.artist %></a>
-          for <a href="<%= _attr.orgHref %>"><%= _attr.org %></a>
-        </div>
+        <summary aria-label="Image attribution"><span class="icon icon-info" style="width:0.95rem;height:0.95rem"></span></summary>
+        <div class="cc-hero-attr-card"><%- imageCredit %></div>
       </details>
       <% } %>
     </div>
+    <% if (imageCaption) { %>
+    <figcaption class="mt-2 text-sm text-base-content/70 italic">
+      <%= imageCaption %>
+    </figcaption>
+    <% } %>
   </div>
 </figure>
+<% } %>
