@@ -14,7 +14,7 @@ A versioned, Eleventy-aware design system. It contains:
 
 - **`voice.md`** — house voice, attribution, surface registers, editorial discipline. Read this before drafting or copyediting.
 - **`visual.md`** — visual brief. Look, layout, motion, philosophy (*Less is More*), anti-patterns, iconography rules. Read this before designing.
-- **`SKILL.md`** — router entry for AI tools. Delegates to one of eight child skills under `skills/`: `design-throwaway` (mocks / decks / demos), `design-surface` (production site work), `wire-consumer` (first-time consumer wiring), `wire-deploy` (first-time Netlify deploy setup), `draft-article` (cold-start a new article), `copyedit` (edit an existing draft), `vibe` (house code style), `vidhi` (authoring house skills).
+- **`SKILL.md`** — router entry for AI tools. Delegates to one of eight child skills under `skills/`: `design-throwaway` (mocks / decks / demos), `design-surface` (production site work), `wire-consumer` (first-time consumer wiring), `wire-deploy` (first-time deploy setup, Netlify or GitHub Pages), `draft-article` (cold-start a new article), `copyedit` (edit an existing draft), `vibe` (house code style), `vidhi` (authoring house skills).
 - **`tailwind.css`** — Tailwind v4 + DaisyUI build entry. Multi-source `@source` scan covers SG plus every sibling consumer repo. Compiled to:
 - **`dist/styles.css`** — the canonical CSS bundle, served via jsDelivr to every consumer.
 - **`colors-and-type.css`** + **`ui-kit.css`** — the source CSS imported by `tailwind.css`. Tokens (light + dark), semantic element styles, and the wiki design vocabulary.
@@ -140,7 +140,7 @@ supramental-gold/
 │   ├── design-throwaway/SKILL.md   ← mocks, decks, demos via CDN
 │   ├── design-surface/SKILL.md     ← production design on a wired consumer
 │   ├── wire-consumer/SKILL.md      ← first-time consumer wiring
-│   ├── wire-deploy/SKILL.md        ← first-time Netlify deploy setup
+│   ├── wire-deploy/SKILL.md        ← first-time deploy setup (Netlify, GitHub Pages)
 │   ├── draft-article/SKILL.md      ← cold-start a new article
 │   ├── copyedit/SKILL.md           ← edit an existing draft
 │   ├── vibe/SKILL.md               ← house code style

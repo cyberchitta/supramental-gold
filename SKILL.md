@@ -17,7 +17,7 @@ This file is a **router**. For any actual work, invoke one of the child skills b
 | **`design-throwaway`** | Producing a one-off artifact (slide, mock, prototype, deck, OG card, single-page demo). Pulls SG via the public CDN, doesn't need the Eleventy plugin. |
 | **`design-surface`** | Production design work on a consumer site that already wires SG (`www.cyberchitta.cc`, `ch-ai-tanya`, etc.). Adding or modifying components, primitives, surfaces. |
 | **`wire-consumer`** | First-time wiring of a new consumer site — npm dep-pin, `_data/sg.js`, Eleventy plugin registration. One-shot setup; afterwards switch to `design-surface`. |
-| **`wire-deploy`** | First-time **Netlify** deploy setup — git LFS for binary assets, immutable cache headers, production-context `cp` step, date-suffix filename convention. Complements `wire-consumer`. Skip for GitHub Pages or non-Netlify targets. |
+| **`wire-deploy`** | First-time deploy setup, **Netlify** or **GitHub Pages**. Netlify: git LFS for binary assets, immutable cache headers, production-context `cp` step. Pages: the Actions workflow (root, subdirectory, or toolchain on a `site-build` branch), custom domain, deploy-branch rule. Date-suffix filename convention for both. Complements `wire-consumer`. |
 
 ### Editorial
 
