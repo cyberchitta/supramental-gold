@@ -19,7 +19,7 @@ A versioned, Eleventy-aware design system. It contains:
 - **`dist/styles.css`** — the canonical CSS bundle, served via jsDelivr to every consumer.
 - **`colors-and-type.css`** + **`ui-kit.css`** — the source CSS imported by `tailwind.css`. Tokens (light + dark), semantic element styles, and the wiki design vocabulary.
 - **`eleventy/index.js`** — Eleventy plugin entry. Registers `sgHelpers` as global data.
-- **`eleventy/primitives/*.ejs`** — design primitives. Header, chrome, footer, article-list, glb-figure, sub-site-bar, status-badge, entry-title-row, provenance, outbound-action, section-title, hero are canonical; article-card, article-view, collaborator-chip ship as samples.
+- **`eleventy/primitives/*.ejs`** — design primitives. Header, chrome, footer, article-list, glb-figure, image-figure, sub-site-bar, status-badge, entry-title-row, provenance, outbound-action, section-title, hero are canonical; article-card, article-view, collaborator-chip ship as samples.
 - **`eleventy/helpers.js`** — date formatters, slug lookups, inverse-collection helpers, section folding.
 - **`eleventy/section-title-transform.js`** — factory for rewriting wiki H2 titles into the `.group-header` shape with optional list classes.
 - **`eleventy/custom-element-renderer.js`** — exported factory for any consumer that wants to register its own HTML-tag namespace. Its scan is **`eleventy/custom-element-scanner.js`**, exported for rendering the same tags to another format.

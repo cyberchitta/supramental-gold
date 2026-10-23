@@ -1,0 +1,30 @@
+<%
+  // A still in one file, in the house figure frame (figures.md §1), for an
+  // image that does not change with the page theme. Lifted from
+  // www.cyberchitta.cc's `showcase/image.ejs` (e60a0f9).
+  //
+  // Consumers register it as a showcase type
+  // (`{ showcase: { image: 'primitives/image-figure.ejs' } }`) and author
+  // `<showcase type="image" … />`.
+  //
+  // Locals: src (required; a URL), alt (required), frame (required; "WxH",
+  // the image's pixel size, so the figure holds its height before the file
+  // arrives), caption. No control cluster, so no headroom above the viewport.
+  const str = (name) => (typeof locals[name] === 'string' ? locals[name] : '');
+  if (!str('src') || !str('alt')) throw new Error('image-figure: src and alt are required');
+  const [width, height] = str('frame').split('x').map(Number);
+  if (!width || !height) throw new Error('image-figure: frame="WxH" is required');
+  const caption = str('caption');
+%>
+<div class="not-prose bg-base-200 rounded-lg shadow-sm border border-base-300 overflow-hidden" style="margin: 2rem 0">
+  <figure class="m-0">
+    <div class="px-1 sm:px-4 py-1">
+      <div class="overflow-hidden bg-base-100 rounded border border-base-300">
+        <img class="block w-full h-auto" src="<%= str('src') %>" alt="<%= str('alt') %>" width="<%= width %>" height="<%= height %>" loading="lazy" decoding="async" />
+      </div>
+    </div>
+    <% if (caption) { %>
+    <figcaption class="px-1 sm:px-4 py-1 mt-0 mb-1" style="font-size: 0.8125rem; opacity: 0.7"><%= caption %></figcaption>
+    <% } %>
+  </figure>
+</div>
