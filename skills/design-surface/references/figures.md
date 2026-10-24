@@ -127,9 +127,8 @@ Rules:
   wins — see `visual.md § What to avoid`, "rainbow category colors", now carved
   out for data figures.)
 - **Light + dark pairs for every token**, same hue, lightness/chroma re-tuned per
-  paper — not the dark value mechanically lightened. A practical generator
-  (`drafts/pc-palette/gen-palette.mjs` on the consumer) holds one `(hue, L, C)`
-  row per entity per theme and converts OKLCH → sRGB hex.
+  paper — not the dark value mechanically lightened. A practical generator holds
+  one `(hue, L, C)` row per entity per theme and converts OKLCH → sRGB hex.
 - **Only co-occurring series must separate.** Tune the tight pairs that share a
   chart (on `pc-chart`: teal↔blue, orange↔rose, blue↔slate); two hues that never
   appear together may sit close. Context/baseline series (a taupe BTC, a slate
