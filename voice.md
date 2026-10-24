@@ -36,7 +36,7 @@ These hold across **every** surface. They are the part of the voice that makes a
 - **Trust the reader to hold the thread.** No "as mentioned earlier", no "to recap", no closing summary section. Short pieces don't need redundant scaffolding; AI-assisted reading doesn't either. If a point seems to need restating, the piece is too long for its argument, or the argument is wrong.
 
 ### Argument and evidence
-- **Show, don't tell.** Real examples from actual work over abstract claims. The catalog beats the thesis; the commit beats the methodology; the artifact beats the description of the artifact. Generalisations earn their place by emerging from the cases, not by leading them.
+- **Show, don't tell.** Real examples from actual work over abstract claims. The catalog beats the thesis; the commit beats the methodology; the artifact beats the description of the artifact. Generalisations earn their place by emerging from the cases, not by leading them. **The same holds against the alternatives: show our case and stop.** A piece doesn't tally a rival tool's flaws or dismantle a rival school; a view that is right wins over time by use and by what it explains. An alternative appears only where the reader needs it to place ours, stated once, plainly and sourced. Essays are the exception: arguing is their job, and they may take a rival account head-on.
 - **Name the counterweight.** Successes and challenges both get airtime. Honest-counterweight beats — *"vibe-gain ran long"*, *"the homogenisation account also holds"*, *"the staffable pick might have been better"* — earn their place because the piece survives them. Drafts that omit the obvious objection get qualified or rewritten at copyedit.
 
 ### Sentence and word discipline
