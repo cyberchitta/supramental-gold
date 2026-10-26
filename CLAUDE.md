@@ -190,6 +190,10 @@ the two are kept in sync.
   dev-testing options.
 - `NOTES.md` — decision log.
 
+## Code style
+
+Code follows the global `code-style` and `javascript-style` skills; load them before writing code.
+
 ## Working notes (gitignored)
 
 Tracked separately in the private `working-notes` repo, symlinked at `_notes/`;
