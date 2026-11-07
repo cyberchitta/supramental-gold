@@ -26,15 +26,18 @@ import markdownItExternalLinks from 'markdown-it-external-links';
 import markdownItFootnote from 'markdown-it-footnote';
 import hljs from 'highlight.js/lib/core';
 import graphql from 'highlight.js/lib/languages/graphql';
+import typescript from 'highlight.js/lib/languages/typescript';
 import lean4 from 'highlightjs-lean4';
 
 const HOUSE_OPTIONS = { html: true, breaks: true, linkify: true };
 
 // Registered once at module load, not per instance. Only the languages the
-// corpus actually uses: `graphql` (llm-compare-shopify-api) and `lean4`
-// (apodictic). Add a language when an article needs one — a speculative set
+// corpus actually uses: `graphql` (llm-compare-shopify-api), `lean4`
+// (apodictic) and `typescript` (bounty-entries; the grammar carries the `ts`
+// alias itself). Add a language when an article needs one — a speculative set
 // is dead weight in every consumer's build.
 hljs.registerLanguage('graphql', graphql);
+hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('lean4', lean4);
 // Articles fence Lean as ```lean, which is the Lean 3 name upstream; there is
 // no Lean 3 in the corpus, so point it at the Lean 4 grammar.
